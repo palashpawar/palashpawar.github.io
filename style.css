@@ -46,27 +46,14 @@ nav a:hover {
   font-weight: 500;
 }
 
-.terminal-box {
-  margin-top: 40px;
-  background-color: #393f56;
-  color: #f9f9f9;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: left;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 0.95rem;
-  box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
-}
-
+/* Terminal box styling */
 .terminal-box {
   position: relative;
   margin-top: 40px;
   background-color: #393f56;
   color: #f9f9f9;
   padding: 30px;
-  padding-top: 50px; /* make room for buttons */
+  padding-top: 50px; /* space for buttons */
   border-radius: 10px;
   text-align: left;
   max-width: 800px;
@@ -74,6 +61,15 @@ nav a:hover {
   margin-right: auto;
   font-size: 0.95rem;
   box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+  max-width: 100%; /* fits screen */
+  overflow-x: auto; /* allows horizontal scroll if needed */
+  box-sizing: border-box;
+}
+
+.terminal-box pre {
+  white-space: pre-wrap; /* wraps long lines */
+  word-wrap: break-word;
+  font-family: 'Fira Code', monospace;
 }
 
 .window-buttons {
@@ -103,7 +99,6 @@ nav a:hover {
   background-color: #27c93f;
 }
 
-
 footer {
   text-align: center;
   padding: 20px;
@@ -119,7 +114,6 @@ footer {
 .terminal-box a:hover {
   text-decoration: underline;
 }
-
 
 .section-title {
   text-align: center;
@@ -202,6 +196,9 @@ footer {
   gap: 20px;
   z-index: 1000;
   backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  gap: 12px;
 }
 
 .floating-nav a {
@@ -210,6 +207,7 @@ footer {
   font-size: 1rem;
   color: #444;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .floating-nav a:hover {
@@ -219,62 +217,6 @@ footer {
 main.with-nav {
   padding-top: 100px;
 }
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.project-card {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-
-.project-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.floating-nav {
-  flex-wrap: wrap;
-  font-size: 0.9rem;
-  padding: 8px 20px;
-  gap: 12px;
-}
-
-.floating-nav a {
-  white-space: nowrap;
-}
-
-
-@media (max-width: 600px) {
-  .section-title {
-    font-size: 1.4rem;
-    text-align: center;
-  }
-
-  .floating-nav {
-    top: 10px;
-    padding: 6px 12px;
-    border-radius: 20px;
-  }
-
-  .project-card {
-    padding: 12px;
-  }
-}
-
 
 .skills-grid {
   display: flex;
@@ -301,14 +243,43 @@ main.with-nav {
 }
 
 .skill-icon img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 8px;
-}
-.skill-icon img {
   width: 90px;
   height: 90px;
   object-fit: contain;
   margin-bottom: 10px;
+}
+
+/* Mobile-specific tweaks */
+@media (max-width: 600px) {
+  .section-title {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .floating-nav {
+    top: 10px;
+    padding: 6px 12px;
+    border-radius: 20px;
+  }
+
+  .project-card {
+    padding: 12px;
+  }
+
+  .cli-prompt {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .terminal-box {
+    padding: 20px;
+    font-size: 0.85rem;
+  }
+
+  .terminal-box pre {
+    font-size: 0.8rem;
+  }
 }
