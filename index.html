@@ -69,25 +69,29 @@
   </footer>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const now = new Date();
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    
-    const dayName = days[now.getDay()];
-    const monthName = months[now.getMonth()];
-    const date = now.getDate();
-    
-    // format hours/minutes/seconds with leading zero
-    const pad = (n) => (n < 10 ? '0' + n : n);
-    const time = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-    
-    const formatted = `${dayName} ${monthName} ${date} ${time}`;
-    
-    document.getElementById("last-login").textContent =
-      `Last login: ${formatted} on console`;
+    function updateLastLogin() {
+      const now = new Date();
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      
+      const dayName = days[now.getDay()];
+      const monthName = months[now.getMonth()];
+      const date = now.getDate();
+      
+      const pad = (n) => (n < 10 ? '0' + n : n);
+      const time = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      
+      const formatted = `${dayName} ${monthName} ${date} ${time}`;
+      document.getElementById("last-login").textContent =
+        `Last login: ${formatted} on console`;
+    }
+
+    updateLastLogin();         // set immediately
+    setInterval(updateLastLogin, 1000); // update every second
   });
 </script>
+
 
 
 </body>
