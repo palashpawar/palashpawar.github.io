@@ -4,6 +4,11 @@ body {
   background-color: #f8f9fb;
   color: #3c3f52;
 }
+.last-login {
+  color: #b0b0b0; /* light grey like mac terminal */
+  display: block;
+  margin-bottom: 10px;
+}
 
 .top-nav {
   display: flex;
