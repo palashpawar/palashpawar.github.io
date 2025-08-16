@@ -35,6 +35,8 @@
         <span class="btn green"></span>
       </div>
       <pre>
+<span id="last-login" class="last-login"></span>
+
 &gt; PalashPawar.currentLocation
   "Austin, Texas"
 
@@ -65,5 +67,28 @@
   <footer>
     <p>&copy; 2025 Palash Pawar</p>
   </footer>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const now = new Date();
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    const dayName = days[now.getDay()];
+    const monthName = months[now.getMonth()];
+    const date = now.getDate();
+    
+    // format hours/minutes/seconds with leading zero
+    const pad = (n) => (n < 10 ? '0' + n : n);
+    const time = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+    
+    const formatted = `${dayName} ${monthName} ${date} ${time}`;
+    
+    document.getElementById("last-login").textContent =
+      `Last login: ${formatted} on console`;
+  });
+</script>
+
+
 </body>
 </html>
