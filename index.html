@@ -17,7 +17,16 @@
   <link rel="stylesheet" href="style.css">
   <style>
     .command { color: #5ecfff; }
-    .output { margin-left: 2ch; }
+    .output { margin-left: 2ch; color: #f9f9f9; }
+    .output a {
+      color: #5ecfff;
+      text-decoration: none;
+      border-bottom: 1px dashed #5ecfff;
+    }
+    .output a:hover {
+      color: #ffffff;
+      border-bottom: 1px solid #ffffff;
+    }
     .cursor {
       display: inline-block;
       width: 8px;
@@ -76,8 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const script = [
     { cmd: "PalashPawar.currentLocation", out: `"Austin, Texas"\n\n` },
     { cmd: "PalashPawar.currentPosition", out: `"Data Science Intern @ Emerson"\n\n` },
-    { cmd: "PalashPawar.contactInfo", out: `["palash.pawar@utexas.edu", "LinkedIn", "GitHub"]\n\n` },
-    { cmd: "PalashPawar.resume", out: `"resume.pdf"\n\n` },
+    { cmd: "PalashPawar.contactInfo", out: `["palash.pawar@utexas.edu", "<a href='https://www.linkedin.com/in/palash-pawar' target='_blank'>LinkedIn</a>", "<a href='https://github.com/palashpawar' target='_blank'>GitHub</a>"]\n\n` },
+    { cmd: "PalashPawar.resume", out: `"<a href='https://docs.google.com/document/d/1zcg7vjWokW0iKyLx3VQU-0rYWO7riRg1vFm9ESyQJlw/edit?usp=sharing' target='_blank'>resume.pdf</a>"\n\n` },
     { cmd: "PalashPawar.interests", out: `["soccer", "travis scott", "stocks"]\n\n` },
     { cmd: "PalashPawar.education", out: `"Statistics + Data Science + CS @ UT Austin"\n\n` },
     { cmd: "PalashPawar.skills", out: `["Python", "R", "SQL", "Machine Learning", "Sports Analytics"]\n\n` },
@@ -105,8 +114,12 @@ document.addEventListener("DOMContentLoaded", function () {
         line.innerHTML = `<span class="command">&gt; ${cmd}</span>`;
         const out = document.createElement("div");
         out.className = "output";
-        out.textContent = script[i].out;
+        out.innerHTML = script[i].out; // allow HTML for links
         terminal.appendChild(out);
+
+        // scroll terminal to bottom as we type
+        terminal.scrollTop = terminal.scrollHeight;
+
         i++;
         j = 0;
         setTimeout(type, 500); // pause before next command
