@@ -9,6 +9,29 @@ body {
   display: block;
   margin-bottom: 10px;
 }
+/* Typing effect for terminal */
+.command {
+  color: #5ecfff; /* light blue commands */
+}
+
+.output {
+  margin-left: 2ch; /* indent outputs */
+  color: #f9f9f9;
+  display: block;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  background: #5ecfff;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
 
 .top-nav {
   display: flex;
