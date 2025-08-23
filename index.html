@@ -15,6 +15,24 @@
   <title>Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .command { color: #5ecfff; }
+    .output { margin-left: 2ch; }
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      background: #5ecfff;
+      margin-left: 2px;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    .last-login {
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
   <header class="floating-nav">
@@ -34,65 +52,71 @@
         <span class="btn yellow"></span>
         <span class="btn green"></span>
       </div>
-      <pre>
-<span id="last-login" class="last-login"></span>
-
-&gt; PalashPawar.currentLocation
-  "Austin, Texas"
-
-&gt; PalashPawar.currentPosition
-  "Data Science Intern @ Emerson"
-
-&gt; PalashPawar.contactInfo
-  ["palash.pawar@utexas.edu", "<a href='https:\\www.linkedin.com/in/palash-pawar' target='_blank'>LinkedIn</a>", "<a href='https://github.com/palashpawar' target='_blank'>GitHub</a>"]
-
-&gt; PalashPawar.resume 
-  "<a href='https://docs.google.com/document/d/1zcg7vjWokW0iKyLx3VQU-0rYWO7riRg1vFm9ESyQJlw/edit?usp=sharing'>resume.pdf</a>"
-
-&gt; PalashPawar.interests
-  ["soccer", "travis scott", "stocks"]
-
-&gt; PalashPawar.education
-  "Statistics + Data Science + CS @ UT Austin"
-
-&gt; PalashPawar.skills
-  ["Python", "R", "SQL", "Machine Learning", "Sports Analytics"]
-
-&gt;
-      </pre>
+      <pre id="terminal"></pre>
     </div>
   </main>
-
 
   <footer>
     <p>&copy; 2025 Palash Pawar</p>
   </footer>
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    function updateLastLogin() {
-      const now = new Date();
-      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      
-      const dayName = days[now.getDay()];
-      const monthName = months[now.getMonth()];
-      const date = now.getDate();
-      
-      const pad = (n) => (n < 10 ? '0' + n : n);
-      const time = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-      
-      const formatted = `${dayName} ${monthName} ${date} ${time}`;
-      document.getElementById("last-login").textContent =
-        `Last login: ${formatted} on console`;
+document.addEventListener("DOMContentLoaded", function () {
+  const terminal = document.getElementById("terminal");
+
+  // --- format last login ---
+  const now = new Date();
+  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const pad = n => (n < 10 ? "0"+n : n);
+  const loginTime = `${days[now.getDay()]} ${months[now.getMonth()]} ${now.getDate()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  terminal.innerHTML = `<span class="last-login">Last login: ${loginTime} on console</span>\n\n`;
+
+  // --- commands and outputs ---
+  const script = [
+    { cmd: "PalashPawar.currentLocation", out: `"Austin, Texas"\n\n` },
+    { cmd: "PalashPawar.currentPosition", out: `"Data Science Intern @ Emerson"\n\n` },
+    { cmd: "PalashPawar.contactInfo", out: `["palash.pawar@utexas.edu", "LinkedIn", "GitHub"]\n\n` },
+    { cmd: "PalashPawar.resume", out: `"resume.pdf"\n\n` },
+    { cmd: "PalashPawar.interests", out: `["soccer", "travis scott", "stocks"]\n\n` },
+    { cmd: "PalashPawar.education", out: `"Statistics + Data Science + CS @ UT Austin"\n\n` },
+    { cmd: "PalashPawar.skills", out: `["Python", "R", "SQL", "Machine Learning", "Sports Analytics"]\n\n` },
+  ];
+
+  let i = 0; // current command
+  let j = 0; // typing position
+  let line;
+
+  function type() {
+    if (i < script.length) {
+      if (j === 0) {
+        line = document.createElement("div");
+        line.innerHTML = `<span class="command">&gt; </span>`;
+        terminal.appendChild(line);
+      }
+
+      const cmd = script[i].cmd;
+      if (j < cmd.length) {
+        line.innerHTML = `<span class="command">&gt; ${cmd.slice(0, j+1)}</span><span class="cursor"></span>`;
+        j++;
+        setTimeout(type, 60); // typing speed
+      } else {
+        // finished command
+        line.innerHTML = `<span class="command">&gt; ${cmd}</span>`;
+        const out = document.createElement("div");
+        out.className = "output";
+        out.textContent = script[i].out;
+        terminal.appendChild(out);
+        i++;
+        j = 0;
+        setTimeout(type, 500); // pause before next command
+      }
     }
+  }
 
-    updateLastLogin();         // set immediately
-    setInterval(updateLastLogin, 1000); // update every second
-  });
+  type();
+});
 </script>
-
-
 
 </body>
 </html>
