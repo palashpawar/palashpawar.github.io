@@ -43,16 +43,15 @@
     /* About Me Section */
     .about-me {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start; /* align top */
+      justify-content: flex-start;
       gap: 30px;
       margin-top: 40px;
       max-width: 800px;
       padding: 20px;
       margin-left: auto;
       margin-right: auto;
-      flex-wrap: wrap;
-      opacity: 0; /* start hidden */
+      opacity: 0;
       transform: translateY(20px);
       transition: opacity 1s ease, transform 1s ease;
     }
@@ -68,7 +67,7 @@
       box-shadow: 0 0 15px rgba(94, 207, 255, 0.3);
     }
     .about-me-text {
-      max-width: 500px;
+      max-width: 550px;
       color: #ccc;
       font-size: 1rem;
       line-height: 1.6;
@@ -87,10 +86,11 @@
       color: #ffffff;
       border-bottom: 1px solid #ffffff;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       .about-me {
         flex-direction: column;
         text-align: center;
+        align-items: center;
       }
       .about-me img {
         width: 150px;
@@ -121,13 +121,13 @@
 
     <!-- About Me Section -->
     <div class="about-me" id="aboutMe">
-      <img src="me.jpg" alt="Palash Pawar">
+      <img src="your-photo.jpg" alt="Palash Pawar">
       <div class="about-me-text">
         <h2>About Me</h2>
         <p>
-          I grew up in the Houston area and have always had a passion for technology from a young age. 
-          In my free time, I enjoy playing soccer and basketball and going to the gym. 
-          Feel free to reach out to me!
+          Hi, I’m Palash! I’m a data science student passionate about machine learning, sports analytics, and finance.  
+          Check out my work on <a href="https://github.com/palashpawar" target="_blank">GitHub</a>,  
+          <a href="https://www.linkedin.com/in/palash-pawar" target="_blank">LinkedIn</a>, or send me an <a href="mailto:palash.pawar@utexas.edu">Email</a>.
         </p>
       </div>
     </div>
@@ -192,7 +192,6 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(type, 500);
       }
     } else {
-      // All commands finished: reveal About Me section
       aboutMe.classList.add("visible");
     }
   }
