@@ -7,7 +7,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-XQRL923MNX');
   </script> 
   <meta charset="UTF-8">
@@ -41,46 +40,60 @@
     .last-login {
       color: #aaa;
     }
-
     /* About Me Section */
-    .about {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #111;
-      border-radius: 8px;
-      border: 2px solid #5ecfff;
+    .about-me {
       display: flex;
       align-items: center;
-      gap: 20px;
-      color: #e0e0e0;
-      font-family: "Fira Code", monospace;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      max-width: 800px;
+      padding: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      flex-wrap: wrap;
+      opacity: 0; /* start hidden */
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
     }
-
-    .about img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid #5ecfff;
-      object-fit: cover;
+    .about-me.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    .about-text {
-      flex: 1;
+    .about-me img {
+      width: 200px;
+      height: auto;
+      border-radius: 12px; /* rounded rectangle */
+      border: 2px solid #5ecfff;
+      box-shadow: 0 0 15px rgba(94, 207, 255, 0.3);
     }
-
-    .about-text h2 {
-      margin: 0 0 10px;
+    .about-me-text {
+      max-width: 500px;
+      color: #ccc;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .about-me-text h2 {
       color: #5ecfff;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
     }
-
+    .about-me-text a {
+      color: #5ecfff;
+      text-decoration: none;
+      border-bottom: 1px dashed #5ecfff;
+    }
+    .about-me-text a:hover {
+      color: #ffffff;
+      border-bottom: 1px solid #ffffff;
+    }
     @media (max-width: 600px) {
-      .about {
+      .about-me {
         flex-direction: column;
         text-align: center;
       }
-      .about img {
-        margin-bottom: 15px;
+      .about-me img {
+        width: 150px;
       }
     }
   </style>
@@ -107,18 +120,17 @@
     </div>
 
     <!-- About Me Section -->
-    <div class="about">
+    <div class="about-me" id="aboutMe">
       <img src="your-photo.jpg" alt="Palash Pawar">
-      <div class="about-text">
+      <div class="about-me-text">
         <h2>About Me</h2>
         <p>
-          Hi, I’m <strong>Palash Pawar</strong>! I love solving problems at the intersection 
-          of <span style="color:#5ecfff;">data, sports, and technology</span>.  
-          When I’m not building models or analyzing stats, I enjoy soccer, music, and following the markets.  
+          Hi, I’m Palash! I’m a data science student passionate about machine learning, sports analytics, and finance.  
+          Check out my work on <a href="https://github.com/palashpawar" target="_blank">GitHub</a>,  
+          <a href="https://www.linkedin.com/in/palash-pawar" target="_blank">LinkedIn</a>, or send me an <a href="mailto:palash.pawar@utexas.edu">Email</a>.
         </p>
       </div>
     </div>
-
   </main>
 
   <footer>
@@ -128,6 +140,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const terminal = document.getElementById("terminal");
+  const aboutMe = document.getElementById("aboutMe");
 
   // --- format last login ---
   const now = new Date();
@@ -164,22 +177,23 @@ document.addEventListener("DOMContentLoaded", function () {
       if (j < cmd.length) {
         line.innerHTML = `<span class="command">&gt; ${cmd.slice(0, j+1)}</span><span class="cursor"></span>`;
         j++;
-        setTimeout(type, 60); // typing speed
+        setTimeout(type, 60);
       } else {
-        // finished command
         line.innerHTML = `<span class="command">&gt; ${cmd}</span>`;
         const out = document.createElement("div");
         out.className = "output";
-        out.innerHTML = script[i].out; // allow HTML for links
+        out.innerHTML = script[i].out;
         terminal.appendChild(out);
 
-        // scroll terminal to bottom as we type
         terminal.scrollTop = terminal.scrollHeight;
 
         i++;
         j = 0;
-        setTimeout(type, 500); // pause before next command
+        setTimeout(type, 500);
       }
+    } else {
+      // All commands finished: reveal About Me section
+      aboutMe.classList.add("visible");
     }
   }
 
