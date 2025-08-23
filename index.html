@@ -41,6 +41,48 @@
     .last-login {
       color: #aaa;
     }
+
+    /* About Me Section */
+    .about {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #111;
+      border-radius: 8px;
+      border: 2px solid #5ecfff;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: #e0e0e0;
+      font-family: "Fira Code", monospace;
+    }
+
+    .about img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #5ecfff;
+      object-fit: cover;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text h2 {
+      margin: 0 0 10px;
+      color: #5ecfff;
+    }
+
+    @media (max-width: 600px) {
+      .about {
+        flex-direction: column;
+        text-align: center;
+      }
+      .about img {
+        margin-bottom: 15px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -63,6 +105,20 @@
       </div>
       <pre id="terminal"></pre>
     </div>
+
+    <!-- About Me Section -->
+    <div class="about">
+      <img src="your-photo.jpg" alt="Palash Pawar">
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>
+          Hi, I’m <strong>Palash Pawar</strong>! I love solving problems at the intersection 
+          of <span style="color:#5ecfff;">data, sports, and technology</span>.  
+          When I’m not building models or analyzing stats, I enjoy soccer, music, and following the markets.  
+        </p>
+      </div>
+    </div>
+
   </main>
 
   <footer>
