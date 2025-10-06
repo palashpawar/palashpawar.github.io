@@ -4,11 +4,13 @@ body {
   background-color: #f8f9fb;
   color: #3c3f52;
 }
+
 .last-login {
   color: #b0b0b0; /* light grey like mac terminal */
   display: block;
   margin-bottom: 10px;
 }
+
 /* Typing effect for terminal */
 .command {
   color: #5ecfff; /* light blue commands */
@@ -211,6 +213,7 @@ footer {
   background-color: #3730a3;
 }
 
+/* ✅ Updated Floating Nav with Light Black Border on Links */
 .floating-nav {
   position: fixed;
   top: 20px;
@@ -221,12 +224,11 @@ footer {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 10px 30px;
   display: flex;
-  gap: 20px;
+  gap: 12px;
   z-index: 1000;
   backdrop-filter: blur(8px);
   flex-wrap: wrap;
   font-size: 0.9rem;
-  gap: 12px;
 }
 
 .floating-nav a {
@@ -234,12 +236,18 @@ footer {
   font-weight: 500;
   font-size: 1rem;
   color: #444;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
   white-space: nowrap;
+
+  border: 1px solid rgba(0, 0, 0, 0.15); /* Light black border */
+  padding: 6px 12px;
+  border-radius: 8px;
 }
 
 .floating-nav a:hover {
   color: #4f46e5;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.3); /* Slightly darker border on hover */
 }
 
 main.with-nav {
