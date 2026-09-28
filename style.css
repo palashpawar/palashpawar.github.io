@@ -214,6 +214,12 @@ footer {
   margin-bottom: 10px;
 }
 
+.project-card .location {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 6px;
+}
+
 .project-card .tech-stack {
   font-size: 0.85rem;
   color: #777;
@@ -423,7 +429,8 @@ a.exp-link:hover h2::after {
   color: #e6e8ef;
 }
 
-[data-theme="dark"] .project-card .description {
+[data-theme="dark"] .project-card .description,
+[data-theme="dark"] .project-card .location {
   color: #b7bccb;
 }
 
