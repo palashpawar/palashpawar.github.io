@@ -42,7 +42,7 @@
 
   <script>
     // Teams I follow: [ESPN sport/league path, ESPN team id, league label, soccer?, short name for phones,
-    //                  FIFA country code (national teams only)]
+    //                  FIFA country code and crest image (national teams only)]
     const teams = [
       ["soccer/eng.1", 360, "Premier League", true, "Man United"],
       ["soccer/fra.1", 160, "Ligue 1", true, "PSG"],
@@ -51,9 +51,9 @@
       ["football/college-football", 251, "College Football", false, "Longhorns"],
       ["football/nfl", 34, "NFL", false, "Texans"],
       ["basketball/nba", 10, "NBA", false, "Rockets"],
-      ["soccer/all", 660, "International", true, "USA", "USA"],
-      ["soccer/all", 478, "International", true, "France", "FRA"],
-      ["soccer/all", 4385, "International", true, "India", "IND"],
+      ["soccer/all", 660, "International", true, "USA", "USA", "img/nat-usa.png"],
+      ["soccer/all", 478, "International", true, "France", "FRA", "img/nat-france.png"],
+      ["soccer/all", 4385, "International", true, "India", "IND", "img/nat-india.png"],
     ];
 
     // National teams have no league table; their position is the FIFA World Ranking,
@@ -78,7 +78,7 @@
       return e;
     }
 
-    function renderRow(tr, [path, id, league, soccer, shortName, fifaCode], team, rankings) {
+    function renderRow(tr, [path, id, league, soccer, shortName, fifaCode, crest], team, rankings) {
       const rec = (team.record && team.record.items && team.record.items[0]) || {};
       const s = Object.fromEntries((rec.stats || []).map(x => [x.name, x.value]));
       const n = v => (v == null ? "–" : String(Math.round(v)));
@@ -89,8 +89,13 @@
       if (clubhouse) { link.href = clubhouse.href; link.target = "_blank"; link.rel = "noopener"; }
       const img = el("img", "team-logo");
       img.alt = "";
-      img.dataset.logos = JSON.stringify(team.logos || []);
-      img.src = logoFor(team.logos || [], isDark());
+      if (crest) {
+        img.src = crest; // our own crest, used in both themes
+        img.classList.add("crest");
+      } else {
+        img.dataset.logos = JSON.stringify(team.logos || []);
+        img.src = logoFor(team.logos || [], isDark());
+      }
       const names = el("span", "team-names");
       names.append(el("span", "name-full", team.displayName), el("span", "name-short", shortName),
                    el("span", "next-inline", "")); // phones: next game sits under the name
@@ -189,7 +194,7 @@
 
     // Swap logo variants when the theme toggles
     new MutationObserver(() => {
-      document.querySelectorAll(".team-logo").forEach(img => {
+      document.querySelectorAll(".team-logo[data-logos]").forEach(img => {
         img.src = logoFor(JSON.parse(img.dataset.logos || "[]"), isDark());
       });
     }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });

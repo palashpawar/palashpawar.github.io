@@ -807,3 +807,12 @@ a.exp-link .location {
 [data-theme="dark"] .team-link:hover {
   color: #5ecfff;
 }
+
+/* National crests have white/transparent insides with no dark-mode variant,
+   so in dark mode they sit on a small white tile */
+[data-theme="dark"] .team-logo.crest {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 2px;
+  box-sizing: border-box;
+}
