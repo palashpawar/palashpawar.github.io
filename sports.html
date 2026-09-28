@@ -27,6 +27,7 @@
             <th>Record</th>
             <th class="col-num">Pts</th>
             <th class="col-pos">Position</th>
+            <th class="col-last">Last game</th>
             <th class="col-next">Next game</th>
           </tr>
         </thead>
@@ -98,7 +99,7 @@
       }
       const names = el("span", "team-names");
       names.append(el("span", "name-full", team.displayName), el("span", "name-short", shortName),
-                   el("span", "next-inline", "")); // phones: next game sits under the name
+                   el("span", "last-inline", ""), el("span", "next-inline", "")); // phones: games sit under the name
       link.append(img, names);
 
       const record = fifaCode ? "–" : soccer ? `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}` : (rec.summary || "–");
@@ -114,7 +115,7 @@
         position = f ? `#${f.rank} FIFA${move > 0 ? ` ▲${move}` : move < 0 ? ` ▼${-move}` : ""}` : "–";
       }
 
-      const cells = [el("td", "col-team"), el("td", "col-league", league), el("td", null, record), el("td", "col-num", points), el("td", "col-pos", position), el("td", "col-next", "…")];
+      const cells = [el("td", "col-team"), el("td", "col-league", league), el("td", null, record), el("td", "col-num", points), el("td", "col-pos", position), el("td", "col-last", "…"), el("td", "col-next", "…")];
       cells[0].append(link);
       tr.replaceChildren(...cells);
     }
@@ -122,7 +123,7 @@
     const rows = teams.map(t => {
       const tr = el("tr");
       const td = el("td", "row-loading", `Loading ${t[2]}…`);
-      td.colSpan = 6;
+      td.colSpan = 7;
       tr.append(td);
       body.append(tr);
       return tr;
@@ -130,8 +131,19 @@
 
     // Next game: first fixture that hasn't finished. Soccer uses the "all" feed so cup and
     // Champions League games count too; fixture=true returns upcoming games rather than results.
-    const scheduleUrl = ([path, id, , soccer]) =>
-      `https://site.api.espn.com/apis/site/v2/sports/${soccer ? "soccer/all" : path}/teams/${id}/schedule?fixture=true`;
+    // Soccer's feed returns results by default and upcoming games with fixture=true, so it needs
+    // both; the other sports return the whole season in one feed.
+    const scheduleUrls = ([path, id, , soccer]) => {
+      const base = `https://site.api.espn.com/apis/site/v2/sports/${soccer ? "soccer/all" : path}/teams/${id}/schedule`;
+      return soccer ? [base, `${base}?fixture=true`] : [base];
+    };
+    const loadSchedule = t => Promise.all(scheduleUrls(t).map(u =>
+      fetch(u).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    )).then(feeds => {
+      const byId = new Map();
+      feeds.forEach(f => (f.events || []).forEach(ev => byId.set(ev.id, ev)));
+      return { events: [...byId.values()] };
+    });
 
     const competitionTag = ev => {
       const name = (ev.league && (ev.league.name || ev.league.abbreviation)) || "";
@@ -167,6 +179,42 @@
       return { ...game, when: `${day}${time}${tag ? ` · ${tag}` : ""}` };
     }
 
+    // Most recent finished game as { result: "W"|"L"|"D", score, where, name, logos, when } (or null)
+    function lastGame(schedule, teamId) {
+      const done = (schedule.events || [])
+        .filter(ev => ev.competitions[0].status.type.completed)
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+      const ev = done[0];
+      if (!ev) return null;
+      const comp = ev.competitions[0];
+      const me = comp.competitors.find(c => String(c.team.id) === String(teamId));
+      const opp = comp.competitors.find(c => c !== me);
+      if (!me || !opp) return null;
+      const pts = c => (c.score && typeof c.score === "object" ? c.score.displayValue : c.score) ?? "–";
+      const result = me.winner ? "W" : opp.winner ? "L" : "D";
+      const pens = me.shootoutScore != null && opp.shootoutScore != null ? ` (${me.shootoutScore}–${opp.shootoutScore} pens)` : "";
+      const when = new Date(ev.date).toLocaleDateString([], { month: "short", day: "numeric" });
+      return {
+        result, score: `${pts(me)}–${pts(opp)}${pens}`,
+        where: comp.neutralSite || me.homeAway === "home" ? "vs" : "@",
+        name: opp.team.shortDisplayName || opp.team.displayName,
+        logos: opp.team.logos || [], when,
+      };
+    }
+
+    // "[W] 20–17 @ [logo] Tennessee · Sep 26"
+    function fillLastGame(target, game, prefix = "") {
+      if (!game) { target.textContent = prefix ? "" : "–"; return; }
+      const logo = el("img", "opp-logo");
+      logo.alt = "";
+      logo.dataset.logos = JSON.stringify(game.logos);
+      logo.src = logoFor(game.logos, isDark());
+      const badge = el("span", `result result-${game.result}`, game.result);
+      const parts = prefix ? [prefix] : [];
+      parts.push(badge, ` ${game.score} ${game.where} `, logo, game.name, ` · ${game.when}`);
+      target.replaceChildren(...parts);
+    }
+
     // "vs [logo] Spurs · Sat, Oct 10, 11:30 AM" (or "LIVE · vs [logo] Spurs")
     function fillNextGame(target, game, prefix = "") {
       if (!game) { target.textContent = prefix ? "" : "–"; return; }
@@ -186,16 +234,18 @@
       fetch(`https://site.api.espn.com/apis/site/v2/sports/${t[0]}/teams/${t[1]}`)
         .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(async d => renderRow(rows[i], t, d.team, await fifa))
-        .then(() => fetch(scheduleUrl(t)))
-        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(() => loadSchedule(t))
         .then(sched => {
+          const last = lastGame(sched, t[1]);
+          fillLastGame(rows[i].querySelector("td.col-last"), last);
+          fillLastGame(rows[i].querySelector(".last-inline"), last, "Last: ");
           const game = nextGame(sched, t[1]);
           fillNextGame(rows[i].querySelector("td.col-next"), game);
           fillNextGame(rows[i].querySelector(".next-inline"), game, "Next: ");
         })
         .catch(() => {
-          const cell = rows[i].querySelector("td.col-next");
-          if (cell) cell.textContent = "–";
+          const cells = rows[i].querySelectorAll("td.col-last, td.col-next");
+          if (cells.length) cells.forEach(c => { if (c.textContent === "…") c.textContent = "–"; });
           else rows[i].firstChild.textContent = `Couldn't load ${t[2]} right now.`;
         })
     )).then(async () => {

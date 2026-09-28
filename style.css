@@ -651,7 +651,7 @@ a.exp-link .location {
 
 /* Sports page */
 .sports-page {
-  max-width: 1100px;
+  max-width: 1280px;
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
@@ -730,6 +730,7 @@ a.exp-link .location {
 }
 
 .name-short,
+.last-inline,
 .next-inline {
   display: none;
 }
@@ -751,11 +752,28 @@ a.exp-link .location {
   color: #e53935;
 }
 
-.standings td.col-next {
+.standings td.col-next,
+.standings td.col-last {
   font-size: 0.85rem;
   white-space: normal; /* long fixtures wrap to a second line instead of widening the table */
-  min-width: 200px;
+  min-width: 180px;
 }
+
+/* W / L / D badge for the last result */
+.result {
+  display: inline-block;
+  min-width: 1.3em;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.8em;
+  text-align: center;
+  color: #fff;
+}
+
+.result-W { background-color: #2e9e4f; }
+.result-L { background-color: #d64545; }
+.result-D { background-color: #8a90a2; }
 
 .row-loading {
   color: #666;
@@ -776,7 +794,17 @@ a.exp-link .location {
   .name-full { display: none; }
   .name-short { display: inline; }
   .standings .col-league { display: none; } /* position already names the conference/division */
-  .standings .col-next { display: none; }
+  .standings .col-next,
+  .standings .col-last { display: none; }
+  .last-inline .opp-logo { width: 13px; height: 13px; vertical-align: -2px; margin-right: 3px; }
+  .last-inline {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 400;
+    opacity: 0.85;
+    white-space: normal;
+    margin-top: 2px;
+  }
   .next-inline .opp-logo { width: 13px; height: 13px; vertical-align: -2px; margin-right: 3px; }
   .next-inline {
     display: block;
