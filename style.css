@@ -342,6 +342,6 @@ main.with-nav {
 @media (max-width: 600px) {
   .floating-nav { gap: 6px; }
   .floating-nav a { font-size: 0.85rem; padding: 5px 8px; }
-  .card-grid { gap: 16px; }
-  .card-grid .project-card { flex-basis: 78vw; }
+  .card-grid { flex-direction: column; gap: 20px; overflow-x: visible; scroll-snap-type: none; }
+  .card-grid .project-card { flex-basis: auto; }
 }
