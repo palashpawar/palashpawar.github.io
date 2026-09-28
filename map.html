@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travel Map - Palash Pawar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="theme.js"></script>
+</head>
+<body>
+  <header class="floating-nav">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience.html">Experience</a>
+  </header>
+
+  <main class="with-nav map-page">
+    <p class="map-count" id="mapCount"></p>
+    <div id="map" class="travel-map"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Palash Pawar</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+    // Cities visited: [name, latitude, longitude]
+    const cities = [
+      ["Houston, TX", 29.7604, -95.3698],
+      ["Austin, TX", 30.2672, -97.7431],
+    ];
+
+    const map = L.map("map", { scrollWheelZoom: false, worldCopyJump: true });
+
+    // OpenStreetMap tiles; dark mode inverts them in CSS
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+    }).addTo(map);
+
+    const pins = cities.map(([name, lat, lng]) =>
+      L.circleMarker([lat, lng], {
+        radius: 8,
+        color: "#ffffff",
+        weight: 2,
+        fillColor: "#4f46e5",
+        fillOpacity: 0.9,
+      }).bindPopup(name).bindTooltip(name, { direction: "top", offset: [0, -8] }).addTo(map)
+    );
+
+    map.fitBounds(L.featureGroup(pins).getBounds(), { padding: [60, 60], maxZoom: 6 });
+
+    document.getElementById("mapCount").textContent =
+      `${cities.length} ${cities.length === 1 ? "city" : "cities"} visited`;
+  </script>
+</body>
+</html>
