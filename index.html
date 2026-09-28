@@ -56,13 +56,15 @@
       I'm passionate about the applications of machine learning to tech, sports, and finance.
     </p>
 
-    <div class="terminal-box">
+    <div class="terminal-box" id="terminalBox">
+      <div class="terminal-titlebar" title="Drag to move · double-click to reset"></div>
       <div class="window-buttons">
         <span class="btn red"></span>
         <span class="btn yellow"></span>
         <span class="btn green"></span>
       </div>
       <pre id="terminal"></pre>
+      <div class="terminal-resize" title="Drag to resize"></div>
     </div>
 
   </main>
@@ -74,6 +76,50 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const terminal = document.getElementById("terminal");
+  const box = document.getElementById("terminalBox");
+
+  // --- movable / resizable terminal (wide screens only; see style.css) ---
+  const desktop = window.matchMedia("(min-width: 940px)");
+  const state = { dx: 0, dy: 0, w: null, h: null };
+  const apply = () => {
+    box.style.setProperty("--dx", state.dx + "px");
+    box.style.setProperty("--dy", state.dy + "px");
+    state.w ? box.style.setProperty("--w", state.w + "px") : box.style.removeProperty("--w");
+    state.h ? box.style.setProperty("--h", state.h + "px") : box.style.removeProperty("--h");
+  };
+
+  function track(e, cls, onMove) {
+    if (!desktop.matches || e.button !== 0) return;
+    e.preventDefault();
+    const start = { x: e.clientX, y: e.clientY, ...state,
+                    w0: box.offsetWidth, h0: box.offsetHeight };
+    box.classList.add(cls);
+    const move = ev => { onMove(ev.clientX - start.x, ev.clientY - start.y, start); apply(); };
+    const up = () => {
+      box.classList.remove(cls);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+  }
+
+  box.querySelector(".terminal-titlebar").addEventListener("pointerdown", e =>
+    track(e, "dragging", (mx, my, s) => { state.dx = s.dx + mx; state.dy = s.dy + my; }));
+
+  box.querySelector(".terminal-resize").addEventListener("pointerdown", e =>
+    track(e, "resizing", (mx, my, s) => {
+      const w = Math.min(Math.max(s.w0 + mx, 320), window.innerWidth - 32);
+      state.w = w;
+      state.h = Math.max(s.h0 + my, 160);
+      // the box is centered, so shift by half the width change to keep its left edge put
+      state.dx = s.dx + (w - s.w0) / 2;
+    }));
+
+  box.querySelector(".terminal-titlebar").addEventListener("dblclick", () => {
+    Object.assign(state, { dx: 0, dy: 0, w: null, h: null });
+    apply();
+  });
 
   // --- format last login ---
   const now = new Date();

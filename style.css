@@ -527,18 +527,67 @@ a.exp-link .location {
   .travel-map { height: 60vh; min-height: 320px; }
 }
 
-/* Wide screens: terminal grows past the home column so each output fits on one line.
-   Narrower screens (tablets, phones) keep the normal width and wrap. */
+/* Wide screens: the terminal is a movable, resizable window. It starts wide enough
+   for each output to fit on one line; text wraps if it's resized narrower.
+   --dx/--dy/--w/--h are set from JS while dragging. Tablets and phones keep the
+   normal static box. */
+.terminal-titlebar,
+.terminal-resize {
+  display: none;
+}
+
 @media (min-width: 940px) {
   .terminal-box {
-    width: min(900px, calc(100vw - 32px));
+    width: var(--w, min(900px, calc(100vw - 32px)));
+    height: var(--h, auto);
     max-width: none;
     position: relative;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(calc(-50% + var(--dx, 0px)), var(--dy, 0px));
+    margin-left: 0;  /* centering comes from left + translate alone, so auto margins */
+    margin-right: 0; /* can't kick in once the box is resized narrower than the column */
+    overflow: hidden; /* the text area scrolls instead, so title bar and grip stay put */
+    padding-top: 65px;
+    padding-bottom: 45px;
+    z-index: 10; /* above page content, below the floating nav */
   }
 
   .terminal-box pre {
-    white-space: pre;
+    margin: 0;
+    max-height: 100%;
+    overflow: auto;
+  }
+
+  .terminal-titlebar {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    cursor: grab;
+  }
+
+  .terminal-box.dragging .terminal-titlebar {
+    cursor: grabbing;
+  }
+
+  .terminal-box.dragging,
+  .terminal-box.resizing {
+    user-select: none;
+  }
+
+  .terminal-resize {
+    display: block;
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    width: 14px;
+    height: 14px;
+    cursor: nwse-resize;
+    /* two short diagonal grip lines */
+    background:
+      linear-gradient(135deg, transparent 45%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0.35) 55%, transparent 55%),
+      linear-gradient(135deg, transparent 75%, rgba(255,255,255,0.35) 75%, rgba(255,255,255,0.35) 85%, transparent 85%);
   }
 }
