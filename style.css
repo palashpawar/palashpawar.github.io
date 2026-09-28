@@ -448,3 +448,23 @@ a.exp-link:hover h2::after {
 [data-theme="dark"] .project-card img.logo-dark {
   display: block;
 }
+
+/* Experience cards carry less text, so it runs larger */
+a.exp-link h2 {
+  font-size: 1.5rem;
+  margin: 20px 0 12px;
+}
+
+a.exp-link .description {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+a.exp-link .location,
+a.exp-link .tech-stack {
+  font-size: 1rem;
+}
+
+a.exp-link .location {
+  margin-bottom: 8px;
+}
