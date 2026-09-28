@@ -169,6 +169,19 @@ footer {
   scroll-snap-align: start;
 }
 
+/* same card size on both pages (desktop); phones stack at natural height */
+@media (min-width: 601px) {
+  .card-grid .project-card {
+    min-height: 468px;
+  }
+
+  .card-grid a.exp-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 .project-card {
   background-color: #ffffff;
   border-radius: 16px;
