@@ -665,80 +665,124 @@ a.exp-link .location {
   margin: 20px 0;
 }
 
-.sports-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 24px;
-  margin-bottom: 40px;
+.standings-wrap {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  overflow-x: auto;
 }
 
-a.sport-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 230px;
-}
-
-.project-card img.sport-logo { /* outranks the project-card image rule */
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  border-radius: 0;
-}
-
-.sport-card h2 {
-  margin: 12px 0 2px;
-  font-size: 1.1rem;
-}
-
-.sport-league {
-  font-size: 0.85rem;
+.standings {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
   color: #000;
-  margin: 0 0 14px;
 }
 
-.sport-stats {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.sport-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 48px;
-}
-
-.sport-stat-value {
-  font-size: 1.25rem;
+.standings th {
+  text-align: left;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+  padding: 16px 16px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
 }
 
-.sport-stat-label {
-  font-size: 0.7rem;
-  color: #000;
-  opacity: 0.65;
-  max-width: 110px;
-  text-align: center;
+.standings td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  white-space: nowrap;
 }
 
-.sport-loading {
-  margin: auto;
-  font-size: 0.85rem;
+.standings tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.standings tbody tr:hover {
+  background-color: rgba(79, 70, 229, 0.05);
+}
+
+.standings .col-num {
+  text-align: right;
+}
+
+.team-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.team-link:hover {
+  color: #4f46e5;
+}
+
+.team-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex: none;
+}
+
+.name-short {
+  display: none;
+}
+
+.row-loading {
   color: #666;
+  font-size: 0.85rem;
+}
+
+.sports-footnote {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #666;
+  margin: 14px 0 40px;
+}
+
+@media (max-width: 600px) {
+  .standings { font-size: 0.8rem; }
+  .standings th, .standings td { padding-left: 7px; padding-right: 7px; }
+  .standings td.col-pos { white-space: normal; } /* "3rd AFC South" may take two lines */
+  .name-full { display: none; }
+  .name-short { display: inline; }
+  .standings .col-league { display: none; } /* position already names the conference/division */
+  .team-link { gap: 6px; }
+  .team-logo { width: 20px; height: 20px; }
 }
 
 [data-theme="dark"] .sports-note,
-[data-theme="dark"] .sport-loading {
+[data-theme="dark"] .sports-footnote,
+[data-theme="dark"] .row-loading {
   color: #8a90a2;
 }
 
-[data-theme="dark"] .sport-league,
-[data-theme="dark"] .sport-stat-value,
-[data-theme="dark"] .sport-stat-label {
+[data-theme="dark"] .standings-wrap {
+  background-color: #1b1e29;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .standings {
   color: #fff;
+}
+
+[data-theme="dark"] .standings th {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .standings td {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .standings tbody tr:hover {
+  background-color: rgba(94, 207, 255, 0.06);
+}
+
+[data-theme="dark"] .team-link:hover {
+  color: #5ecfff;
 }
