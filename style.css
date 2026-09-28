@@ -265,36 +265,9 @@ main.with-nav {
   padding-top: 100px;
 }
 
-.skills-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 70px;
-  margin: 40px auto;
-}
 
-.skill-row {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
 
-.skill-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #333;
-}
 
-.skill-icon img {
-  width: 90px;
-  height: 90px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
 
 /* Mobile-specific tweaks */
 @media (max-width: 600px) {
@@ -438,8 +411,7 @@ a.exp-link:hover h2::after {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-[data-theme="dark"] .project-card h2,
-[data-theme="dark"] .skill-icon {
+[data-theme="dark"] .project-card h2 {
   color: #e6e8ef;
 }
 
@@ -453,13 +425,6 @@ a.exp-link:hover h2::after {
 }
 
 /* keep logos on a light panel so dark wordmarks stay readable */
-[data-theme="dark"] .project-card img.logo,
-[data-theme="dark"] .skill-icon img {
+[data-theme="dark"] .project-card img.logo {
   background-color: #e4e7ee;
-}
-
-[data-theme="dark"] .skill-icon img {
-  padding: 10px;
-  border-radius: 14px;
-  box-sizing: border-box;
 }
