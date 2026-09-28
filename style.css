@@ -319,3 +319,10 @@ main.with-nav {
     font-size: 0.8rem;
   }
 }
+
+.project-card img.logo {
+  object-fit: contain;
+  padding: 30px;
+  box-sizing: border-box;
+  background-color: #f3f4f7;
+}

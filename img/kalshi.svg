@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect width="400" height="200" fill="#161b26"/>
-<line x1="60" y1="100" x2="340" y2="100" stroke="#3a4256" stroke-width="2"/>
-<rect x="110" y="42" width="60" height="58" fill="#5ecfff"/><rect x="230" y="100" width="60" height="50" fill="#ff7a7a"/>
-<g font-family="monospace" font-size="14" fill="#e6e9ef"><text x="116" y="34">+4.1¢</text><text x="236" y="168">−3.6¢</text></g>
-<g font-family="monospace" font-size="12" fill="#8b93a7"><text x="104" y="118">backtest</text><text x="228" y="90">forward</text></g></svg>

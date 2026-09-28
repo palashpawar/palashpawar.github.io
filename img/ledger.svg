@@ -1,3 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect width="400" height="200" fill="#161b26"/>
-<g font-family="monospace" font-size="13" fill="#8b93a7"><text x="60" y="52">food</text><text x="60" y="87">transit</text><text x="60" y="122">shopping</text><text x="60" y="157">bills</text></g>
-<g fill="#5ecfff"><rect x="150" y="40" width="190" height="16" rx="3"/><rect x="150" y="75" width="95" height="16" rx="3" opacity=".8"/><rect x="150" y="110" width="150" height="16" rx="3" opacity=".65"/><rect x="150" y="145" width="60" height="16" rx="3" opacity=".5"/></g></svg>
