@@ -43,7 +43,7 @@
 
   <script>
     // Teams I follow: [ESPN sport/league path, ESPN team id, league label, soccer?, short name for phones,
-    //                  FIFA country code and crest image (national teams only)]
+    //                  FIFA country code, crest image and optional dark-mode crest (national teams only)]
     const teams = [
       ["soccer/eng.1", 360, "Premier League", true, "Man United"],
       ["soccer/fra.1", 160, "Ligue 1", true, "PSG"],
@@ -52,7 +52,7 @@
       ["football/college-football", 251, "College Football", false, "Longhorns"],
       ["football/nfl", 34, "NFL", false, "Texans"],
       ["basketball/nba", 10, "NBA", false, "Rockets"],
-      ["soccer/all", 660, "International", true, "USA", "USA", "img/nat-usa.png"],
+      ["soccer/all", 660, "International", true, "USA", "USA", "img/nat-usa.png", "img/nat-usa-dark.png"],
       ["soccer/all", 478, "International", true, "France", "FRA", "img/nat-france.png"],
       ["soccer/all", 4385, "International", true, "India", "IND", "img/nat-india.png"],
     ];
@@ -79,7 +79,7 @@
       return e;
     }
 
-    function renderRow(tr, [path, id, league, soccer, shortName, fifaCode, crest], team, rankings) {
+    function renderRow(tr, [path, id, league, soccer, shortName, fifaCode, crest, crestDark], team, rankings) {
       const rec = (team.record && team.record.items && team.record.items[0]) || {};
       const s = Object.fromEntries((rec.stats || []).map(x => [x.name, x.value]));
       const n = v => (v == null ? "–" : String(Math.round(v)));
@@ -91,8 +91,9 @@
       const img = el("img", "team-logo");
       img.alt = "";
       if (crest) {
-        img.src = crest; // our own crest, used in both themes
-        img.classList.add("crest");
+        img.dataset.crest = crest;
+        img.dataset.crestDark = crestDark || crest;
+        img.src = isDark() ? img.dataset.crestDark : crest;
       } else {
         img.dataset.logos = JSON.stringify(team.logos || []);
         img.src = logoFor(team.logos || [], isDark());
@@ -262,6 +263,9 @@
     new MutationObserver(() => {
       document.querySelectorAll("img[data-logos]").forEach(img => {
         img.src = logoFor(JSON.parse(img.dataset.logos || "[]"), isDark());
+      });
+      document.querySelectorAll("img[data-crest]").forEach(img => {
+        img.src = isDark() ? img.dataset.crestDark : img.dataset.crest;
       });
     }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   </script>
