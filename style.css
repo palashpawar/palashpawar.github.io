@@ -176,6 +176,7 @@ footer {
   }
 
   .card-grid a.exp-link {
+    flex-basis: 316px; /* 340px wide overall, like project cards */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -450,13 +451,23 @@ a.exp-link:hover h2::after {
 }
 
 /* Experience cards carry less text, so it runs larger */
+a.exp-link {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+a.exp-link h2,
+a.exp-link p {
+  white-space: nowrap;
+}
+
 a.exp-link h2 {
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   margin: 20px 0 12px;
 }
 
 a.exp-link .description {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 12px;
 }
 
