@@ -388,8 +388,7 @@ a.exp-link:hover h2::after {
   color: #d4d7e1;
 }
 
-[data-theme="dark"] .subtitle,
-[data-theme="dark"] .about-me-text {
+[data-theme="dark"] .subtitle {
   color: #b7bccb;
 }
 
