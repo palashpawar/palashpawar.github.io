@@ -206,24 +206,24 @@ footer {
 .project-card h2 {
   font-size: 1.25rem;
   margin: 15px 0 10px;
-  color: #333;
+  color: #000;
 }
 
 .project-card .description {
   font-size: 0.95rem;
-  color: #555;
+  color: #000;
   margin-bottom: 10px;
 }
 
 .project-card .location {
   font-size: 0.85rem;
-  color: #666;
+  color: #000;
   margin: 0 0 6px;
 }
 
 .project-card .tech-stack {
   font-size: 0.85rem;
-  color: #777;
+  color: #000;
   margin-bottom: 15px;
 }
 
@@ -346,7 +346,7 @@ a.project-card {
 a.exp-link h2::after {
   content: " ↗";
   font-size: 0.8em;
-  color: #999;
+  color: #000;
   transition: color 0.2s ease;
 }
 
@@ -478,4 +478,8 @@ a.exp-link .tech-stack {
 
 a.exp-link .location {
   margin-bottom: 8px;
+}
+
+[data-theme="dark"] a.exp-link:not(:hover) h2::after {
+  color: #e6e8ef;
 }
