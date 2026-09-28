@@ -145,25 +145,41 @@
       return "";
     };
 
-    function nextGameText(schedule, teamId) {
+    // Returns the next unfinished fixture as { where, name, logos, when } (or null)
+    function nextGame(schedule, teamId) {
       const upcoming = (schedule.events || [])
         .filter(ev => !ev.competitions[0].status.type.completed)
         .sort((a, b) => new Date(a.date) - new Date(b.date));
       const ev = upcoming[0];
-      if (!ev) return "–";
+      if (!ev) return null;
       const comp = ev.competitions[0];
       const me = comp.competitors.find(c => String(c.team.id) === String(teamId));
       const opp = comp.competitors.find(c => c !== me);
-      if (!opp) return "–";
+      if (!opp) return null;
       const where = comp.neutralSite || (me && me.homeAway === "home") ? "vs" : "@";
-      const opponent = `${where} ${opp.team.shortDisplayName || opp.team.displayName}`;
-      if (comp.status.type.state === "in") return `LIVE · ${opponent}`;
+      const game = { where, name: opp.team.shortDisplayName || opp.team.displayName, logos: opp.team.logos || [] };
+      if (comp.status.type.state === "in") return { ...game, live: true, when: "LIVE" };
 
       const d = new Date(ev.date);
       const day = d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" });
       const time = ev.timeValid === false ? "" : `, ${d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
       const tag = competitionTag(ev);
-      return `${opponent} · ${day}${time}${tag ? ` · ${tag}` : ""}`;
+      return { ...game, when: `${day}${time}${tag ? ` · ${tag}` : ""}` };
+    }
+
+    // "vs [logo] Spurs · Sat, Oct 10, 11:30 AM" (or "LIVE · vs [logo] Spurs")
+    function fillNextGame(target, game, prefix = "") {
+      if (!game) { target.textContent = prefix ? "" : "–"; return; }
+      const logo = el("img", "opp-logo");
+      logo.alt = "";
+      logo.dataset.logos = JSON.stringify(game.logos);
+      logo.src = logoFor(game.logos, isDark());
+      const parts = [];
+      if (prefix) parts.push(prefix);
+      if (game.live) parts.push(el("strong", "live-tag", "LIVE"), " · ");
+      parts.push(`${game.where} `, logo, game.name);
+      if (!game.live) parts.push(` · ${game.when}`);
+      target.replaceChildren(...parts);
     }
 
     Promise.allSettled(teams.map((t, i) =>
@@ -173,9 +189,9 @@
         .then(() => fetch(scheduleUrl(t)))
         .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(sched => {
-          const text = nextGameText(sched, t[1]);
-          rows[i].querySelector("td.col-next").textContent = text;
-          rows[i].querySelector(".next-inline").textContent = text === "–" ? "" : `Next: ${text}`;
+          const game = nextGame(sched, t[1]);
+          fillNextGame(rows[i].querySelector("td.col-next"), game);
+          fillNextGame(rows[i].querySelector(".next-inline"), game, "Next: ");
         })
         .catch(() => {
           const cell = rows[i].querySelector("td.col-next");
@@ -194,7 +210,7 @@
 
     // Swap logo variants when the theme toggles
     new MutationObserver(() => {
-      document.querySelectorAll(".team-logo[data-logos]").forEach(img => {
+      document.querySelectorAll("img[data-logos]").forEach(img => {
         img.src = logoFor(JSON.parse(img.dataset.logos || "[]"), isDark());
       });
     }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
