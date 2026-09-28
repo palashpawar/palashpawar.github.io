@@ -351,3 +351,14 @@ a.project-card {
   color: inherit;
   text-decoration: none;
 }
+
+a.exp-link h2::after {
+  content: " ↗";
+  font-size: 0.8em;
+  color: #999;
+  transition: color 0.2s ease;
+}
+
+a.exp-link:hover h2::after {
+  color: #4f46e5;
+}
