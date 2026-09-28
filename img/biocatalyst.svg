@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect width="400" height="200" fill="#161b26"/>
-<line x1="30" y1="100" x2="370" y2="100" stroke="#3a4256" stroke-width="2"/>
-<g fill="#5ecfff"><circle cx="70" cy="100" r="7"/><circle cx="150" cy="100" r="11"/><circle cx="215" cy="100" r="6"/><circle cx="290" cy="100" r="14"/><circle cx="345" cy="100" r="8"/></g>
-<g font-family="monospace" font-size="13" fill="#8b93a7"><text x="120" y="70">PDUFA</text><text x="258" y="70">readout</text></g>
-<text x="200" y="182" text-anchor="middle" font-family="monospace" font-size="15" fill="#8b93a7">catalyst board · 6 backtests</text></svg>
