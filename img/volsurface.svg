@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><rect width="400" height="200" fill="#161b26"/>
+<g fill="none" stroke-width="2.5" stroke-linecap="round">
+<path d="M40 60 Q200 170 360 40" stroke="#5ecfff" opacity=".35"/>
+<path d="M40 80 Q200 170 360 65" stroke="#5ecfff" opacity=".55"/>
+<path d="M40 100 Q200 170 360 90" stroke="#5ecfff" opacity=".75"/>
+<path d="M40 120 Q200 172 360 115" stroke="#5ecfff"/></g>
+<text x="200" y="182" text-anchor="middle" font-family="monospace" font-size="15" fill="#8b93a7">SPY · SVI fit · 32 expiries</text></svg>

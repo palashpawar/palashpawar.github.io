@@ -1,11 +1,9 @@
-<!DOCTYPE html><html><head><title>Projects</title><link rel='stylesheet' href='style.css'></head><body></body></html>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Projects</title>
+  <title>Projects - Palash Pawar</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
@@ -14,46 +12,70 @@
     <a href="index.html">Home</a>
     <a href="skills.html">Skills</a>
   </header>
-  
-<main class="with-nav">
-  <main class="projects">
-    <h1 class="section-title">     </h1>
+
+  <main class="with-nav projects">
     <div class="card-grid">
-      
-      <!-- Card 1 -->
+
       <div class="project-card">
-        <img src="aa.png" alt="Project 1 image" />
+        <img src="img/volsurface.svg" alt="Volatility smile curves across expiries" />
+        <h2>SPY Volatility Surface + Market-Making Simulator</h2>
+        <p class="description">Arbitrage-free SVI surface fit to 4,500+ real SPY option quotes, plus a market-making simulator with full P&amp;L attribution. 188 tests, fully reproducible.</p>
+        <p class="tech-stack"><strong>Tech Stack:</strong> Python, NumPy, SciPy, Streamlit</p>
+        <a href="https://github.com/palashpawar/spy-vol-surface-mm" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <img src="img/biocatalyst.svg" alt="Timeline of biotech catalyst events" />
+        <h2>BioCatalyst: Biotech Event Engine</h2>
+        <p class="description">Builds a calendar of trial readouts and FDA dates from ClinicalTrials.gov and SEC EDGAR, then ranks each as a named setup backed by an actual backtest.</p>
+        <p class="tech-stack"><strong>Tech Stack:</strong> Python, DuckDB, Flask, Vercel</p>
+        <a href="https://github.com/palashpawar/biocatalyst" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <img src="img/kalshi.svg" alt="Backtest edge versus forward-test result" />
+        <h2>Kalshi Earnings-Mention Edge Study</h2>
+        <p class="description">A backtest found a +4¢/contract edge in prediction markets on earnings-call keywords. Forward testing rejected it (−3.6¢), and the repo diagnoses why.</p>
+        <p class="tech-stack"><strong>Tech Stack:</strong> Python, Kalshi API, pandas</p>
+        <a href="https://github.com/palashpawar/kalshi-earnings-edge" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <img src="img/ledger.svg" alt="Spending by category bar chart" />
+        <h2>Debit Ledger</h2>
+        <p class="description">Local-first spending dashboard with real bank sync through Plaid. Data stays on your machine in SQLite, with no build step.</p>
+        <p class="tech-stack"><strong>Tech Stack:</strong> Node.js, Plaid API, SQLite</p>
+        <a href="https://github.com/palashpawar/debit-ledger" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <img src="aa.png" alt="American Airlines project" />
         <h2>American Airlines ML Project</h2>
         <p class="description">Analytics + Forecasting for American Airlines</p>
         <p class="tech-stack"><strong>Tech Stack:</strong> Python, R</p>
-        <a href="https://yourprojectlink1.com" target="_blank">View Project</a>
       </div>
 
-      <!-- Repeat for 5 more cards -->
       <div class="project-card">
-        <img src="kmv.png" alt="Project 2 image" />
-        <h2>Uncovering Hidden Gems: Using Data to Build a Winning Franchise </h2>
+        <img src="kmv.png" alt="Moneyball franchise simulation" />
+        <h2>Uncovering Hidden Gems: Using Data to Build a Winning Franchise</h2>
         <p class="description">Implemented Moneyball in a sports franchise simulation</p>
         <p class="tech-stack"><strong>Awards:</strong> 3rd Place @ DECA ICDC + $500</p>
         <a href="https://www.youtube.com/watch?v=qi1M5PiFbqk" target="_blank">View Project</a>
       </div>
 
-
       <div class="project-card">
-        <img src="tf.jpg" alt="Project 2 image" />
+        <img src="tf.jpg" alt="Insect bite classifier" />
         <h2>Creating a Convolutional Neural Network for Insect Bite Classification</h2>
-        <p class="description">Created an ML model for insect bite classification and implmented it into an Android app</p>
-        <p class="tech-stack"><strong>Tech Stack:</strong> Python, Tensorflow, Kotlin </p>
+        <p class="description">Created an ML model for insect bite classification and implemented it into an Android app</p>
+        <p class="tech-stack"><strong>Tech Stack:</strong> Python, Tensorflow, Kotlin</p>
         <a href="https://drive.google.com/file/d/1it8Y_aBNfJUBj2RynIkCmBNlAtyOc7zc/view" target="_blank">View Project</a>
       </div>
 
-      <!-- Add 4 more cards as needed... -->
-      
     </div>
   </main>
-</main>
+
   <footer>
-    <p>&copy; 2025 Palash Pawar</p>
+    <p>&copy; 2026 Palash Pawar</p>
   </footer>
 </body>
 </html>
