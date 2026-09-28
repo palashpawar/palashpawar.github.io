@@ -27,6 +27,7 @@
             <th>Record</th>
             <th class="col-num">Pts</th>
             <th class="col-pos">Position</th>
+            <th class="col-next">Next game</th>
           </tr>
         </thead>
         <tbody id="standingsBody"></tbody>
@@ -82,7 +83,10 @@
       img.alt = "";
       img.dataset.logos = JSON.stringify(team.logos || []);
       img.src = logoFor(team.logos || [], isDark());
-      link.append(img, el("span", "name-full", team.displayName), el("span", "name-short", shortName));
+      const names = el("span", "team-names");
+      names.append(el("span", "name-full", team.displayName), el("span", "name-short", shortName),
+                   el("span", "next-inline", "")); // phones: next game sits under the name
+      link.append(img, names);
 
       const record = soccer ? `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}` : (rec.summary || "–");
       const points = soccer ? n(s.points) : "–";
@@ -92,7 +96,7 @@
       let position = m ? (soccer ? m[1] : `${m[1]} ${m[2].replace(/ Division$/, " Div.").replace(/^(North|South)(east|west)\b/, (w, a, b) => a[0] + b[0].toUpperCase())}`) : "–";
       if (!soccer && team.rank && team.rank <= 25) position += ` (#${team.rank})`;
 
-      const cells = [el("td", "col-team"), el("td", "col-league", league), el("td", null, record), el("td", "col-num", points), el("td", "col-pos", position)];
+      const cells = [el("td", "col-team"), el("td", "col-league", league), el("td", null, record), el("td", "col-num", points), el("td", "col-pos", position), el("td", "col-next", "…")];
       cells[0].append(link);
       tr.replaceChildren(...cells);
     }
@@ -100,17 +104,63 @@
     const rows = teams.map(t => {
       const tr = el("tr");
       const td = el("td", "row-loading", `Loading ${t[2]}…`);
-      td.colSpan = 5;
+      td.colSpan = 6;
       tr.append(td);
       body.append(tr);
       return tr;
     });
 
+    // Next game: first fixture that hasn't finished. Soccer uses the "all" feed so cup and
+    // Champions League games count too; fixture=true returns upcoming games rather than results.
+    const scheduleUrl = ([path, id, , soccer]) =>
+      `https://site.api.espn.com/apis/site/v2/sports/${soccer ? "soccer/all" : path}/teams/${id}/schedule?fixture=true`;
+
+    const competitionTag = ev => {
+      const name = (ev.league && (ev.league.name || ev.league.abbreviation)) || "";
+      if (/Champions League/i.test(name)) return "UCL";
+      if (/Europa League/i.test(name)) return "UEL";
+      if (/Conference League/i.test(name)) return "UECL";
+      if (/Cup|Copa|Coupe|Coppa|Pokal|Trophy|Shield|Supercopa/i.test(name)) return "Cup";
+      return "";
+    };
+
+    function nextGameText(schedule, teamId) {
+      const upcoming = (schedule.events || [])
+        .filter(ev => !ev.competitions[0].status.type.completed)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+      const ev = upcoming[0];
+      if (!ev) return "–";
+      const comp = ev.competitions[0];
+      const me = comp.competitors.find(c => String(c.team.id) === String(teamId));
+      const opp = comp.competitors.find(c => c !== me);
+      if (!opp) return "–";
+      const where = comp.neutralSite || (me && me.homeAway === "home") ? "vs" : "@";
+      const opponent = `${where} ${opp.team.shortDisplayName || opp.team.displayName}`;
+      if (comp.status.type.state === "in") return `LIVE · ${opponent}`;
+
+      const d = new Date(ev.date);
+      const day = d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" });
+      const time = ev.timeValid === false ? "" : `, ${d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+      const tag = competitionTag(ev);
+      return `${opponent} · ${day}${time}${tag ? ` · ${tag}` : ""}`;
+    }
+
     Promise.allSettled(teams.map((t, i) =>
       fetch(`https://site.api.espn.com/apis/site/v2/sports/${t[0]}/teams/${t[1]}`)
         .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(d => renderRow(rows[i], t, d.team))
-        .catch(() => { rows[i].firstChild.textContent = `Couldn't load ${t[2]} right now.`; })
+        .then(() => fetch(scheduleUrl(t)))
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(sched => {
+          const text = nextGameText(sched, t[1]);
+          rows[i].querySelector("td.col-next").textContent = text;
+          rows[i].querySelector(".next-inline").textContent = text === "–" ? "" : `Next: ${text}`;
+        })
+        .catch(() => {
+          const cell = rows[i].querySelector("td.col-next");
+          if (cell) cell.textContent = "–";
+          else rows[i].firstChild.textContent = `Couldn't load ${t[2]} right now.`;
+        })
     )).then(() => {
       const time = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
       document.getElementById("sportsNote").textContent = `Live from ESPN · updated ${time}`;
