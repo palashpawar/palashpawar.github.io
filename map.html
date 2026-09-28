@@ -102,6 +102,11 @@
         gestureHandling: "cooperative", // page scroll isn't hijacked; ctrl/two-finger to zoom
         mapTypeControl: false,
         streetViewControl: false,
+        // keep the view inside the world so no grey bands show above/below it
+        restriction: {
+          latLngBounds: { north: 85, south: -85, west: -180, east: 180 },
+          strictBounds: true,
+        },
       });
 
       const info = new google.maps.InfoWindow();
