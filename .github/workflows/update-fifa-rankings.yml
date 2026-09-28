@@ -1,0 +1,43 @@
+name: Update FIFA rankings
+
+# FIFA's ranking API can't be called from the browser, so this refreshes
+# data/fifa-rankings.json (read by sports.html) once a week.
+on:
+  schedule:
+    - cron: "0 14 * * 1"   # Mondays 14:00 UTC
+  workflow_dispatch:        # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write           # commit the refreshed data file
+  pages: write              # request a Pages rebuild after committing
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch latest rankings
+        run: python3 scripts/update_fifa_rankings.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          if git diff --quiet -- data/fifa-rankings.json; then
+            echo "Rankings unchanged."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/fifa-rankings.json
+            git commit -m "Update FIFA rankings"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Pushes made with the workflow token don't always kick off a Pages build, so ask for one.
+      - name: Rebuild GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
