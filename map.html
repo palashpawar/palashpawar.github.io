@@ -68,15 +68,7 @@
         const marker = new google.maps.Marker({
           position: { lat, lng },
           map,
-          title: name,
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 8,
-            fillColor: "#4f46e5",
-            fillOpacity: 0.9,
-            strokeColor: "#ffffff",
-            strokeWeight: 2,
-          },
+          title: name, // no custom icon: Google's classic red pin
         });
         marker.addListener("click", () => {
           info.setContent(`<span class="map-popup">${name}</span>`);
