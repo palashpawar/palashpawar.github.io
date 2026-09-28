@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Travel Map - Palash Pawar</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <link rel="stylesheet" href="style.css"/>
   <script src="theme.js"></script>
 </head>
@@ -25,7 +24,6 @@
     <p>&copy; 2026 Palash Pawar</p>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script>
     // Cities visited: [name, latitude, longitude]
     const cities = [
@@ -33,28 +31,73 @@
       ["Austin, TX", 30.2672, -97.7431],
     ];
 
-    const map = L.map("map", { scrollWheelZoom: false, worldCopyJump: true });
+    // Google's "night" palette, used when the site is in dark mode
+    const darkStyle = [
+      { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+      { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+      { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+      { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
+      { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
+      { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#263c3f" }] },
+      { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6b9a76" }] },
+      { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
+      { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
+      { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#9ca5b3" }] },
+      { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#746855" }] },
+      { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1f2835" }] },
+      { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#f3d19c" }] },
+      { featureType: "transit", elementType: "geometry", stylers: [{ color: "#2f3948" }] },
+      { featureType: "transit.station", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
+      { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] },
+      { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#515c6d" }] },
+      { featureType: "water", elementType: "labels.text.stroke", stylers: [{ color: "#17263c" }] },
+    ];
+    const styleFor = () => (document.documentElement.dataset.theme === "dark" ? darkStyle : []);
 
-    // OpenStreetMap tiles; dark mode inverts them in CSS
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 19,
-    }).addTo(map);
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        styles: styleFor(),
+        gestureHandling: "cooperative", // page scroll isn't hijacked; ctrl/two-finger to zoom
+        mapTypeControl: false,
+        streetViewControl: false,
+      });
 
-    const pins = cities.map(([name, lat, lng]) =>
-      L.circleMarker([lat, lng], {
-        radius: 8,
-        color: "#ffffff",
-        weight: 2,
-        fillColor: "#4f46e5",
-        fillOpacity: 0.9,
-      }).bindPopup(name).bindTooltip(name, { direction: "top", offset: [0, -8] }).addTo(map)
-    );
+      const info = new google.maps.InfoWindow();
+      const bounds = new google.maps.LatLngBounds();
+      for (const [name, lat, lng] of cities) {
+        const marker = new google.maps.Marker({
+          position: { lat, lng },
+          map,
+          title: name,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 8,
+            fillColor: "#4f46e5",
+            fillOpacity: 0.9,
+            strokeColor: "#ffffff",
+            strokeWeight: 2,
+          },
+        });
+        marker.addListener("click", () => {
+          info.setContent(`<span class="map-popup">${name}</span>`);
+          info.open({ map, anchor: marker });
+        });
+        bounds.extend(marker.getPosition());
+      }
 
-    map.fitBounds(L.featureGroup(pins).getBounds(), { padding: [60, 60], maxZoom: 6 });
+      map.fitBounds(bounds, 60);
+      google.maps.event.addListenerOnce(map, "idle", () => {
+        if (map.getZoom() > 6) map.setZoom(6);
+      });
+
+      new MutationObserver(() => map.setOptions({ styles: styleFor() }))
+        .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    }
 
     document.getElementById("mapCount").textContent =
       `${cities.length} ${cities.length === 1 ? "city" : "cities"} visited`;
   </script>
+  <!-- Replace YOUR_API_KEY with your Google Maps JavaScript API key -->
+  <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&loading=async"></script>
 </body>
 </html>

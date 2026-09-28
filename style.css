@@ -506,12 +506,12 @@ a.exp-link .location {
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   overflow: hidden;
-  z-index: 0; /* keep Leaflet panes below the floating nav */
+  z-index: 0; /* keep map layers below the floating nav */
 }
 
-.travel-map .leaflet-popup-content,
-.travel-map .leaflet-tooltip {
+.travel-map .map-popup {
   font-family: 'Fira Code', monospace;
+  color: #000;
 }
 
 [data-theme="dark"] .map-count {
@@ -523,9 +523,6 @@ a.exp-link .location {
   background: #1b1e29;
 }
 
-[data-theme="dark"] .travel-map .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
-}
 
 @media (max-width: 600px) {
   .travel-map { height: 60vh; min-height: 320px; }
