@@ -229,6 +229,9 @@ footer {
   backdrop-filter: blur(8px);
   flex-wrap: wrap;
   font-size: 0.9rem;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
 }
 
 .floating-nav a {
@@ -325,4 +328,63 @@ main.with-nav {
   padding: 30px;
   box-sizing: border-box;
   background-color: #f3f4f7;
+}
+
+/* Experience timeline */
+.timeline {
+  list-style: none;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px 0 40px;
+  border-left: 2px solid #dcdcf5;
+  box-sizing: border-box;
+}
+
+.exp-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  transition: transform 0.2s ease;
+}
+
+.exp-card:hover {
+  transform: translateY(-3px);
+}
+
+.exp-card::before {
+  content: "";
+  position: absolute;
+  left: -48px;
+  top: 26px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #4f46e5;
+  border: 3px solid #f8f9fb;
+}
+
+.exp-date {
+  font-size: 0.8rem;
+  color: #5ecfff;
+}
+
+.exp-card h2 {
+  font-size: 1.25rem;
+  margin: 6px 0 4px;
+  color: #333;
+}
+
+.exp-role {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .timeline { margin-left: 16px; padding-right: 16px; }
+  .floating-nav { gap: 6px; }
+  .floating-nav a { font-size: 0.85rem; padding: 5px 8px; }
 }
