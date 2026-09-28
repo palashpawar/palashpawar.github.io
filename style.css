@@ -375,8 +375,15 @@ main.with-nav {
 
 
 @media (max-width: 600px) {
-  .floating-nav { gap: 6px; }
-  .floating-nav a { font-size: 0.85rem; padding: 5px 8px; }
+  /* pin the nav left so it never runs under the theme button on the right */
+  .floating-nav {
+    gap: 2px;
+    left: 12px;
+    transform: none;
+    max-width: calc(100vw - 64px);
+    padding: 6px 6px;
+  }
+  .floating-nav a { font-size: 0.8rem; padding: 5px 6px; }
   .card-grid { flex-direction: column; gap: 20px; overflow-x: visible; scroll-snap-type: none; }
   .card-grid .project-card { flex-basis: auto; }
 }
@@ -640,4 +647,98 @@ a.exp-link .location {
 
 [data-theme="dark"] .highlight {
   color: #5ecfff;
+}
+
+/* Sports page */
+.sports-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.sports-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+  margin: 20px 0;
+}
+
+.sports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+a.sport-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 230px;
+}
+
+.project-card img.sport-logo { /* outranks the project-card image rule */
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+.sport-card h2 {
+  margin: 12px 0 2px;
+  font-size: 1.1rem;
+}
+
+.sport-league {
+  font-size: 0.85rem;
+  color: #000;
+  margin: 0 0 14px;
+}
+
+.sport-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sport-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+}
+
+.sport-stat-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #000;
+}
+
+.sport-stat-label {
+  font-size: 0.7rem;
+  color: #000;
+  opacity: 0.65;
+  max-width: 110px;
+  text-align: center;
+}
+
+.sport-loading {
+  margin: auto;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+[data-theme="dark"] .sports-note,
+[data-theme="dark"] .sport-loading {
+  color: #8a90a2;
+}
+
+[data-theme="dark"] .sport-league,
+[data-theme="dark"] .sport-stat-value,
+[data-theme="dark"] .sport-stat-label {
+  color: #fff;
 }

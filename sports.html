@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sports - Palash Pawar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="theme.js"></script>
+</head>
+<body>
+  <header class="floating-nav">
+    <a href="index.html">Home</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="map.html">Map</a>
+  </header>
+
+  <main class="with-nav sports-page">
+    <p class="sports-note" id="sportsNote">Loading live standings…</p>
+    <div class="sports-grid" id="sportsGrid"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Palash Pawar</p>
+  </footer>
+
+  <script>
+    // Teams I follow: [ESPN sport/league path, ESPN team id, league label, soccer?]
+    const teams = [
+      ["soccer/eng.1", 360, "Premier League", true],
+      ["soccer/fra.1", 160, "Ligue 1", true],
+      ["soccer/esp.1", 86, "LALIGA", true],
+      ["soccer/usa.1", 6077, "MLS", true],
+      ["football/college-football", 251, "College Football", false],
+      ["football/nfl", 34, "NFL", false],
+      ["basketball/nba", 10, "NBA", false],
+    ];
+
+    const grid = document.getElementById("sportsGrid");
+    const isDark = () => document.documentElement.dataset.theme === "dark";
+
+    // Pick ESPN's dark-background logo variant in dark mode when one exists
+    const logoFor = (logos, dark) => {
+      const pick = logos.find(l => l.rel.includes("default") && l.rel.includes(dark ? "dark" : "full") && !l.rel.includes("scoreboard"))
+        || logos.find(l => l.rel.includes(dark ? "dark" : "full"))
+        || logos[0];
+      return pick ? pick.href : "";
+    };
+
+    function el(tag, cls, text) {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    }
+
+    function stat(value, label) {
+      const box = el("div", "sport-stat");
+      box.append(el("span", "sport-stat-value", value), el("span", "sport-stat-label", label));
+      return box;
+    }
+
+    function renderCard(card, [path, id, league, soccer], team) {
+      const rec = (team.record && team.record.items && team.record.items[0]) || {};
+      const s = Object.fromEntries((rec.stats || []).map(x => [x.name, x.value]));
+      const n = v => (v == null ? "–" : String(Math.round(v)));
+
+      const img = el("img", "sport-logo");
+      img.alt = `${team.displayName} logo`;
+      img.dataset.logos = JSON.stringify(team.logos || []);
+      img.src = logoFor(team.logos || [], isDark());
+
+      const stats = el("div", "sport-stats");
+      if (soccer) {
+        stats.append(stat(n(s.points), "Points"), stat(`${n(s.wins)}-${n(s.ties)}-${n(s.losses)}`, "W-D-L"));
+      } else {
+        stats.append(stat(rec.summary || "–", "Record"));
+        if (team.rank && team.rank <= 25) stats.append(stat(`#${team.rank}`, "Rank"));
+      }
+      // "12th in English Premier League" → "12th" / "Position";  "3rd in AFC South" → "3rd" / "AFC South"
+      const m = (team.standingSummary || "").match(/^(\S+)\s+in\s+(.+)$/);
+      if (m) stats.append(stat(m[1], soccer ? "Position" : m[2]));
+
+      card.replaceChildren(img, el("h2", null, team.displayName), el("p", "sport-league", league), stats);
+      const link = (team.links || []).find(l => l.rel.includes("clubhouse"));
+      if (link) card.href = link.href;
+    }
+
+    const cards = teams.map(t => {
+      const card = el("a", "project-card sport-card");
+      card.target = "_blank";
+      card.rel = "noopener";
+      card.append(el("p", "sport-loading", `Loading ${t[2]}…`));
+      grid.append(card);
+      return card;
+    });
+
+    Promise.allSettled(teams.map((t, i) =>
+      fetch(`https://site.api.espn.com/apis/site/v2/sports/${t[0]}/teams/${t[1]}`)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(d => renderCard(cards[i], t, d.team))
+        .catch(() => cards[i].replaceChildren(el("p", "sport-loading", `Couldn't load ${t[2]} right now.`)))
+    )).then(() => {
+      const time = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      document.getElementById("sportsNote").textContent = `Live from ESPN · updated ${time}`;
+    });
+
+    // Swap logo variants when the theme toggles
+    new MutationObserver(() => {
+      document.querySelectorAll(".sport-logo").forEach(img => {
+        img.src = logoFor(JSON.parse(img.dataset.logos || "[]"), isDark());
+      });
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  </script>
+</body>
+</html>
