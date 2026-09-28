@@ -591,3 +591,11 @@ a.exp-link .location {
       linear-gradient(135deg, transparent 75%, rgba(255,255,255,0.35) 75%, rgba(255,255,255,0.35) 85%, transparent 85%);
   }
 }
+
+.highlight:hover {
+  text-decoration: underline;
+}
+
+[data-theme="dark"] .highlight {
+  color: #5ecfff;
+}
