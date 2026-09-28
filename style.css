@@ -741,6 +741,8 @@ a.exp-link .location {
 
 .standings td.col-next {
   font-size: 0.85rem;
+  white-space: normal; /* long fixtures wrap to a second line instead of widening the table */
+  min-width: 200px;
 }
 
 .row-loading {

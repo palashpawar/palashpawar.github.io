@@ -1,0 +1,23 @@
+{
+  "published": "2026-07-20T10:00:00+00:00",
+  "teams": {
+    "USA": {
+      "rank": 16,
+      "previousRank": 17,
+      "points": 1690,
+      "published": "2026-07-20T10:00:00+00:00"
+    },
+    "FRA": {
+      "rank": 3,
+      "previousRank": 3,
+      "points": 1949,
+      "published": "2026-07-20T10:00:00+00:00"
+    },
+    "IND": {
+      "rank": 138,
+      "previousRank": 138,
+      "points": 1085,
+      "published": "2026-07-20T10:00:00+00:00"
+    }
+  }
+}

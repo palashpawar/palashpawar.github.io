@@ -33,7 +33,7 @@
         <tbody id="standingsBody"></tbody>
       </table>
     </div>
-    <p class="sports-footnote">Soccer records are wins-draws-losses; points apply to soccer only. (#N) is the national ranking.</p>
+    <p class="sports-footnote">Soccer records are wins-draws-losses; points apply to club soccer only. (#N) is the national ranking.<span id="fifaDate"></span></p>
   </main>
 
   <footer>
@@ -41,7 +41,8 @@
   </footer>
 
   <script>
-    // Teams I follow: [ESPN sport/league path, ESPN team id, league label, soccer?, short name for phones]
+    // Teams I follow: [ESPN sport/league path, ESPN team id, league label, soccer?, short name for phones,
+    //                  FIFA country code (national teams only)]
     const teams = [
       ["soccer/eng.1", 360, "Premier League", true, "Man United"],
       ["soccer/fra.1", 160, "Ligue 1", true, "PSG"],
@@ -50,7 +51,14 @@
       ["football/college-football", 251, "College Football", false, "Longhorns"],
       ["football/nfl", 34, "NFL", false, "Texans"],
       ["basketball/nba", 10, "NBA", false, "Rockets"],
+      ["soccer/all", 660, "International", true, "USA", "USA"],
+      ["soccer/all", 478, "International", true, "France", "FRA"],
+      ["soccer/all", 4385, "International", true, "India", "IND"],
     ];
+
+    // National teams have no league table; their position is the FIFA World Ranking,
+    // which scripts/update_fifa_rankings.py saves here (FIFA's API can't be called from the browser)
+    const fifa = fetch("data/fifa-rankings.json").then(r => r.json()).catch(() => null);
 
     const body = document.getElementById("standingsBody");
     const isDark = () => document.documentElement.dataset.theme === "dark";
@@ -70,7 +78,7 @@
       return e;
     }
 
-    function renderRow(tr, [path, id, league, soccer, shortName], team) {
+    function renderRow(tr, [path, id, league, soccer, shortName, fifaCode], team, rankings) {
       const rec = (team.record && team.record.items && team.record.items[0]) || {};
       const s = Object.fromEntries((rec.stats || []).map(x => [x.name, x.value]));
       const n = v => (v == null ? "–" : String(Math.round(v)));
@@ -88,13 +96,18 @@
                    el("span", "next-inline", "")); // phones: next game sits under the name
       link.append(img, names);
 
-      const record = soccer ? `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}` : (rec.summary || "–");
-      const points = soccer ? n(s.points) : "–";
+      const record = fifaCode ? "–" : soccer ? `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}` : (rec.summary || "–");
+      const points = soccer && !fifaCode ? n(s.points) : "–";
 
       // "12th in English Premier League" → "12th";  "3rd in AFC South" → "3rd AFC South"
       const m = (team.standingSummary || "").match(/^(\S+)\s+in\s+(.+)$/);
       let position = m ? (soccer ? m[1] : `${m[1]} ${m[2].replace(/ Division$/, " Div.").replace(/^(North|South)(east|west)\b/, (w, a, b) => a[0] + b[0].toUpperCase())}`) : "–";
       if (!soccer && team.rank && team.rank <= 25) position += ` (#${team.rank})`;
+      if (fifaCode) {
+        const f = rankings && rankings.teams[fifaCode];
+        const move = f && f.previousRank ? f.previousRank - f.rank : 0;
+        position = f ? `#${f.rank} FIFA${move > 0 ? ` ▲${move}` : move < 0 ? ` ▼${-move}` : ""}` : "–";
+      }
 
       const cells = [el("td", "col-team"), el("td", "col-league", league), el("td", null, record), el("td", "col-num", points), el("td", "col-pos", position), el("td", "col-next", "…")];
       cells[0].append(link);
@@ -120,6 +133,9 @@
       if (/Champions League/i.test(name)) return "UCL";
       if (/Europa League/i.test(name)) return "UEL";
       if (/Conference League/i.test(name)) return "UECL";
+      if (/Nations League/i.test(name)) return "UNL";
+      if (/Friendly/i.test(name)) return "Friendly";
+      if (/Qualif/i.test(name)) return "Qualifier";
       if (/Cup|Copa|Coupe|Coppa|Pokal|Trophy|Shield|Supercopa/i.test(name)) return "Cup";
       return "";
     };
@@ -148,7 +164,7 @@
     Promise.allSettled(teams.map((t, i) =>
       fetch(`https://site.api.espn.com/apis/site/v2/sports/${t[0]}/teams/${t[1]}`)
         .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(d => renderRow(rows[i], t, d.team))
+        .then(async d => renderRow(rows[i], t, d.team, await fifa))
         .then(() => fetch(scheduleUrl(t)))
         .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(sched => {
@@ -161,9 +177,14 @@
           if (cell) cell.textContent = "–";
           else rows[i].firstChild.textContent = `Couldn't load ${t[2]} right now.`;
         })
-    )).then(() => {
+    )).then(async () => {
       const time = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
       document.getElementById("sportsNote").textContent = `Live from ESPN · updated ${time}`;
+      const f = await fifa;
+      if (f) {
+        const date = new Date(f.published).toLocaleDateString([], { month: "long", day: "numeric", year: "numeric" });
+        document.getElementById("fifaDate").textContent = ` National teams use the FIFA World Ranking (released ${date}).`;
+      }
     });
 
     // Swap logo variants when the theme toggles
