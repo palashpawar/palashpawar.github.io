@@ -425,16 +425,13 @@ a.exp-link:hover h2::after {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-[data-theme="dark"] .project-card h2 {
-  color: #e6e8ef;
-}
-
+[data-theme="dark"] .project-card h2,
 [data-theme="dark"] .project-card .description,
-[data-theme="dark"] .project-card .location {
-  color: #b7bccb;
+[data-theme="dark"] .project-card .location,
+[data-theme="dark"] .project-card .tech-stack {
+  color: #fff;
 }
 
-[data-theme="dark"] .project-card .tech-stack,
 [data-theme="dark"] footer {
   color: #8a90a2;
 }
@@ -480,7 +477,7 @@ a.exp-link .location {
 }
 
 [data-theme="dark"] a.exp-link:not(:hover) h2::after {
-  color: #e6e8ef;
+  color: #fff;
 }
 
 /* Travel map */
