@@ -527,3 +527,19 @@ a.exp-link .location {
 @media (max-width: 600px) {
   .travel-map { height: 60vh; min-height: 320px; }
 }
+
+/* Wide screens: terminal grows past the home column so each output fits on one line.
+   Narrower screens (tablets, phones) keep the normal width and wrap. */
+@media (min-width: 940px) {
+  .terminal-box {
+    width: min(900px, calc(100vw - 32px));
+    max-width: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .terminal-box pre {
+    white-space: pre;
+  }
+}
