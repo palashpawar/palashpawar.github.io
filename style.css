@@ -130,9 +130,9 @@ nav a:hover {
 .terminal-title {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 16px; /* matches the 16px window buttons */
   font-weight: 600;
   color: #a6a6a6;
   white-space: nowrap;
@@ -350,6 +350,15 @@ main.with-nav {
     padding: 20px;
     padding-top: 54px; /* clear the title bar */
     font-size: 0.85rem;
+  }
+
+  /* narrow title bar: drop "— -zsh" and only reserve room for the buttons on the left */
+  .terminal-shell {
+    display: none;
+  }
+
+  .terminal-header {
+    padding: 0 12px 0 90px;
   }
 
   .terminal-box pre {
