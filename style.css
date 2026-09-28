@@ -104,10 +104,10 @@ nav a:hover {
 
 .window-buttons {
   position: absolute;
-  top: 13px;
-  left: 16px;
+  top: 12px; /* (38px bar − 14px dot) / 2 */
+  left: 14px;
   display: flex;
-  gap: 8px;
+  gap: 9px;
   z-index: 1;
 }
 
@@ -145,8 +145,8 @@ nav a:hover {
 }
 
 .btn {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   display: inline-block;
 }
