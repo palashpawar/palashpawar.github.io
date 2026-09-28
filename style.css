@@ -306,7 +306,6 @@ main.with-nav {
   object-fit: contain;
   padding: 30px;
   box-sizing: border-box;
-  background-color: #f3f4f7;
 }
 
 
@@ -419,7 +418,12 @@ a.exp-link:hover h2::after {
   color: #8a90a2;
 }
 
-/* keep logos on a light panel so dark wordmarks stay readable */
-[data-theme="dark"] .project-card img.logo {
-  background-color: #e4e7ee;
+/* dark-mode logo variants have light wordmarks */
+.project-card img.logo-dark,
+[data-theme="dark"] .project-card img.logo-light {
+  display: none;
+}
+
+[data-theme="dark"] .project-card img.logo-dark {
+  display: block;
 }
