@@ -388,3 +388,21 @@ main.with-nav {
   .floating-nav { gap: 6px; }
   .floating-nav a { font-size: 0.85rem; padding: 5px 8px; }
 }
+
+.exp-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.exp-logo {
+  flex: 0 0 110px;
+  width: 110px;
+  height: 64px;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .exp-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .exp-logo { flex-basis: auto; height: 48px; object-position: left center; }
+}
