@@ -104,10 +104,44 @@ nav a:hover {
 
 .window-buttons {
   position: absolute;
-  top: 12px;
+  top: 13px;
   left: 16px;
   display: flex;
   gap: 8px;
+  z-index: 1;
+}
+
+/* macOS-style title bar */
+.terminal-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 38px;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 80px; /* keep the title clear of the window buttons */
+  box-sizing: border-box;
+}
+
+.terminal-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #a6a6a6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.terminal-folder {
+  flex: none;
 }
 
 .btn {
@@ -314,6 +348,7 @@ main.with-nav {
 
   .terminal-box {
     padding: 20px;
+    padding-top: 54px; /* clear the title bar */
     font-size: 0.85rem;
   }
 
@@ -561,8 +596,9 @@ a.exp-link .location {
     top: 0;
     left: 0;
     right: 0;
-    height: 40px;
+    height: 38px;
     cursor: grab;
+    z-index: 2;
   }
 
   .terminal-box.dragging .terminal-titlebar {

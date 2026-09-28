@@ -57,6 +57,12 @@
     </p>
 
     <div class="terminal-box" id="terminalBox">
+      <div class="terminal-header">
+        <span class="terminal-title">
+          <svg class="terminal-folder" viewBox="0 0 16 13" width="16" height="13" aria-hidden="true"><path d="M1.5 1h4.2l1.5 1.6h7.3c.6 0 1 .4 1 1V11.5c0 .6-.4 1-1 1h-13c-.6 0-1-.4-1-1V2c0-.6.4-1 1-1z" fill="#5ab4f0"/><path d="M.5 4.2h15v7.3c0 .6-.4 1-1 1h-13c-.6 0-1-.4-1-1z" fill="#7cc6f7"/></svg>
+          palashpawar — -zsh — <span id="terminalSize">120×30</span>
+        </span>
+      </div>
       <div class="terminal-titlebar" title="Drag to move · double-click to reset"></div>
       <div class="window-buttons">
         <span class="btn red"></span>
@@ -115,6 +121,22 @@ document.addEventListener("DOMContentLoaded", function () {
       // the box is centered, so shift by half the width change to keep its left edge put
       state.dx = s.dx + (w - s.w0) / 2;
     }));
+
+  // title shows the terminal's size in character columns × rows, like macOS Terminal
+  const sizeLabel = document.getElementById("terminalSize");
+  const probe = document.createElement("span");
+  probe.textContent = "0".repeat(100);
+  probe.style.cssText = "position:absolute;visibility:hidden;white-space:pre";
+  terminal.appendChild(probe);
+  const charW = probe.getBoundingClientRect().width / 100;
+  probe.remove();
+  const updateSize = () => {
+    const lineH = parseFloat(getComputedStyle(terminal).lineHeight) || charW * 2;
+    const cols = Math.floor(terminal.clientWidth / charW);
+    const rows = Math.max(Math.floor((box.clientHeight - 50) / lineH), 1);
+    sizeLabel.textContent = `${cols}×${rows}`;
+  };
+  new ResizeObserver(updateSize).observe(box);
 
   box.querySelector(".terminal-titlebar").addEventListener("dblclick", () => {
     Object.assign(state, { dx: 0, dy: 0, w: null, h: null });
