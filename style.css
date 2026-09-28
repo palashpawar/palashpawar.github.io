@@ -362,3 +362,104 @@ a.exp-link h2::after {
 a.exp-link:hover h2::after {
   color: #4f46e5;
 }
+
+/* Theme toggle */
+.theme-toggle {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1001;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #ffffffdd;
+  color: #444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  color: #4f46e5;
+}
+
+@media (max-width: 600px) {
+  .theme-toggle { top: 14px; right: 12px; width: 34px; height: 34px; }
+}
+
+/* Dark theme */
+[data-theme="dark"] body {
+  background-color: #11131a;
+  color: #d4d7e1;
+}
+
+[data-theme="dark"] .subtitle,
+[data-theme="dark"] .about-me-text {
+  color: #b7bccb;
+}
+
+[data-theme="dark"] .cli-prompt {
+  color: #5ecfff;
+}
+
+[data-theme="dark"] .terminal-box {
+  background-color: #1d2130;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .floating-nav,
+[data-theme="dark"] .theme-toggle {
+  background-color: #1d2130dd;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .floating-nav a,
+[data-theme="dark"] .theme-toggle {
+  color: #d4d7e1;
+}
+
+[data-theme="dark"] .floating-nav a {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="dark"] .floating-nav a:hover,
+[data-theme="dark"] .theme-toggle:hover {
+  color: #5ecfff;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .project-card {
+  background-color: #1b1e29;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .project-card h2,
+[data-theme="dark"] .skill-icon {
+  color: #e6e8ef;
+}
+
+[data-theme="dark"] .project-card .description {
+  color: #b7bccb;
+}
+
+[data-theme="dark"] .project-card .tech-stack,
+[data-theme="dark"] footer {
+  color: #8a90a2;
+}
+
+/* keep logos on a light panel so dark wordmarks stay readable */
+[data-theme="dark"] .project-card img.logo,
+[data-theme="dark"] .skill-icon img {
+  background-color: #e4e7ee;
+}
+
+[data-theme="dark"] .skill-icon img {
+  padding: 10px;
+  border-radius: 14px;
+  box-sizing: border-box;
+}
