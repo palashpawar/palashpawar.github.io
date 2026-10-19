@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19T20:37:16+00:00",
+ "updated": "2026-10-19T23:24:58+00:00",
  "ap": {
   "2390": 1,
   "252": 2,
@@ -1593,6 +1593,636 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/251.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "football/college-football|197": {
+   "team": {
+    "displayName": "Oklahoma State Cowboys",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png",
+    "recordSummary": "4-2",
+    "standingSummary": "5th in Big 12",
+    "clubhouse": "https://www.espn.com/college-football/team/_/id/197/oklahoma-state-cowboys"
+   },
+   "events": [
+    {
+     "id": "401856831",
+     "date": "2026-10-17T23:30Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": true,
+         "state": "post"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": true,
+         "score": "35",
+         "shootoutScore": null,
+         "team": {
+          "id": "248",
+          "displayName": "Houston Cougars",
+          "shortDisplayName": "Houston",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/248.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": "32",
+         "shootoutScore": null,
+         "team": {
+          "id": "197",
+          "displayName": "Oklahoma State Cowboys",
+          "shortDisplayName": "Oklahoma St",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/197.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401856836",
+     "date": "2026-10-24T23:00Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "197",
+          "displayName": "Oklahoma State Cowboys",
+          "shortDisplayName": "Oklahoma St",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/197.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "38",
+          "displayName": "Colorado Buffaloes",
+          "shortDisplayName": "Colorado",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/38.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/38.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401856847",
+     "date": "2026-10-31T23:00Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "66",
+          "displayName": "Iowa State Cyclones",
+          "shortDisplayName": "Iowa State",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/66.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/66.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "197",
+          "displayName": "Oklahoma State Cowboys",
+          "shortDisplayName": "Oklahoma St",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/197.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401856854",
+     "date": "2026-11-07T05:00Z",
+     "timeValid": false,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "2306",
+          "displayName": "Kansas State Wildcats",
+          "shortDisplayName": "Kansas St",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/2306.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/2306.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "197",
+          "displayName": "Oklahoma State Cowboys",
+          "shortDisplayName": "Oklahoma St",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/197.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "football/college-football|248": {
+   "team": {
+    "displayName": "Houston Cougars",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png",
+    "recordSummary": "6-1",
+    "standingSummary": "4th in Big 12",
+    "clubhouse": "https://www.espn.com/college-football/team/_/id/248/houston-cougars"
+   },
+   "events": [
+    {
+     "id": "401856831",
+     "date": "2026-10-17T23:30Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": true,
+         "state": "post"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": true,
+         "score": "35",
+         "shootoutScore": null,
+         "team": {
+          "id": "248",
+          "displayName": "Houston Cougars",
+          "shortDisplayName": "Houston",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/248.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": "32",
+         "shootoutScore": null,
+         "team": {
+          "id": "197",
+          "displayName": "Oklahoma State Cowboys",
+          "shortDisplayName": "Oklahoma St",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/197.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401856837",
+     "date": "2026-10-25T02:15Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "254",
+          "displayName": "Utah Utes",
+          "shortDisplayName": "Utah",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/254.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/254.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "248",
+          "displayName": "Houston Cougars",
+          "shortDisplayName": "Houston",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/248.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401856851",
+     "date": "2026-11-07T05:00Z",
+     "timeValid": false,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "248",
+          "displayName": "Houston Cougars",
+          "shortDisplayName": "Houston",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/248.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "2132",
+          "displayName": "Cincinnati Bearcats",
+          "shortDisplayName": "Cincinnati",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/2132.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/2132.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401856860",
+     "date": "2026-11-14T03:15Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "38",
+          "displayName": "Colorado Buffaloes",
+          "shortDisplayName": "Colorado",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/38.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/38.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "248",
+          "displayName": "Houston Cougars",
+          "shortDisplayName": "Houston",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/248.png"
            }
           ]
          }
