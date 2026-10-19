@@ -138,14 +138,27 @@
       const base = `https://site.api.espn.com/apis/site/v2/sports/${soccer ? "soccer/all" : path}/teams/${id}/schedule`;
       return soccer ? [base, `${base}?fixture=true`] : [base];
     };
-    const loadSchedule = t => Promise.all(scheduleUrls(t).map(u =>
-      fetch(u).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    )).then(feeds => {
+    // Hourly snapshot of the same ESPN feeds, saved by .github/workflows/update-sports.yml
+    // (scripts/update_sports.py). Used for any team whose live request fails.
+    const snapshot = fetch("data/sports.json").then(r => r.json()).catch(() => null);
+    let usedSnapshot = false;
+
+    const getJSON = u => fetch(u, { signal: AbortSignal.timeout(8000) })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+
+    const loadLive = t => Promise.all(scheduleUrls(t).map(getJSON)).then(feeds => {
       const byId = new Map();
       feeds.forEach(f => (f.events || []).forEach(ev => byId.set(ev.id, ev)));
       // each feed also describes the team (name, logo, record, standing)
       const team = feeds.map(f => f.team).find(tm => tm && tm.standingSummary) || feeds[0].team;
       return { events: [...byId.values()], team };
+    });
+
+    const loadSchedule = t => loadLive(t).catch(async err => {
+      const saved = (await snapshot)?.teams?.[`${t[0]}|${t[1]}`];
+      if (!saved) throw err;
+      usedSnapshot = true;
+      return saved;
     });
 
     // ESPN's per-team endpoint stopped allowing cross-site requests (Oct 2026), so team details
@@ -175,7 +188,7 @@
             const poll = (d.rankings || []).find(p => /AP/.test(p.name)) || (d.rankings || [])[0];
             return Object.fromEntries((poll ? poll.ranks : []).map(r => [String(r.team.id), r.current]));
           })
-          .catch(() => ({}))
+          .catch(async () => (await snapshot)?.ap || {})
       : Promise.resolve({});
 
     const competitionTag = ev => {
@@ -284,8 +297,11 @@
           else rows[i].firstChild.textContent = `Couldn't load ${t[2]} right now.`;
         })
     )).then(async () => {
-      const time = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-      document.getElementById("sportsNote").textContent = `Live from ESPN · updated ${time}`;
+      const fmt = d => d.toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" });
+      const saved = (await snapshot)?.updated;
+      document.getElementById("sportsNote").textContent = usedSnapshot && saved
+        ? `From ESPN · as of ${fmt(new Date(saved))}`
+        : `Live from ESPN · updated ${fmt(new Date())}`;
       const f = await fifa;
       if (f) {
         const date = new Date(f.published).toLocaleDateString([], { month: "long", day: "numeric", year: "numeric" });
