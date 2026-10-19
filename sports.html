@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sports - Palash Pawar</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202610191818"/>
-  <script src="theme.js?v=202610191818"></script>
+  <link rel="stylesheet" href="style.css?v=202610191821"/>
+  <script src="theme.js?v=202610191821"></script>
 </head>
 <body>
   <header class="floating-nav">
@@ -18,7 +18,8 @@
 
   <main class="with-nav sports-page">
     <p class="sports-note" id="sportsNote">Loading live standings…</p>
-    <div id="standingsGroups"></div>
+    <nav class="league-tabs" id="leagueTabs" aria-label="Filter by league"></nav>
+    <div class="team-cards" id="teamCards"></div>
     <p class="sports-footnote">Soccer records are wins-draws-losses.<span id="fifaDate"></span></p>
   </main>
 
@@ -63,51 +64,45 @@
       return e;
     }
 
-    // A cell with a bold main line and an optional muted line underneath
-    function stack(main, sub) {
-      const box = el("div", "cell-stack");
-      box.append(el("span", "cell-main", main));
-      if (sub) box.append(el("span", "cell-sub", sub));
+    // League tab each team belongs to (only tabs that have teams are shown)
+    const tabOf = ([path, , , , , fifaCode]) =>
+      fifaCode ? "International" : path.startsWith("soccer") ? "Soccer"
+      : path.endsWith("college-football") ? "NCAAF" : path.endsWith("nfl") ? "NFL" : "NBA";
+    const TAB_ORDER = ["All", "Soccer", "NFL", "NCAAF", "NBA", "International"];
+
+    const tabs = document.getElementById("leagueTabs");
+    const grid = document.getElementById("teamCards");
+    TAB_ORDER.filter(tab => tab === "All" || teams.some(t => tabOf(t) === tab)).forEach(tab => {
+      const b = el("button", "league-tab", tab);
+      b.type = "button";
+      b.setAttribute("aria-pressed", tab === "All" ? "true" : "false");
+      b.addEventListener("click", () => {
+        tabs.querySelectorAll(".league-tab").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+        grid.querySelectorAll(".team-card").forEach(c => { c.hidden = tab !== "All" && c.dataset.tab !== tab; });
+      });
+      tabs.append(b);
+    });
+
+    const isCollege = t => t[0].endsWith("college-football");
+
+    // Real-style stat tile: small grey label over a big number
+    function tile(label, value, note) {
+      const box = el("div", "stat-tile");
+      box.append(el("span", "stat-label", label), el("span", "stat-value", value));
+      if (note) box.append(el("span", "stat-note", note));
       return box;
     }
 
-    // Tables by kind of team, each with only the columns that apply to it
-    const GROUPS = [
-      { key: "club", title: "Club Soccer", cols: ["Team", "Pts", "Pos", "Last game", "Next game"] },
-      { key: "us", title: "US Sports", cols: ["Team", "Record", "Standing", "Last game", "Next game"] },
-      { key: "nat", title: "National Teams", cols: ["Team", "Pts", "FIFA rank", "Last game", "Next game"] },
-    ];
-    const groupOf = ([, , , soccer, , fifaCode]) => (fifaCode ? "nat" : soccer ? "club" : "us");
-
-    const tbodies = {};
-    const container = document.getElementById("standingsGroups");
-    GROUPS.filter(g => teams.some(t => groupOf(t) === g.key)).forEach(g => {
-      const wrap = el("section", "standings-wrap");
-      wrap.append(el("h2", "standings-title", g.title));
-      const table = el("table", "standings");
-      const head = el("tr");
-      g.cols.forEach((c, i) => {
-        const th = el("th", i === 0 ? "col-team" : /game/.test(c) ? `col-${c.startsWith("Last") ? "last" : "next"}` : "col-stat", c);
-        head.append(th);
-      });
-      const thead = el("thead"); thead.append(head);
-      tbodies[g.key] = el("tbody");
-      table.append(thead, tbodies[g.key]);
-      wrap.append(table);
-      container.append(wrap);
-    });
-
-    function renderRow(tr, t, team, rankings) {
-      const [, , league, , shortName, fifaCode, crest, crestDark] = t;
-      const group = groupOf(t);
+    function renderCard(card, t, team, rankings) {
+      const [, , league, soccer, shortName, fifaCode, crest, crestDark] = t;
       const rec = (team.record && team.record.items && team.record.items[0]) || {};
       const s = Object.fromEntries((rec.stats || []).map(x => [x.name, x.value]));
       const n = v => (v == null ? "–" : String(Math.round(v)));
 
-      // Team: logo + name (league underneath), linked to the team's ESPN page
-      const link = el("a", "team-link");
+      // header: logo · name + league · position badge
+      const head = el("a", "card-head");
       const clubhouse = (team.links || []).find(l => l.rel.includes("clubhouse"));
-      if (clubhouse) { link.href = clubhouse.href; link.target = "_blank"; link.rel = "noopener"; }
+      if (clubhouse) { head.href = clubhouse.href; head.target = "_blank"; head.rel = "noopener"; }
       const img = el("img", "team-logo");
       img.alt = "";
       if (crest) {
@@ -118,43 +113,51 @@
         img.dataset.logos = JSON.stringify(team.logos || []);
         img.src = logoFor(team.logos || [], isDark());
       }
-      const names = el("span", "team-names");
-      const name = el("span", "cell-main");
-      name.append(el("span", "name-full", team.displayName), el("span", "name-short", shortName));
-      names.append(name);
-      if (group !== "nat") names.append(el("span", "cell-sub", league));
-      names.append(el("span", "game-inline last-inline"), el("span", "game-inline next-inline")); // phones only
-      link.append(img, names);
+      const names = el("div", "card-names");
+      const nm = el("span", "team-name");
+      nm.append(el("span", "name-full", team.displayName), el("span", "name-short", shortName));
+      names.append(nm, el("span", "team-league", league));
 
-      // "12th in English Premier League" → ["12th", "English Premier League"]
+      // "12th in English Premier League" → place "12th", group "English Premier League"
       const m = (team.standingSummary || "").match(/^(\S+)\s+in\s+(.+)$/);
       const conf = m ? m[2].replace(/ Division$/, " Div.").replace(/^(North|South)(east|west)\b/, (w, a, b) => a[0] + b[0].toUpperCase()) : "";
+      const f = fifaCode && rankings && rankings.teams[fifaCode];
+      const badgeText = fifaCode ? (f ? `#${f.rank}` : "–") : (m ? m[1] : "–");
+      const badge = el("div", "rank-badge");
+      badge.append(el("span", "rank-value", badgeText), el("span", "rank-label", fifaCode ? "FIFA rank" : soccer ? "in league" : conf));
+      head.append(img, names, badge);
 
-      const cells = [el("td", "col-team")];
-      cells[0].append(link);
-      const statCell = (main, sub) => { const td = el("td", "col-stat"); td.append(stack(main, sub)); return td; };
-      if (group === "club") {
-        cells.push(statCell(n(s.points), `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}`), statCell(m ? m[1] : "–"));
-      } else if (group === "us") {
-        const ap = team.rank && team.rank <= 25 ? `AP #${team.rank}` : "";
-        cells.push(statCell(rec.summary || "–"), statCell(m ? m[1] : "–", [conf, ap].filter(Boolean).join(" · ")));
-      } else {
-        const f = rankings && rankings.teams[fifaCode];
+      // stat tiles
+      const stats = el("div", "stat-row");
+      // the badge already shows the position, so the tiles add what it doesn't
+      if (fifaCode) {
         const move = f && f.previousRank ? f.previousRank - f.rank : 0;
-        cells.push(statCell(f && f.points != null ? String(Math.round(f.points)) : "–", "FIFA"),
-                   statCell(f ? `#${f.rank}` : "–", move > 0 ? `▲ ${move}` : move < 0 ? `▼ ${-move}` : ""));
+        stats.append(tile("FIFA pts", f && f.points != null ? String(Math.round(f.points)) : "–"),
+                     tile("Prev rank", f && f.previousRank ? `#${f.previousRank}` : "–"),
+                     tile("Change", move > 0 ? `▲${move}` : move < 0 ? `▼${-move}` : "–"));
+      } else if (soccer) {
+        const gp = [s.wins, s.ties, s.losses].every(v => v != null) ? String(s.wins + s.ties + s.losses) : "–";
+        stats.append(tile("Pts", n(s.points)), tile("W-D-L", `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}`), tile("Played", gp));
+      } else {
+        const [w, l] = (rec.summary || "").split("-").map(Number);
+        const gp = w + l;
+        const pct = gp > 0 ? (w / gp).toFixed(3).replace(/^0/, "") : "–";   // .667 style
+        const ap = team.rank && team.rank <= 25 ? `#${team.rank}` : "–";
+        stats.append(tile("Record", rec.summary || "–"), tile("Win %", pct),
+                     isCollege(t) ? tile("AP poll", ap) : tile("Played", Number.isFinite(gp) ? String(gp) : "–"));
       }
-      cells.push(el("td", "col-last", "…"), el("td", "col-next", "…"));
-      tr.replaceChildren(...cells);
+
+      const games = el("div", "game-rows");
+      games.append(el("div", "game-row game-last", ""), el("div", "game-row game-next", ""));
+      card.replaceChildren(head, stats, games);
     }
 
-    const rows = teams.map(t => {
-      const tr = el("tr");
-      const td = el("td", "row-loading", `Loading ${t[2]}…`);
-      td.colSpan = 6;
-      tr.append(td);
-      tbodies[groupOf(t)].append(tr);
-      return tr;
+    const cards = teams.map(t => {
+      const card = el("article", "team-card");
+      card.dataset.tab = tabOf(t);
+      card.append(el("p", "card-loading", `Loading ${t[2]}…`));
+      grid.append(card);
+      return card;
     });
 
     // Next game: first fixture that hasn't finished. Soccer uses the "all" feed so cup and
@@ -189,7 +192,7 @@
     });
 
     // ESPN's per-team endpoint stopped allowing cross-site requests (Oct 2026), so team details
-    // come from the schedule feed instead; reshape them into the fields renderRow reads.
+    // come from the schedule feed instead; reshape them into the fields renderCard reads.
     function teamFromSchedule(st, soccer, rank) {
       const logo = st.logo || "";
       const [w, a, b] = (st.recordSummary || "").split("-").map(Number); // soccer: wins-draws-losses
@@ -285,33 +288,33 @@
       return img;
     };
 
-    // Table:  [W] 34–31            Phone line:  Last: [W] 34–31 vs Jaguars
-    //         vs (logo) Jaguars · Oct 18
-    function fillLastGame(target, game, inline = false) {
-      if (!game) { target.textContent = inline ? "" : "–"; return; }
-      const badge = el("span", `result result-${game.result}`, game.result);
-      if (inline) { target.replaceChildren("Last: ", badge, ` ${game.score} ${game.where} ${game.name}`); return; }
-      const main = el("span", "cell-main"); main.append(badge, ` ${game.score}`);
-      const sub = el("span", "cell-sub"); sub.append(`${game.where} `, oppLogo(game.logos), `${game.name} · ${game.when}`);
-      const box = el("div", "cell-stack"); box.append(main, sub);
-      target.replaceChildren(box);
+    // LAST   vs (logo) Jaguars              [W] 34–31
+    function fillLastGame(row, game) {
+      const label = el("span", "game-label", "Last");
+      if (!game) { row.replaceChildren(label, el("span", "game-opp game-empty", "No games yet")); return; }
+      const opp = el("span", "game-opp");
+      opp.append(el("span", "game-where", game.where), oppLogo(game.logos), el("span", "game-name", game.name));
+      const right = el("span", "game-right");
+      right.append(el("span", `result result-${game.result}`, game.result), el("span", "game-score", game.score));
+      row.replaceChildren(label, opp, right);
+      row.title = game.when;
     }
 
-    // Table:  vs (logo) Giants      Phone line:  Next: vs Giants · Sun, Oct 25
-    //         Sun, Oct 25 · 12:00 PM
-    function fillNextGame(target, game, inline = false) {
-      if (!game) { target.textContent = inline ? "" : "–"; return; }
-      if (inline) {
-        target.replaceChildren("Next: ", ...(game.live ? [el("strong", "live-tag", "LIVE"), " "] : []),
-                               `${game.where} ${game.name}${game.live ? "" : ` · ${game.day}`}`);
-        return;
+    // NEXT   @ (logo) Como                  Wed, Oct 21 · 11:45 AM
+    function fillNextGame(row, game) {
+      const label = el("span", "game-label", "Next");
+      if (!game) { row.replaceChildren(label, el("span", "game-opp game-empty", "None scheduled")); return; }
+      const opp = el("span", "game-opp");
+      opp.append(el("span", "game-where", game.where), oppLogo(game.logos), el("span", "game-name", game.name));
+      const right = el("span", "game-right");
+      if (game.live) right.append(el("span", "live-tag", "LIVE"));
+      else {
+        // date over time, Real-style, so the opponent's name keeps its room
+        const when = el("span", "game-when");
+        when.append(el("span", "when-day", game.day), el("span", "when-time", [game.time, game.tag].filter(Boolean).join(" · ")));
+        right.append(when);
       }
-      const main = el("span", "cell-main");
-      if (game.live) main.append(el("strong", "live-tag", "LIVE"), " ");
-      main.append(`${game.where} `, oppLogo(game.logos), game.name);
-      const box = el("div", "cell-stack"); box.append(main);
-      if (!game.live) box.append(el("span", "cell-sub", [game.day, game.time, game.tag].filter(Boolean).join(" · ")));
-      target.replaceChildren(box);
+      row.replaceChildren(label, opp, right);
     }
 
     Promise.allSettled(teams.map((t, i) =>
@@ -321,18 +324,13 @@
           // before a US team's first regular-season game ESPN's record is its preseason one
           const played = sched.events.some(ev => ev.competitions[0].status.type.completed);
           if (!t[3] && !played) team.record.items[0].summary = "0-0";
-          renderRow(rows[i], t, team, await fifa);
-          const last = lastGame(sched, t[1]);
-          fillLastGame(rows[i].querySelector("td.col-last"), last);
-          fillLastGame(rows[i].querySelector(".last-inline"), last, true);
-          const game = nextGame(sched, t[1]);
-          fillNextGame(rows[i].querySelector("td.col-next"), game);
-          fillNextGame(rows[i].querySelector(".next-inline"), game, true);
+          renderCard(cards[i], t, team, await fifa);
+          fillLastGame(cards[i].querySelector(".game-last"), lastGame(sched, t[1]));
+          fillNextGame(cards[i].querySelector(".game-next"), nextGame(sched, t[1]));
         })
         .catch(() => {
-          const cells = rows[i].querySelectorAll("td.col-last, td.col-next");
-          if (cells.length) cells.forEach(c => { if (c.textContent === "…") c.textContent = "–"; });
-          else rows[i].firstChild.textContent = `Couldn't load ${t[2]} right now.`;
+          const loading = cards[i].querySelector(".card-loading");
+          if (loading) loading.textContent = `Couldn't load ${t[2]} right now.`;
         })
     )).then(async () => {
       const fmt = d => d.toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" });
