@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sports - Palash Pawar</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202610191809"/>
-  <script src="theme.js?v=202610191809"></script>
+  <link rel="stylesheet" href="style.css?v=202610191818"/>
+  <script src="theme.js?v=202610191818"></script>
 </head>
 <body>
   <header class="floating-nav">
@@ -18,23 +18,8 @@
 
   <main class="with-nav sports-page">
     <p class="sports-note" id="sportsNote">Loading live standings…</p>
-    <div class="standings-wrap">
-      <table class="standings">
-        <thead>
-          <tr>
-            <th class="col-team">Team</th>
-            <th class="col-league">League</th>
-            <th>Record</th>
-            <th class="col-num">Pts</th>
-            <th class="col-pos">Position</th>
-            <th class="col-last">Last game</th>
-            <th class="col-next">Next game</th>
-          </tr>
-        </thead>
-        <tbody id="standingsBody"></tbody>
-      </table>
-    </div>
-    <p class="sports-footnote">Soccer records are wins-draws-losses; points apply to club soccer only. (#N) is the national ranking.<span id="fifaDate"></span></p>
+    <div id="standingsGroups"></div>
+    <p class="sports-footnote">Soccer records are wins-draws-losses.<span id="fifaDate"></span></p>
   </main>
 
   <footer>
@@ -61,7 +46,6 @@
     // which scripts/update_fifa_rankings.py saves here (FIFA's API can't be called from the browser)
     const fifa = fetch("data/fifa-rankings.json").then(r => r.json()).catch(() => null);
 
-    const body = document.getElementById("standingsBody");
     const isDark = () => document.documentElement.dataset.theme === "dark";
 
     // Pick ESPN's dark-background logo variant in dark mode when one exists
@@ -79,12 +63,48 @@
       return e;
     }
 
-    function renderRow(tr, [path, id, league, soccer, shortName, fifaCode, crest, crestDark], team, rankings) {
+    // A cell with a bold main line and an optional muted line underneath
+    function stack(main, sub) {
+      const box = el("div", "cell-stack");
+      box.append(el("span", "cell-main", main));
+      if (sub) box.append(el("span", "cell-sub", sub));
+      return box;
+    }
+
+    // Tables by kind of team, each with only the columns that apply to it
+    const GROUPS = [
+      { key: "club", title: "Club Soccer", cols: ["Team", "Pts", "Pos", "Last game", "Next game"] },
+      { key: "us", title: "US Sports", cols: ["Team", "Record", "Standing", "Last game", "Next game"] },
+      { key: "nat", title: "National Teams", cols: ["Team", "Pts", "FIFA rank", "Last game", "Next game"] },
+    ];
+    const groupOf = ([, , , soccer, , fifaCode]) => (fifaCode ? "nat" : soccer ? "club" : "us");
+
+    const tbodies = {};
+    const container = document.getElementById("standingsGroups");
+    GROUPS.filter(g => teams.some(t => groupOf(t) === g.key)).forEach(g => {
+      const wrap = el("section", "standings-wrap");
+      wrap.append(el("h2", "standings-title", g.title));
+      const table = el("table", "standings");
+      const head = el("tr");
+      g.cols.forEach((c, i) => {
+        const th = el("th", i === 0 ? "col-team" : /game/.test(c) ? `col-${c.startsWith("Last") ? "last" : "next"}` : "col-stat", c);
+        head.append(th);
+      });
+      const thead = el("thead"); thead.append(head);
+      tbodies[g.key] = el("tbody");
+      table.append(thead, tbodies[g.key]);
+      wrap.append(table);
+      container.append(wrap);
+    });
+
+    function renderRow(tr, t, team, rankings) {
+      const [, , league, , shortName, fifaCode, crest, crestDark] = t;
+      const group = groupOf(t);
       const rec = (team.record && team.record.items && team.record.items[0]) || {};
       const s = Object.fromEntries((rec.stats || []).map(x => [x.name, x.value]));
       const n = v => (v == null ? "–" : String(Math.round(v)));
 
-      // Team cell: logo + name, linked to the team's ESPN page
+      // Team: logo + name (league underneath), linked to the team's ESPN page
       const link = el("a", "team-link");
       const clubhouse = (team.links || []).find(l => l.rel.includes("clubhouse"));
       if (clubhouse) { link.href = clubhouse.href; link.target = "_blank"; link.rel = "noopener"; }
@@ -99,34 +119,41 @@
         img.src = logoFor(team.logos || [], isDark());
       }
       const names = el("span", "team-names");
-      names.append(el("span", "name-full", team.displayName), el("span", "name-short", shortName),
-                   el("span", "last-inline", ""), el("span", "next-inline", "")); // phones: games sit under the name
+      const name = el("span", "cell-main");
+      name.append(el("span", "name-full", team.displayName), el("span", "name-short", shortName));
+      names.append(name);
+      if (group !== "nat") names.append(el("span", "cell-sub", league));
+      names.append(el("span", "game-inline last-inline"), el("span", "game-inline next-inline")); // phones only
       link.append(img, names);
 
-      const record = fifaCode ? "–" : soccer ? `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}` : (rec.summary || "–");
-      const points = soccer && !fifaCode ? n(s.points) : "–";
-
-      // "12th in English Premier League" → "12th";  "3rd in AFC South" → "3rd AFC South"
+      // "12th in English Premier League" → ["12th", "English Premier League"]
       const m = (team.standingSummary || "").match(/^(\S+)\s+in\s+(.+)$/);
-      let position = m ? (soccer ? m[1] : `${m[1]} ${m[2].replace(/ Division$/, " Div.").replace(/^(North|South)(east|west)\b/, (w, a, b) => a[0] + b[0].toUpperCase())}`) : "–";
-      if (!soccer && team.rank && team.rank <= 25) position += ` (#${team.rank})`;
-      if (fifaCode) {
+      const conf = m ? m[2].replace(/ Division$/, " Div.").replace(/^(North|South)(east|west)\b/, (w, a, b) => a[0] + b[0].toUpperCase()) : "";
+
+      const cells = [el("td", "col-team")];
+      cells[0].append(link);
+      const statCell = (main, sub) => { const td = el("td", "col-stat"); td.append(stack(main, sub)); return td; };
+      if (group === "club") {
+        cells.push(statCell(n(s.points), `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}`), statCell(m ? m[1] : "–"));
+      } else if (group === "us") {
+        const ap = team.rank && team.rank <= 25 ? `AP #${team.rank}` : "";
+        cells.push(statCell(rec.summary || "–"), statCell(m ? m[1] : "–", [conf, ap].filter(Boolean).join(" · ")));
+      } else {
         const f = rankings && rankings.teams[fifaCode];
         const move = f && f.previousRank ? f.previousRank - f.rank : 0;
-        position = f ? `#${f.rank} FIFA${move > 0 ? ` ▲${move}` : move < 0 ? ` ▼${-move}` : ""}` : "–";
+        cells.push(statCell(f && f.points != null ? String(Math.round(f.points)) : "–", "FIFA"),
+                   statCell(f ? `#${f.rank}` : "–", move > 0 ? `▲ ${move}` : move < 0 ? `▼ ${-move}` : ""));
       }
-
-      const cells = [el("td", "col-team"), el("td", "col-league", league), el("td", null, record), el("td", "col-num", points), el("td", "col-pos", position), el("td", "col-last", "…"), el("td", "col-next", "…")];
-      cells[0].append(link);
+      cells.push(el("td", "col-last", "…"), el("td", "col-next", "…"));
       tr.replaceChildren(...cells);
     }
 
     const rows = teams.map(t => {
       const tr = el("tr");
       const td = el("td", "row-loading", `Loading ${t[2]}…`);
-      td.colSpan = 7;
+      td.colSpan = 6;
       tr.append(td);
-      body.append(tr);
+      tbodies[groupOf(t)].append(tr);
       return tr;
     });
 
@@ -216,13 +243,15 @@
       if (!opp) return null;
       const where = comp.neutralSite || (me && me.homeAway === "home") ? "vs" : "@";
       const game = { where, name: opp.team.shortDisplayName || opp.team.displayName, logos: opp.team.logos || [] };
-      if (comp.status.type.state === "in") return { ...game, live: true, when: "LIVE" };
+      if (comp.status.type.state === "in") return { ...game, live: true };
 
       const d = new Date(ev.date);
-      const day = d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" });
-      const time = ev.timeValid === false ? "" : `, ${d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
-      const tag = competitionTag(ev);
-      return { ...game, when: `${day}${time}${tag ? ` · ${tag}` : ""}` };
+      return {
+        ...game,
+        day: d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" }),
+        time: ev.timeValid === false ? "" : d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }),
+        tag: competitionTag(ev),
+      };
     }
 
     // Most recent finished game as { result: "W"|"L"|"D", score, where, name, logos, when } (or null)
@@ -248,32 +277,41 @@
       };
     }
 
-    // "[W] 20–17 @ [logo] Tennessee · Sep 26"
-    function fillLastGame(target, game, prefix = "") {
-      if (!game) { target.textContent = prefix ? "" : "–"; return; }
-      const logo = el("img", "opp-logo");
-      logo.alt = "";
-      logo.dataset.logos = JSON.stringify(game.logos);
-      logo.src = logoFor(game.logos, isDark());
+    const oppLogo = logos => {
+      const img = el("img", "opp-logo");
+      img.alt = "";
+      img.dataset.logos = JSON.stringify(logos);
+      img.src = logoFor(logos, isDark());
+      return img;
+    };
+
+    // Table:  [W] 34–31            Phone line:  Last: [W] 34–31 vs Jaguars
+    //         vs (logo) Jaguars · Oct 18
+    function fillLastGame(target, game, inline = false) {
+      if (!game) { target.textContent = inline ? "" : "–"; return; }
       const badge = el("span", `result result-${game.result}`, game.result);
-      const parts = prefix ? [prefix] : [];
-      parts.push(badge, ` ${game.score} ${game.where} `, logo, game.name, ` · ${game.when}`);
-      target.replaceChildren(...parts);
+      if (inline) { target.replaceChildren("Last: ", badge, ` ${game.score} ${game.where} ${game.name}`); return; }
+      const main = el("span", "cell-main"); main.append(badge, ` ${game.score}`);
+      const sub = el("span", "cell-sub"); sub.append(`${game.where} `, oppLogo(game.logos), `${game.name} · ${game.when}`);
+      const box = el("div", "cell-stack"); box.append(main, sub);
+      target.replaceChildren(box);
     }
 
-    // "vs [logo] Spurs · Sat, Oct 10, 11:30 AM" (or "LIVE · vs [logo] Spurs")
-    function fillNextGame(target, game, prefix = "") {
-      if (!game) { target.textContent = prefix ? "" : "–"; return; }
-      const logo = el("img", "opp-logo");
-      logo.alt = "";
-      logo.dataset.logos = JSON.stringify(game.logos);
-      logo.src = logoFor(game.logos, isDark());
-      const parts = [];
-      if (prefix) parts.push(prefix);
-      if (game.live) parts.push(el("strong", "live-tag", "LIVE"), " · ");
-      parts.push(`${game.where} `, logo, game.name);
-      if (!game.live) parts.push(` · ${game.when}`);
-      target.replaceChildren(...parts);
+    // Table:  vs (logo) Giants      Phone line:  Next: vs Giants · Sun, Oct 25
+    //         Sun, Oct 25 · 12:00 PM
+    function fillNextGame(target, game, inline = false) {
+      if (!game) { target.textContent = inline ? "" : "–"; return; }
+      if (inline) {
+        target.replaceChildren("Next: ", ...(game.live ? [el("strong", "live-tag", "LIVE"), " "] : []),
+                               `${game.where} ${game.name}${game.live ? "" : ` · ${game.day}`}`);
+        return;
+      }
+      const main = el("span", "cell-main");
+      if (game.live) main.append(el("strong", "live-tag", "LIVE"), " ");
+      main.append(`${game.where} `, oppLogo(game.logos), game.name);
+      const box = el("div", "cell-stack"); box.append(main);
+      if (!game.live) box.append(el("span", "cell-sub", [game.day, game.time, game.tag].filter(Boolean).join(" · ")));
+      target.replaceChildren(box);
     }
 
     Promise.allSettled(teams.map((t, i) =>
@@ -286,10 +324,10 @@
           renderRow(rows[i], t, team, await fifa);
           const last = lastGame(sched, t[1]);
           fillLastGame(rows[i].querySelector("td.col-last"), last);
-          fillLastGame(rows[i].querySelector(".last-inline"), last, "Last: ");
+          fillLastGame(rows[i].querySelector(".last-inline"), last, true);
           const game = nextGame(sched, t[1]);
           fillNextGame(rows[i].querySelector("td.col-next"), game);
-          fillNextGame(rows[i].querySelector(".next-inline"), game, "Next: ");
+          fillNextGame(rows[i].querySelector(".next-inline"), game, true);
         })
         .catch(() => {
           const cells = rows[i].querySelectorAll("td.col-last, td.col-next");
@@ -305,7 +343,7 @@
       const f = await fifa;
       if (f) {
         const date = new Date(f.published).toLocaleDateString([], { month: "long", day: "numeric", year: "numeric" });
-        document.getElementById("fifaDate").textContent = ` National teams use the FIFA World Ranking (released ${date}).`;
+        document.getElementById("fifaDate").textContent = ` National teams are ranked by the FIFA World Ranking (${date}).`;
       }
     });
 
