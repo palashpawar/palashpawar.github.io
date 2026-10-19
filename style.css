@@ -802,10 +802,6 @@ a.exp-link .location {
   color: var(--rs-muted);
 }
 
-.name-short {
-  display: none;
-}
-
 .rank-badge {
   display: flex;
   flex-direction: column;
@@ -907,9 +903,12 @@ a.exp-link .location {
 }
 
 .game-name {
-  white-space: nowrap;
+  /* full opponent names ("Jacksonville Jaguars") wrap to a second line rather than being cut off */
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .game-empty {
@@ -997,8 +996,6 @@ a.exp-link .location {
 
 @media (max-width: 600px) {
   .team-cards { grid-template-columns: 1fr; }
-  .name-full { display: none; }
-  .name-short { display: inline; }
   .team-logo { width: 38px; height: 38px; }
   .stat-value { font-size: 1.1rem; }
 }

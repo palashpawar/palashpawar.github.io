@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sports - Palash Pawar</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202610191825"/>
-  <script src="theme.js?v=202610191825"></script>
+  <link rel="stylesheet" href="style.css?v=202610191835"/>
+  <script src="theme.js?v=202610191835"></script>
 </head>
 <body>
   <header class="floating-nav">
@@ -28,22 +28,22 @@
   </footer>
 
   <script>
-    // Teams I follow: [ESPN sport/league path, ESPN team id, league label, soccer?, short name for phones,
+    // Teams I follow: [ESPN sport/league path, ESPN team id, league label, soccer?,
     //                  FIFA country code (national teams), crest image to use instead of ESPN's logo,
     //                  optional dark-mode crest]
     const teams = [
-      ["soccer/eng.1", 360, "Premier League", true, "Man United"],
-      ["soccer/fra.1", 160, "Ligue 1", true, "PSG"],
-      ["soccer/esp.1", 86, "LALIGA", true, "Real Madrid"],
-      ["soccer/usa.1", 6077, "MLS", true, "Dynamo"],
-      ["football/college-football", 251, "College Football", false, "Longhorns"],
-      ["football/college-football", 197, "College Football", false, "Okla State", null, "img/osu-logo.png"],
-      ["football/college-football", 248, "College Football", false, "UH Cougars"],
-      ["football/nfl", 34, "NFL", false, "Texans"],
-      ["basketball/nba", 10, "NBA", false, "Rockets"],
-      ["soccer/all", 660, "International", true, "USA", "USA", "img/nat-usa.png", "img/nat-usa-dark.png"],
-      ["soccer/all", 478, "International", true, "France", "FRA", "img/nat-france.png"],
-      ["soccer/all", 4385, "International", true, "India", "IND", "img/nat-india.png"],
+      ["soccer/eng.1", 360, "Premier League", true],
+      ["soccer/fra.1", 160, "Ligue 1", true],
+      ["soccer/esp.1", 86, "LALIGA", true],
+      ["soccer/usa.1", 6077, "MLS", true],
+      ["football/college-football", 251, "College Football", false],
+      ["football/college-football", 197, "College Football", false, null, "img/osu-logo.png"],
+      ["football/college-football", 248, "College Football", false],
+      ["football/nfl", 34, "NFL", false],
+      ["basketball/nba", 10, "NBA", false],
+      ["soccer/all", 660, "International", true, "USA", "img/nat-usa.png", "img/nat-usa-dark.png"],
+      ["soccer/all", 478, "International", true, "FRA", "img/nat-france.png"],
+      ["soccer/all", 4385, "International", true, "IND", "img/nat-india.png"],
     ];
 
     // National teams have no league table; their position is the FIFA World Ranking,
@@ -68,7 +68,7 @@
     }
 
     // League tab each team belongs to (only tabs that have teams are shown)
-    const tabOf = ([path, , , , , fifaCode]) =>
+    const tabOf = ([path, , , , fifaCode]) =>
       fifaCode ? "International" : path.startsWith("soccer") ? "Soccer"
       : path.endsWith("college-football") ? "NCAAF" : path.endsWith("nfl") ? "NFL" : "NBA";
     const TAB_ORDER = ["All", "Soccer", "NFL", "NCAAF", "NBA", "International"];
@@ -97,7 +97,7 @@
     }
 
     function renderCard(card, t, team, rankings) {
-      const [, , league, soccer, shortName, fifaCode, crest, crestDark] = t;
+      const [, , league, soccer, fifaCode, crest, crestDark] = t;
       const rec = (team.record && team.record.items && team.record.items[0]) || {};
       const s = Object.fromEntries((rec.stats || []).map(x => [x.name, x.value]));
       const n = v => (v == null ? "–" : String(Math.round(v)));
@@ -118,7 +118,7 @@
       }
       const names = el("div", "card-names");
       const nm = el("span", "team-name");
-      nm.append(el("span", "name-full", team.displayName), el("span", "name-short", shortName));
+      nm.textContent = team.displayName;   // always the full name, on phones too
       names.append(nm, el("span", "team-league", league));
 
       // "12th in English Premier League" → place "12th", group "English Premier League"
@@ -248,7 +248,7 @@
       const opp = comp.competitors.find(c => c !== me);
       if (!opp) return null;
       const where = comp.neutralSite || (me && me.homeAway === "home") ? "vs" : "@";
-      const game = { where, name: opp.team.shortDisplayName || opp.team.displayName, logos: opp.team.logos || [] };
+      const game = { where, name: opp.team.displayName || opp.team.shortDisplayName, logos: opp.team.logos || [] };
       if (comp.status.type.state === "in") return { ...game, live: true };
 
       const d = new Date(ev.date);
@@ -278,7 +278,7 @@
       return {
         result, score: `${pts(me)}–${pts(opp)}${pens}`,
         where: comp.neutralSite || me.homeAway === "home" ? "vs" : "@",
-        name: opp.team.shortDisplayName || opp.team.displayName,
+        name: opp.team.displayName || opp.team.shortDisplayName,
         logos: opp.team.logos || [], when,
       };
     }
