@@ -29,14 +29,15 @@
 
   <script>
     // Teams I follow: [ESPN sport/league path, ESPN team id, league label, soccer?, short name for phones,
-    //                  FIFA country code, crest image and optional dark-mode crest (national teams only)]
+    //                  FIFA country code (national teams), crest image to use instead of ESPN's logo,
+    //                  optional dark-mode crest]
     const teams = [
       ["soccer/eng.1", 360, "Premier League", true, "Man United"],
       ["soccer/fra.1", 160, "Ligue 1", true, "PSG"],
       ["soccer/esp.1", 86, "LALIGA", true, "Real Madrid"],
       ["soccer/usa.1", 6077, "MLS", true, "Dynamo"],
       ["football/college-football", 251, "College Football", false, "Longhorns"],
-      ["football/college-football", 197, "College Football", false, "Okla State"],
+      ["football/college-football", 197, "College Football", false, "Okla State", null, "img/osu-logo.png"],
       ["football/college-football", 248, "College Football", false, "UH Cougars"],
       ["football/nfl", 34, "NFL", false, "Texans"],
       ["basketball/nba", 10, "NBA", false, "Rockets"],
