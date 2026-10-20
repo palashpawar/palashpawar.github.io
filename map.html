@@ -110,25 +110,14 @@
         },
       });
 
-      const info = new google.maps.InfoWindow();
-      // Build bounds from min/max so the view spans Americas → Europe → India
+      // No pins (flight routes will be drawn here instead); the cities still frame the view.
+      // Bounds come from min/max so the view spans Americas → Europe → India
       // instead of wrapping the short way across the Pacific
       const lats = cities.map(c => c[1]), lngs = cities.map(c => c[2]);
       const bounds = new google.maps.LatLngBounds(
         { lat: Math.min(...lats), lng: Math.min(...lngs) },
         { lat: Math.max(...lats), lng: Math.max(...lngs) }
       );
-      for (const [name, lat, lng] of cities) {
-        const marker = new google.maps.Marker({
-          position: { lat, lng },
-          map,
-          title: name, // no custom icon: Google's classic red pin
-        });
-        marker.addListener("click", () => {
-          info.setContent(`<span class="map-popup">${name}</span>`);
-          info.open({ map, anchor: marker });
-        });
-      }
 
       map.fitBounds(bounds, 60);
       google.maps.event.addListenerOnce(map, "idle", () => {
