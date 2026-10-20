@@ -139,8 +139,16 @@
         .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     }
 
-    document.getElementById("mapCount").textContent =
-      `${cities.length} ${cities.length === 1 ? "city" : "cities"} visited`;
+    // "Dallas, TX" → United States (two-letter state code); "Paris, France" → France
+    const countryOf = name => {
+      const place = name.split(", ").pop();
+      return /^[A-Z]{2}$/.test(place) ? "United States" : place;
+    };
+    const countries = [...new Set(cities.map(([name]) => countryOf(name)))];
+    const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+    const count = document.getElementById("mapCount");
+    count.textContent = `${plural(cities.length, "city", "cities")} · ${plural(countries.length, "country", "countries")} visited`;
+    count.title = countries.join(", ");
   </script>
   <!-- Replace YOUR_API_KEY with your Google Maps JavaScript API key -->
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU7Ed_gfyZOxjNcIihbAQprkOrLixZC_c&callback=initMap&loading=async"></script>
