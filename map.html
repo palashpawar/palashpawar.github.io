@@ -98,6 +98,7 @@
       BUF: ["Buffalo", 42.9405, -78.7322],
       DTW: ["Detroit", 42.2162, -83.3554],
       PIT: ["Pittsburgh", 40.4915, -80.2329],
+      YYZ: ["Toronto Pearson", 43.6777, -79.6248],
       CUN: ["Cancún", 21.0365, -86.8771],
       LIR: ["Liberia, Costa Rica", 10.5933, -85.5444],
       LHR: ["London Heathrow", 51.4700, -0.4543],
@@ -156,6 +157,8 @@
       ["2022-07-07", "DL4977", "LGA", "PIT"],
       ["2022-07-18", "UA1116", "BUF", "ORD"],
       ["2022-07-18", "UA2417", "ORD", "IAH"],
+      ["2019-06-30", "AC594", "IAH", "YYZ"],
+      ["2019-07-16", "AC593", "YYZ", "IAH"],
     ];
 
     // Airline from the flight number's 2-character prefix: [name, brand color for its route lines]
@@ -169,6 +172,7 @@
       F9: ["Frontier Airlines", "#00875a"],
       VY: ["Vueling", "#ffc72c"],
       UK: ["Vistara", "#7b2d6e"],
+      AC: ["Air Canada", "#ff5a5f"],
     };
     const airlineOf = num => airlines[num.slice(0, 2)] || [num.slice(0, 2), "#888888"];
 
