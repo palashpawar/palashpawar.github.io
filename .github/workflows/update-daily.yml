@@ -1,0 +1,62 @@
+name: Daily site data
+
+# Once a day:
+#  - data/github.json: contribution calendar + latest repos for the home page
+#    (the calendar needs a token, so the browser can't fetch it itself)
+#  - resume.pdf: copy of the latest build from palashpawar/resume, served from
+#    this site so it opens in the browser instead of downloading
+on:
+  schedule:
+    - cron: "41 12 * * *"   # daily, 12:41 UTC (morning in Texas)
+  workflow_dispatch:        # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write           # commit refreshed files
+  pages: write              # request a Pages rebuild after committing
+
+concurrency:
+  group: data-commits       # never overlap with another run of this job
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: GitHub activity
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/update_github.py
+
+      - name: Latest resume
+        run: |
+          curl -fsSL -o resume.new.pdf \
+            "https://github.com/palashpawar/resume/releases/download/latest/Palash_Pawar_Resume.pdf"
+          # keep the old copy if the download isn't a PDF (e.g. the release is mid-rebuild)
+          if head -c 4 resume.new.pdf | grep -q '%PDF'; then mv resume.new.pdf resume.pdf; else rm -f resume.new.pdf; fi
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          git add data/github.json resume.pdf
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update GitHub activity and resume"
+          for attempt in 1 2 3; do
+            git pull --rebase && git push && break
+            sleep 10
+          done
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # Pushes made with the workflow token don't always kick off a Pages build, so ask for one.
+      - name: Rebuild GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || true

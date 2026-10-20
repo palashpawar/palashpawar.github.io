@@ -12,9 +12,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
+  <meta name="description" content="Statistics & Data Science at UT Austin. Machine learning, quant finance and sports analytics projects."/>
+  <!-- link preview (LinkedIn, iMessage, Slack, X) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Palash Pawar"/>
+  <meta property="og:title" content="Palash Pawar"/>
+  <meta property="og:description" content="Statistics & Data Science at UT Austin. Machine learning, quant finance and sports analytics projects."/>
+  <meta property="og:url" content="https://palashpawar.github.io/"/>
+  <meta property="og:image" content="https://palashpawar.github.io/img/og-card.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://palashpawar.github.io/img/og-card.png"/>
+  <!-- site icon -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=202610192323">
-  <script src="theme.js?v=202610192323"></script>
+  <link rel="stylesheet" href="style.css?v=202610192342">
+  <script src="theme.js?v=202610192342"></script>
   <style>
     .command { color: #5ecfff; }
     .output { margin-left: 2ch; color: #f9f9f9; }
@@ -49,6 +65,7 @@
     <a href="projects.html">Projects</a>
     <a href="map.html">Map</a>
     <a href="sports.html">Sports</a>
+    <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
   </header>
   
   <main class="home">
@@ -73,6 +90,20 @@
       <pre id="terminal"></pre>
       <div class="terminal-resize" title="Drag to resize"></div>
     </div>
+
+    <!-- GitHub activity: calendar from data/github.json (daily workflow), repos live from the GitHub API -->
+    <section class="gh-section" id="ghSection" hidden>
+      <div class="gh-head">
+        <h2>On GitHub</h2>
+        <a href="https://github.com/palashpawar" target="_blank" rel="noopener">@palashpawar ↗</a>
+      </div>
+      <p class="gh-total" id="ghTotal"></p>
+      <div class="gh-calendar-wrap" id="ghCalendarWrap">
+        <div class="gh-months" id="ghMonths"></div>
+        <div class="gh-calendar" id="ghCalendar" role="img"></div>
+      </div>
+      <div class="gh-repos" id="ghRepos"></div>
+    </section>
 
   </main>
 
@@ -199,5 +230,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<script src="github-activity.js?v=202610192341"></script>
 </body>
 </html>
