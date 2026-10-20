@@ -380,14 +380,14 @@ main.with-nav {
     gap: 0;
     left: 12px;
     transform: none;
-    max-width: calc(100vw - 64px);
-    padding: 6px 6px;
+    max-width: calc(100vw - 62px);
+    padding: 6px 5px;
     flex-wrap: nowrap;        /* always one line; scrolls sideways if a page ever has too many links */
     overflow-x: auto;
     scrollbar-width: none;
   }
   .floating-nav::-webkit-scrollbar { display: none; }
-  .floating-nav a { font-size: 0.74rem; padding: 5px 5px; }
+  .floating-nav a { font-size: 0.66rem; padding: 5px 4px; }
   .card-grid { flex-direction: column; gap: 20px; overflow-x: visible; scroll-snap-type: none; }
   .card-grid .project-card { flex-basis: auto; }
 }
@@ -1057,7 +1057,7 @@ a.exp-link .location {
   --gh-2: #a5b4fc;
   --gh-3: #6366f1;
   --gh-4: #4338ca;
-  margin: 36px auto 0;
+  margin: 24px auto 40px;
   text-align: left;
   color: #000;
 }
@@ -1071,14 +1071,12 @@ a.exp-link .location {
   color: #e6e8ef;
 }
 
-/* as wide as the terminal on wide screens, so a full year of weeks fits */
-@media (min-width: 940px) {
-  .gh-section {
-    width: min(900px, calc(100vw - 32px));
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.github-page {
+  max-width: 940px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
 }
 
 .gh-head {
