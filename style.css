@@ -76,6 +76,32 @@ nav a:hover {
   font-weight: 500;
 }
 
+.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.resume-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
+}
+
+[data-theme="dark"] .resume-btn {
+  background: #5ecfff;
+  color: #10131c;
+  box-shadow: 0 4px 14px rgba(94, 207, 255, 0.25);
+}
+
 /* Terminal box styling */
 .terminal-box {
   position: relative;
