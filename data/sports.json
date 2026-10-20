@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19T23:24:58+00:00",
+ "updated": "2026-10-20T11:45:35+00:00",
  "ap": {
   "2390": 1,
   "252": 2,
@@ -977,8 +977,8 @@
    "team": {
     "displayName": "Houston Dynamo FC",
     "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/6077.png",
-    "recordSummary": "13-8-9",
-    "standingSummary": "5th in MLS",
+    "recordSummary": null,
+    "standingSummary": null,
     "clubhouse": "https://www.espn.com/soccer/club/_/id/6077/houston-dynamo-fc"
    },
    "events": [
@@ -2552,8 +2552,8 @@
    "team": {
     "displayName": "Houston Rockets",
     "logo": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
-    "recordSummary": "2-1",
-    "standingSummary": "3rd in Southwest Division",
+    "recordSummary": "0-0",
+    "standingSummary": "1st in Southwest Division",
     "clubhouse": "https://www.espn.com/nba/team/_/name/hou/houston-rockets"
    },
    "events": [
