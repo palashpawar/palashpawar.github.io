@@ -35,11 +35,15 @@ jobs:
             "https://github.com/palashpawar/resume/releases/download/latest/Palash_Pawar_Resume.pdf"
           # keep the old copy if the download isn't a PDF (e.g. the release is mid-rebuild)
           if head -c 4 resume.new.pdf | grep -q '%PDF'; then mv resume.new.pdf resume.pdf; else rm -f resume.new.pdf; fi
+          # new resume → bump the ?v= stamp on the Resume links so browsers skip their cached copy
+          if ! git diff --quiet resume.pdf; then
+            sed -i "s|resume\.pdf?v=[0-9]*|resume.pdf?v=$(date -u +%Y%m%d%H%M)|" *.html
+          fi
 
       - name: Commit if changed
         id: commit
         run: |
-          git add data/github.json resume.pdf
+          git add data/github.json resume.pdf *.html
           if git diff --cached --quiet; then
             echo "Nothing changed."
             echo "changed=false" >> "$GITHUB_OUTPUT"
