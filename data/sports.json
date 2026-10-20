@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T20:40:54+00:00",
+ "updated": "2026-10-20T23:56:20+00:00",
  "ap": {
   "2390": 1,
   "252": 2,
@@ -353,12 +353,12 @@
    },
    "events": [
     {
-     "id": "401876432",
-     "date": "2026-10-17T15:15Z",
+     "id": "401915399",
+     "date": "2026-10-20T19:00Z",
      "timeValid": true,
      "league": {
-      "name": "French Ligue 1",
-      "abbreviation": "Ligue 1"
+      "name": "UEFA Champions League",
+      "abbreviation": "UEFA Champions League"
      },
      "competitions": [
       {
@@ -372,35 +372,8 @@
        "competitors": [
         {
          "homeAway": "home",
-         "winner": false,
-         "score": "1",
-         "shootoutScore": null,
-         "team": {
-          "id": "180",
-          "displayName": "Strasbourg",
-          "shortDisplayName": "Strasbourg",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/180.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/180.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
          "winner": true,
-         "score": "3",
+         "score": "4",
          "shootoutScore": null,
          "team": {
           "id": "160",
@@ -423,60 +396,11 @@
            }
           ]
          }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401915399",
-     "date": "2026-10-20T19:00Z",
-     "timeValid": true,
-     "league": {
-      "name": "UEFA Champions League",
-      "abbreviation": "UEFA Champions League"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
+        },
         {
-         "homeAway": "home",
+         "homeAway": "away",
          "winner": false,
          "score": "2",
-         "shootoutScore": null,
-         "team": {
-          "id": "160",
-          "displayName": "Paris Saint-Germain",
-          "shortDisplayName": "PSG",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/160.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": "1",
          "shootoutScore": null,
          "team": {
           "id": "83",
@@ -621,6 +545,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/3236.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "160",
+          "displayName": "Paris Saint-Germain",
+          "shortDisplayName": "PSG",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/160.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401915309",
+     "date": "2026-11-03T20:00Z",
+     "timeValid": true,
+     "league": {
+      "name": "UEFA Champions League",
+      "abbreviation": "UEFA Champions League"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "102",
+          "displayName": "Villarreal",
+          "shortDisplayName": "Villarreal",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/102.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/102.png"
            }
           ]
          }
