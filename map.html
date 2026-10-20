@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Travel Map - Palash Pawar</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202610192306"/>
-  <script src="theme.js?v=202610192306"></script>
+  <link rel="stylesheet" href="style.css?v=202610192317"/>
+  <script src="theme.js?v=202610192317"></script>
 </head>
 <body>
   <header class="floating-nav">
@@ -18,6 +18,7 @@
 
   <main class="with-nav map-page">
     <p class="map-count" id="mapCount"></p>
+    <p class="map-count map-count-sub" id="flightCount"></p>
     <div id="map" class="travel-map"></div>
   </main>
 
@@ -74,6 +75,91 @@
       ["Chennai, India", 13.0827, 80.2707],
     ];
 
+    // Airports on my flights: code → [city, latitude, longitude]
+    const airports = {
+      AUS: ["Austin", 30.1945, -97.6699],
+      IAH: ["Houston", 29.9902, -95.3368],
+      DFW: ["Dallas/Fort Worth", 32.8998, -97.0403],
+      JFK: ["New York JFK", 40.6413, -73.7781],
+      LGA: ["New York LaGuardia", 40.7769, -73.8740],
+      EWR: ["Newark", 40.6895, -74.1745],
+      ORD: ["Chicago O'Hare", 41.9742, -87.9073],
+      MCI: ["Kansas City", 39.2976, -94.7139],
+      SEA: ["Seattle", 47.4502, -122.3088],
+      SNA: ["Orange County", 33.6762, -117.8675],
+      MCO: ["Orlando", 28.4312, -81.3081],
+      MIA: ["Miami", 25.7959, -80.2870],
+      BUF: ["Buffalo", 42.9405, -78.7322],
+      DTW: ["Detroit", 42.2162, -83.3554],
+      PIT: ["Pittsburgh", 40.4915, -80.2329],
+      CUN: ["Cancún", 21.0365, -86.8771],
+      LIR: ["Liberia, Costa Rica", 10.5933, -85.5444],
+      LHR: ["London Heathrow", 51.4700, -0.4543],
+      CDG: ["Paris CDG", 49.0097, 2.5479],
+      BCN: ["Barcelona", 41.2974, 2.0833],
+      FRA: ["Frankfurt", 50.0379, 8.5622],
+      DEL: ["Delhi", 28.5562, 77.1000],
+      BOM: ["Mumbai", 19.0896, 72.8656],
+      MAA: ["Chennai", 12.9941, 80.1709],
+    };
+
+    // Flights flown: [date, flight number, from, to]
+    const flights = [
+      ["2026-10-16", "AA2292", "AUS", "JFK"],
+      ["2026-10-17", "AA2772", "JFK", "AUS"],
+      ["2025-11-20", "BA194", "IAH", "LHR"],
+      ["2025-11-21", "BA310", "LHR", "CDG"],
+      ["2025-11-24", "VY8243", "CDG", "BCN"],
+      ["2025-11-27", "BA475", "BCN", "LHR"],
+      ["2025-11-27", "BA197", "LHR", "IAH"],
+      ["2025-08-29", "NK2688", "IAH", "EWR"],
+      ["2025-08-31", "UA1611", "EWR", "IAH"],
+      ["2025-05-19", "UA1100", "IAH", "ORD"],
+      ["2025-05-21", "UA310", "ORD", "MCI"],
+      ["2025-05-25", "AA2100", "MCI", "DFW"],
+      ["2025-05-25", "AA650", "DFW", "IAH"],
+      ["2024-07-21", "LH441", "IAH", "FRA"],
+      ["2024-07-22", "LH758", "FRA", "MAA"],
+      ["2024-07-31", "LH759", "MAA", "FRA"],
+      ["2024-07-31", "LH490", "FRA", "SEA"],
+      ["2024-07-31", "UA1932", "SEA", "IAH"],
+      ["2024-06-02", "NK712", "IAH", "EWR"],
+      ["2024-06-03", "NK1343", "IAH", "LGA"],
+      ["2024-06-05", "NK703", "EWR", "IAH"],
+      ["2024-05-22", "AA1416", "IAH", "DFW"],
+      ["2024-05-23", "AA3361", "DFW", "MCI"],
+      ["2024-04-30", "UA1383", "IAH", "SNA"],
+      ["2024-05-01", "UA2093", "SNA", "IAH"],
+      ["2024-03-07", "F91098", "IAH", "MCO"],
+      ["2024-03-07", "F9162", "MCO", "BUF"],
+      ["2024-03-19", "DL2848", "BUF", "DTW"],
+      ["2024-03-19", "DL1633", "DTW", "IAH"],
+      ["2024-01-10", "UK950", "BOM", "DEL"],
+      ["2024-01-11", "LH761", "DEL", "FRA"],
+      ["2024-01-11", "LH440", "FRA", "IAH"],
+      ["2023-12-16", "LH7600", "IAH", "FRA"],
+      ["2023-12-17", "LH7252", "FRA", "DEL"],
+      ["2023-12-18", "UK945", "DEL", "BOM"],
+      ["2023-07-23", "NK1336", "IAH", "CUN"],
+      ["2023-07-28", "NK412", "CUN", "IAH"],
+      ["2023-06-24", "AA324", "IAH", "MIA"],
+      ["2023-06-24", "AA1377", "MIA", "LIR"],
+      ["2023-07-03", "AA1436", "LIR", "DFW"],
+      ["2023-07-04", "AA2420", "DFW", "IAH"],
+      ["2022-07-07", "DL1227", "IAH", "LGA"],
+      ["2022-07-07", "DL4977", "LGA", "PIT"],
+      ["2022-07-18", "UA1116", "BUF", "ORD"],
+      ["2022-07-18", "UA2417", "ORD", "IAH"],
+    ];
+
+    // Great-circle distance in miles
+    const miles = (a, b) => {
+      const R = 3958.8, rad = d => d * Math.PI / 180;
+      const [, la1, lo1] = airports[a], [, la2, lo2] = airports[b];
+      const h = Math.sin(rad(la2 - la1) / 2) ** 2 + Math.cos(rad(la1)) * Math.cos(rad(la2)) * Math.sin(rad(lo2 - lo1) / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(h));
+    };
+
     // Google's "night" palette, used when the site is in dark mode
     const darkStyle = [
       { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
@@ -110,13 +196,70 @@
         },
       });
 
-      // No pins (flight routes will be drawn here instead); the cities still frame the view.
+      const isDark = () => document.documentElement.dataset.theme === "dark";
+      const routeColor = () => (isDark() ? "#5ecfff" : "#4f46e5");
+      const dotColor = () => (isDark() ? "#ffffff" : "#1b1e29");
+      const info = new google.maps.InfoWindow();
+      const pos = code => ({ lat: airports[code][1], lng: airports[code][2] });
+      const fmtDate = d => new Date(d + "T12:00:00").toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" });
+
+      // one arc per airport pair (either direction); flown more often → thicker
+      const routes = new Map();
+      for (const f of flights) {
+        const key = [f[2], f[3]].sort().join("-");
+        if (!routes.has(key)) routes.set(key, []);
+        routes.get(key).push(f);
+      }
+
+      const lines = [];
+      for (const [key, legs] of routes) {
+        const [a, b] = key.split("-");
+        const line = new google.maps.Polyline({
+          map,
+          path: [pos(a), pos(b)],
+          geodesic: true,            // follow the great-circle path, like a real flight
+          strokeColor: routeColor(),
+          strokeOpacity: 0.75,
+          strokeWeight: 1.5 + legs.length,
+        });
+        line.addListener("mouseover", () => line.setOptions({ strokeOpacity: 1, zIndex: 10 }));
+        line.addListener("mouseout", () => line.setOptions({ strokeOpacity: 0.75, zIndex: 1 }));
+        line.addListener("click", e => {
+          const rows = legs
+            .sort((x, y) => x[0].localeCompare(y[0]))
+            .map(([d, num, from, to]) => `<div>${fmtDate(d)} · <b>${num}</b> · ${from} → ${to}</div>`).join("");
+          info.setContent(`<div class="map-popup"><b>${airports[a][0]} (${a}) ⇄ ${airports[b][0]} (${b})</b>` +
+            `<div class="popup-sub">${Math.round(miles(a, b)).toLocaleString()} mi · flown ${legs.length}×</div>${rows}</div>`);
+          info.setPosition(e.latLng);
+          info.open({ map });
+        });
+        lines.push(line);
+      }
+
+      // small dot on every airport
+      const codes = [...new Set(flights.flatMap(f => [f[2], f[3]]))];
+      const dots = codes.map(code => {
+        const dot = new google.maps.Marker({
+          map,
+          position: pos(code),
+          title: `${airports[code][0]} (${code})`,
+          icon: { path: google.maps.SymbolPath.CIRCLE, scale: 4, fillColor: dotColor(), fillOpacity: 1, strokeColor: routeColor(), strokeWeight: 2 },
+          zIndex: 20,
+        });
+        dot.addListener("click", () => {
+          const n = flights.filter(f => f[2] === code || f[3] === code).length;
+          info.setContent(`<div class="map-popup"><b>${airports[code][0]} (${code})</b><div class="popup-sub">${n} flight${n === 1 ? "" : "s"}</div></div>`);
+          info.open({ map, anchor: dot });
+        });
+        return dot;
+      });
+
       // Bounds come from min/max so the view spans Americas → Europe → India
       // instead of wrapping the short way across the Pacific
-      const lats = cities.map(c => c[1]), lngs = cities.map(c => c[2]);
+      const pts = codes.map(pos);
       const bounds = new google.maps.LatLngBounds(
-        { lat: Math.min(...lats), lng: Math.min(...lngs) },
-        { lat: Math.max(...lats), lng: Math.max(...lngs) }
+        { lat: Math.min(...pts.map(p => p.lat)), lng: Math.min(...pts.map(p => p.lng)) },
+        { lat: Math.max(...pts.map(p => p.lat)), lng: Math.max(...pts.map(p => p.lng)) }
       );
 
       map.fitBounds(bounds, 60);
@@ -124,8 +267,11 @@
         if (map.getZoom() > 6) map.setZoom(6);
       });
 
-      new MutationObserver(() => map.setOptions({ styles: styleFor() }))
-        .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+      new MutationObserver(() => {
+        map.setOptions({ styles: styleFor() });
+        lines.forEach(l => l.setOptions({ strokeColor: routeColor() }));
+        dots.forEach(d => d.setIcon({ ...d.getIcon(), fillColor: dotColor(), strokeColor: routeColor() }));
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     }
 
     // "Dallas, TX" → United States (two-letter state code); "Paris, France" → France
@@ -138,6 +284,10 @@
     const count = document.getElementById("mapCount");
     count.textContent = `${plural(cities.length, "city", "cities")} · ${plural(countries.length, "country", "countries")} visited`;
     count.title = countries.join(", ");
+    const totalMiles = Math.round(flights.reduce((sum, f) => sum + miles(f[2], f[3]), 0));
+    const airportCount = new Set(flights.flatMap(f => [f[2], f[3]])).size;
+    document.getElementById("flightCount").textContent =
+      `${plural(flights.length, "flight", "flights")} · ${plural(airportCount, "airport", "airports")} · ${totalMiles.toLocaleString()} miles flown`;
   </script>
   <!-- Replace YOUR_API_KEY with your Google Maps JavaScript API key -->
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU7Ed_gfyZOxjNcIihbAQprkOrLixZC_c&callback=initMap&loading=async"></script>

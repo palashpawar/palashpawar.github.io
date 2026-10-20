@@ -551,7 +551,13 @@ a.exp-link .location {
   text-align: center;
   font-size: 1rem;
   color: #000;
-  margin: 20px 0;
+  margin: 20px 0 4px;
+}
+
+.map-count-sub {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin: 0 0 18px;
 }
 
 .travel-map {
@@ -565,7 +571,14 @@ a.exp-link .location {
 
 .travel-map .map-popup {
   font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
   color: #000;
+}
+
+.travel-map .map-popup .popup-sub {
+  color: #666;
+  margin-bottom: 4px;
 }
 
 [data-theme="dark"] .map-count {
