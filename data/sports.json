@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T11:45:35+00:00",
+ "updated": "2026-10-20T17:14:23+00:00",
  "ap": {
   "2390": 1,
   "252": 2,
@@ -3016,6 +3016,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/hai.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401930977",
+     "date": "2026-12-13T20:30Z",
+     "timeValid": true,
+     "league": {
+      "name": "International Friendly",
+      "abbreviation": "Men's International Friendly"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "660",
+          "displayName": "United States",
+          "shortDisplayName": "USA",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/usa.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "1038",
+          "displayName": "Jamaica",
+          "shortDisplayName": "Jamaica",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/jam.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/jam.png"
            }
           ]
          }
