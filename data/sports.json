@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T20:12:57+00:00",
+ "updated": "2026-10-21T23:25:20+00:00",
  "ap": {
   "2390": 1,
   "252": 2,
@@ -668,12 +668,12 @@
    },
    "events": [
     {
-     "id": "401882839",
-     "date": "2026-10-18T19:00Z",
+     "id": "401915313",
+     "date": "2026-10-21T19:00Z",
      "timeValid": true,
      "league": {
-      "name": "Spanish LALIGA",
-      "abbreviation": "LALIGA"
+      "name": "UEFA Champions League",
+      "abbreviation": "UEFA Champions League"
      },
      "competitions": [
       {
@@ -716,82 +716,6 @@
          "homeAway": "away",
          "winner": false,
          "score": "1",
-         "shootoutScore": null,
-         "team": {
-          "id": "243",
-          "displayName": "Sevilla",
-          "shortDisplayName": "Sevilla",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/243.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401915313",
-     "date": "2026-10-21T19:00Z",
-     "timeValid": true,
-     "league": {
-      "name": "UEFA Champions League",
-      "abbreviation": "UEFA Champions League"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": "1",
-         "shootoutScore": null,
-         "team": {
-          "id": "86",
-          "displayName": "Real Madrid",
-          "shortDisplayName": "Real Madrid",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/86.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": "0",
          "shootoutScore": null,
          "team": {
           "id": "11420",
@@ -936,6 +860,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/87.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "86",
+          "displayName": "Real Madrid",
+          "shortDisplayName": "Real Madrid",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/86.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401915383",
+     "date": "2026-11-04T17:45Z",
+     "timeValid": true,
+     "league": {
+      "name": "UEFA Champions League",
+      "abbreviation": "UEFA Champions League"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "887",
+          "displayName": "AEK Athens",
+          "shortDisplayName": "AEK Athens",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/887.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/887.png"
            }
           ]
          }
