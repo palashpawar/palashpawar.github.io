@@ -489,6 +489,11 @@ main.with-nav {
   box-sizing: border-box;
 }
 
+/* stacked two-logo marks need the room more than the padding */
+.project-card img.logo.logo-tall {
+  padding: 8px 14px;
+}
+
 
 @media (max-width: 600px) {
   /* pin the nav left so it never runs under the theme button on the right */
