@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-25T01:14:28+00:00",
+ "updated": "2026-10-25T06:15:18+00:00",
  "ap": {
   "2390": 1,
   "252": 2,
@@ -983,82 +983,6 @@
    },
    "events": [
     {
-     "id": "761883",
-     "date": "2026-10-18T00:30Z",
-     "timeValid": true,
-     "league": {
-      "name": "MLS",
-      "abbreviation": "MLS"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": true,
-         "state": "post"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": "2",
-         "shootoutScore": null,
-         "team": {
-          "id": "6077",
-          "displayName": "Houston Dynamo FC",
-          "shortDisplayName": "Houston",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/6077.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/6077.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": "2",
-         "shootoutScore": null,
-         "team": {
-          "id": "185",
-          "displayName": "FC Dallas",
-          "shortDisplayName": "Dallas",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/185.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/185.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
      "id": "761896",
      "date": "2026-10-25T00:30Z",
      "timeValid": true,
@@ -1071,8 +995,8 @@
        "neutralSite": false,
        "status": {
         "type": {
-         "completed": false,
-         "state": "in"
+         "completed": true,
+         "state": "post"
         }
        },
        "competitors": [
@@ -1285,6 +1209,82 @@
        ]
       }
      ]
+    },
+    {
+     "id": "761944",
+     "date": "2026-11-08T00:00Z",
+     "timeValid": true,
+     "league": {
+      "name": "MLS",
+      "abbreviation": "MLS"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "6077",
+          "displayName": "Houston Dynamo FC",
+          "shortDisplayName": "Houston",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/6077.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/6077.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "21812",
+          "displayName": "St. Louis CITY SC",
+          "shortDisplayName": "St. Louis",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/21812.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/21812.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
     }
    ]
   },
@@ -1292,14 +1292,14 @@
    "team": {
     "displayName": "Texas Longhorns",
     "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png",
-    "recordSummary": "4-2",
-    "standingSummary": "10th in SEC",
+    "recordSummary": "5-2",
+    "standingSummary": "8th in SEC",
     "clubhouse": "https://www.espn.com/college-football/team/_/id/251/texas-longhorns"
    },
    "events": [
     {
-     "id": "401856724",
-     "date": "2026-10-17T16:00Z",
+     "id": "401856732",
+     "date": "2026-10-24T23:30Z",
      "timeValid": true,
      "league": {
       "name": null,
@@ -1317,84 +1317,8 @@
        "competitors": [
         {
          "homeAway": "home",
-         "winner": false,
-         "score": "24",
-         "shootoutScore": null,
-         "team": {
-          "id": "251",
-          "displayName": "Texas Longhorns",
-          "shortDisplayName": "Texas",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/251.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
          "winner": true,
-         "score": "27",
-         "shootoutScore": null,
-         "team": {
-          "id": "57",
-          "displayName": "Florida Gators",
-          "shortDisplayName": "Florida",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/57.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/57.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401856732",
-     "date": "2026-10-24T23:30Z",
-     "timeValid": true,
-     "league": {
-      "name": null,
-      "abbreviation": null
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": null,
-         "score": null,
+         "score": "34",
          "shootoutScore": null,
          "team": {
           "id": "251",
@@ -1420,8 +1344,8 @@
         },
         {
          "homeAway": "away",
-         "winner": null,
-         "score": null,
+         "winner": false,
+         "score": "27",
          "shootoutScore": null,
          "team": {
           "id": "145",
@@ -1600,6 +1524,82 @@
        ]
       }
      ]
+    },
+    {
+     "id": "401856885",
+     "date": "2026-11-14T05:00Z",
+     "timeValid": false,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "99",
+          "displayName": "LSU Tigers",
+          "shortDisplayName": "LSU",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/99.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/99.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "251",
+          "displayName": "Texas Longhorns",
+          "shortDisplayName": "Texas",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/251.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/251.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
     }
    ]
   },
@@ -1607,14 +1607,14 @@
    "team": {
     "displayName": "Oklahoma State Cowboys",
     "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png",
-    "recordSummary": "4-2",
-    "standingSummary": "5th in Big 12",
+    "recordSummary": "5-2",
+    "standingSummary": "2nd in Big 12",
     "clubhouse": "https://www.espn.com/college-football/team/_/id/197/oklahoma-state-cowboys"
    },
    "events": [
     {
-     "id": "401856831",
-     "date": "2026-10-17T23:30Z",
+     "id": "401856836",
+     "date": "2026-10-24T23:00Z",
      "timeValid": true,
      "league": {
       "name": null,
@@ -1633,26 +1633,26 @@
         {
          "homeAway": "home",
          "winner": true,
-         "score": "35",
+         "score": "57",
          "shootoutScore": null,
          "team": {
-          "id": "248",
-          "displayName": "Houston Cougars",
-          "shortDisplayName": "Houston",
+          "id": "197",
+          "displayName": "Oklahoma State Cowboys",
+          "shortDisplayName": "Oklahoma St",
           "logos": [
            {
             "rel": [
              "full",
              "default"
             ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
            },
            {
             "rel": [
              "full",
              "dark"
             ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/248.png"
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/197.png"
            }
           ]
          }
@@ -1660,83 +1660,7 @@
         {
          "homeAway": "away",
          "winner": false,
-         "score": "32",
-         "shootoutScore": null,
-         "team": {
-          "id": "197",
-          "displayName": "Oklahoma State Cowboys",
-          "shortDisplayName": "Oklahoma St",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/197.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401856836",
-     "date": "2026-10-24T23:00Z",
-     "timeValid": true,
-     "league": {
-      "name": null,
-      "abbreviation": null
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": null,
-         "score": null,
-         "shootoutScore": null,
-         "team": {
-          "id": "197",
-          "displayName": "Oklahoma State Cowboys",
-          "shortDisplayName": "Oklahoma St",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/197.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": null,
-         "score": null,
+         "score": "24",
          "shootoutScore": null,
          "team": {
           "id": "38",
@@ -1915,22 +1839,11 @@
        ]
       }
      ]
-    }
-   ]
-  },
-  "football/college-football|248": {
-   "team": {
-    "displayName": "Houston Cougars",
-    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png",
-    "recordSummary": "6-1",
-    "standingSummary": "2nd in Big 12",
-    "clubhouse": "https://www.espn.com/college-football/team/_/id/248/houston-cougars"
-   },
-   "events": [
+    },
     {
-     "id": "401856831",
-     "date": "2026-10-17T23:30Z",
-     "timeValid": true,
+     "id": "401856863",
+     "date": "2026-11-14T05:00Z",
+     "timeValid": false,
      "league": {
       "name": null,
       "abbreviation": null
@@ -1940,42 +1853,15 @@
        "neutralSite": false,
        "status": {
         "type": {
-         "completed": true,
-         "state": "post"
+         "completed": false,
+         "state": "pre"
         }
        },
        "competitors": [
         {
          "homeAway": "home",
-         "winner": true,
-         "score": "35",
-         "shootoutScore": null,
-         "team": {
-          "id": "248",
-          "displayName": "Houston Cougars",
-          "shortDisplayName": "Houston",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/248.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": "32",
+         "winner": null,
+         "score": null,
          "shootoutScore": null,
          "team": {
           "id": "197",
@@ -1998,11 +1884,49 @@
            }
           ]
          }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "2641",
+          "displayName": "Texas Tech Red Raiders",
+          "shortDisplayName": "Texas Tech",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/2641.png"
+           }
+          ]
+         }
         }
        ]
       }
      ]
-    },
+    }
+   ]
+  },
+  "football/college-football|248": {
+   "team": {
+    "displayName": "Houston Cougars",
+    "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png",
+    "recordSummary": "6-2",
+    "standingSummary": "6th in Big 12",
+    "clubhouse": "https://www.espn.com/college-football/team/_/id/248/houston-cougars"
+   },
+   "events": [
     {
      "id": "401856837",
      "date": "2026-10-25T02:15Z",
@@ -2016,15 +1940,15 @@
        "neutralSite": false,
        "status": {
         "type": {
-         "completed": false,
-         "state": "pre"
+         "completed": true,
+         "state": "post"
         }
        },
        "competitors": [
         {
          "homeAway": "home",
-         "winner": null,
-         "score": null,
+         "winner": true,
+         "score": "21",
          "shootoutScore": null,
          "team": {
           "id": "254",
@@ -2050,8 +1974,8 @@
         },
         {
          "homeAway": "away",
-         "winner": null,
-         "score": null,
+         "winner": false,
+         "score": "13",
          "shootoutScore": null,
          "team": {
           "id": "248",
@@ -2196,6 +2120,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/38.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "248",
+          "displayName": "Houston Cougars",
+          "shortDisplayName": "Houston",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/248.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/248.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401856868",
+     "date": "2026-11-21T05:00Z",
+     "timeValid": false,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "277",
+          "displayName": "West Virginia Mountaineers",
+          "shortDisplayName": "West Virginia",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/277.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/277.png"
            }
           ]
          }
@@ -2552,14 +2552,14 @@
    "team": {
     "displayName": "Houston Rockets",
     "logo": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
-    "recordSummary": "2-0",
+    "recordSummary": "3-0",
     "standingSummary": "1st in Southwest Division",
     "clubhouse": "https://www.espn.com/nba/team/_/name/hou/houston-rockets"
    },
    "events": [
     {
-     "id": "401909096",
-     "date": "2026-10-24T01:30Z",
+     "id": "401909856",
+     "date": "2026-10-25T00:30Z",
      "timeValid": true,
      "league": {
       "name": null,
@@ -2578,83 +2578,7 @@
         {
          "homeAway": "home",
          "winner": false,
-         "score": "110",
-         "shootoutScore": null,
-         "team": {
-          "id": "24",
-          "displayName": "San Antonio Spurs",
-          "shortDisplayName": "Spurs",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/sa.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": true,
          "score": "114",
-         "shootoutScore": null,
-         "team": {
-          "id": "10",
-          "displayName": "Houston Rockets",
-          "shortDisplayName": "Rockets",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/hou.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401909856",
-     "date": "2026-10-25T00:30Z",
-     "timeValid": true,
-     "league": {
-      "name": null,
-      "abbreviation": null
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": null,
-         "score": null,
          "shootoutScore": null,
          "team": {
           "id": "1",
@@ -2680,8 +2604,8 @@
         },
         {
          "homeAway": "away",
-         "winner": null,
-         "score": null,
+         "winner": true,
+         "score": "121",
          "shootoutScore": null,
          "team": {
           "id": "10",
@@ -2826,6 +2750,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/mil.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "10",
+          "displayName": "Houston Rockets",
+          "shortDisplayName": "Rockets",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/hou.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401909283",
+     "date": "2026-10-31T00:00Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "6",
+          "displayName": "Dallas Mavericks",
+          "shortDisplayName": "Mavericks",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/dal.png"
            }
           ]
          }
