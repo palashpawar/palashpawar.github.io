@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-25T06:15:18+00:00",
+ "updated": "2026-10-25T16:28:54+00:00",
  "ap": {
   "2390": 1,
   "252": 2,
@@ -32,87 +32,11 @@
    "team": {
     "displayName": "Manchester United",
     "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png",
-    "recordSummary": "1-4-2",
-    "standingSummary": "15th in English Premier League",
+    "recordSummary": "1-4-3",
+    "standingSummary": "16th in English Premier League",
     "clubhouse": "https://www.espn.com/soccer/club/_/id/360/manchester-united"
    },
    "events": [
-    {
-     "id": "401915395",
-     "date": "2026-10-21T16:45Z",
-     "timeValid": true,
-     "league": {
-      "name": "UEFA Champions League",
-      "abbreviation": "UEFA Champions League"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": true,
-         "state": "post"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": true,
-         "score": "4",
-         "shootoutScore": null,
-         "team": {
-          "id": "2572",
-          "displayName": "Como",
-          "shortDisplayName": "Como",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/2572.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/2572.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": "1",
-         "shootoutScore": null,
-         "team": {
-          "id": "360",
-          "displayName": "Manchester United",
-          "shortDisplayName": "Man United",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/360.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
     {
      "id": "401879252",
      "date": "2026-10-25T14:00Z",
@@ -126,15 +50,15 @@
        "neutralSite": false,
        "status": {
         "type": {
-         "completed": false,
-         "state": "pre"
+         "completed": true,
+         "state": "post"
         }
        },
        "competitors": [
         {
          "homeAway": "home",
          "winner": false,
-         "score": null,
+         "score": "0",
          "shootoutScore": null,
          "team": {
           "id": "360",
@@ -160,8 +84,8 @@
         },
         {
          "homeAway": "away",
-         "winner": false,
-         "score": null,
+         "winner": true,
+         "score": "3",
          "shootoutScore": null,
          "team": {
           "id": "349",
@@ -340,6 +264,82 @@
        ]
       }
      ]
+    },
+    {
+     "id": "401879240",
+     "date": "2026-11-08T16:30Z",
+     "timeValid": true,
+     "league": {
+      "name": "English Premier League",
+      "abbreviation": "Premier League"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "360",
+          "displayName": "Manchester United",
+          "shortDisplayName": "Man United",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/360.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/360.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "362",
+          "displayName": "Aston Villa",
+          "shortDisplayName": "Aston Villa",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/362.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
     }
    ]
   },
@@ -348,7 +348,7 @@
     "displayName": "Paris Saint-Germain",
     "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
     "recordSummary": "4-2-1",
-    "standingSummary": "2nd in French Ligue 1",
+    "standingSummary": "4th in French Ligue 1",
     "clubhouse": "https://www.espn.com/soccer/club/_/id/160/paris-saint-germain"
    },
    "events": [
