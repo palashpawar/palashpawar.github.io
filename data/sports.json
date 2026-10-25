@@ -1,31 +1,31 @@
 {
- "updated": "2026-10-25T16:28:54+00:00",
+ "updated": "2026-10-25T19:41:50+00:00",
  "ap": {
   "2390": 1,
-  "252": 2,
-  "194": 3,
-  "87": 4,
-  "61": 5,
-  "84": 6,
-  "145": 7,
-  "2641": 8,
-  "26": 9,
-  "254": 10,
-  "2633": 11,
-  "96": 12,
-  "333": 13,
-  "248": 14,
-  "2294": 15,
-  "30": 16,
-  "154": 17,
-  "99": 18,
-  "251": 19,
-  "57": 20,
-  "68": 21,
-  "142": 22,
-  "2567": 23,
-  "77": 24,
-  "12": 25
+  "194": 2,
+  "61": 3,
+  "84": 4,
+  "87": 5,
+  "254": 6,
+  "26": 7,
+  "252": 8,
+  "96": 9,
+  "333": 10,
+  "251": 11,
+  "145": 12,
+  "2641": 13,
+  "154": 14,
+  "99": 15,
+  "2633": 16,
+  "57": 17,
+  "248": 18,
+  "2567": 19,
+  "68": 20,
+  "77": 20,
+  "12": 22,
+  "142": 23,
+  "197": 24,
+  "275": 25
  },
  "teams": {
   "soccer/eng.1|360": {
@@ -63,7 +63,7 @@
          "team": {
           "id": "360",
           "displayName": "Manchester United",
-          "shortDisplayName": "Man United",
+          "shortDisplayName": "Man Utd",
           "logos": [
            {
             "rel": [
@@ -166,7 +166,7 @@
          "team": {
           "id": "360",
           "displayName": "Manchester United",
-          "shortDisplayName": "Man United",
+          "shortDisplayName": "Man Utd",
           "logos": [
            {
             "rel": [
@@ -215,7 +215,7 @@
          "team": {
           "id": "360",
           "displayName": "Manchester United",
-          "shortDisplayName": "Man United",
+          "shortDisplayName": "Man Utd",
           "logos": [
            {
             "rel": [
@@ -291,7 +291,7 @@
          "team": {
           "id": "360",
           "displayName": "Manchester United",
-          "shortDisplayName": "Man United",
+          "shortDisplayName": "Man Utd",
           "logos": [
            {
             "rel": [
@@ -348,7 +348,7 @@
     "displayName": "Paris Saint-Germain",
     "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
     "recordSummary": "4-2-1",
-    "standingSummary": "4th in French Ligue 1",
+    "standingSummary": "5th in French Ligue 1",
     "clubhouse": "https://www.espn.com/soccer/club/_/id/160/paris-saint-germain"
    },
    "events": [
@@ -2332,7 +2332,7 @@
        "status": {
         "type": {
          "completed": false,
-         "state": "pre"
+         "state": "in"
         }
        },
        "competitors": [
