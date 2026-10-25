@@ -826,6 +826,15 @@ a.exp-link .location {
   color: #5ecfff;
 }
 
+/* UT Austin in its burnt orange (#BF5700); a touch lighter on dark backgrounds to stay readable */
+.highlight.ut-orange {
+  color: #bf5700;
+}
+
+[data-theme="dark"] .highlight.ut-orange {
+  color: #e0782e;
+}
+
 /* Sports page — styled after the Real sports app: league pills, rounded team cards,
    big bold numbers with small grey labels, scoreboard rows */
 .sports-page {
