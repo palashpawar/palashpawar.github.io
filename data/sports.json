@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T00:30:19+00:00",
+ "updated": "2026-10-27T06:21:32+00:00",
  "ap": {
   "2390": 1,
   "194": 2,
@@ -2552,14 +2552,14 @@
    "team": {
     "displayName": "Houston Rockets",
     "logo": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
-    "recordSummary": "3-0",
+    "recordSummary": "4-0",
     "standingSummary": "1st in Southwest Division",
     "clubhouse": "https://www.espn.com/nba/team/_/name/hou/houston-rockets"
    },
    "events": [
     {
-     "id": "401909856",
-     "date": "2026-10-25T00:30Z",
+     "id": "401909874",
+     "date": "2026-10-27T00:30Z",
      "timeValid": true,
      "league": {
       "name": null,
@@ -2577,84 +2577,8 @@
        "competitors": [
         {
          "homeAway": "home",
-         "winner": false,
-         "score": "114",
-         "shootoutScore": null,
-         "team": {
-          "id": "1",
-          "displayName": "Atlanta Hawks",
-          "shortDisplayName": "Hawks",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/atl.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
          "winner": true,
-         "score": "121",
-         "shootoutScore": null,
-         "team": {
-          "id": "10",
-          "displayName": "Houston Rockets",
-          "shortDisplayName": "Rockets",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/hou.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401909874",
-     "date": "2026-10-27T00:30Z",
-     "timeValid": true,
-     "league": {
-      "name": null,
-      "abbreviation": null
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "pre"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": null,
-         "score": null,
+         "score": "120",
          "shootoutScore": null,
          "team": {
           "id": "10",
@@ -2680,8 +2604,8 @@
         },
         {
          "homeAway": "away",
-         "winner": null,
-         "score": null,
+         "winner": false,
+         "score": "110",
          "shootoutScore": null,
          "team": {
           "id": "1",
@@ -2853,6 +2777,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/hou.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401909902",
+     "date": "2026-11-01T00:30Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "10",
+          "displayName": "Houston Rockets",
+          "shortDisplayName": "Rockets",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/hou.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "25",
+          "displayName": "Oklahoma City Thunder",
+          "shortDisplayName": "Thunder",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/okc.png"
            }
           ]
          }
