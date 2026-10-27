@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-26T20:33:12+00:00",
+ "updated": "2026-10-27T00:30:19+00:00",
  "ap": {
   "2390": 1,
   "194": 2,
@@ -347,18 +347,18 @@
    "team": {
     "displayName": "Paris Saint-Germain",
     "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
-    "recordSummary": "4-2-1",
-    "standingSummary": "5th in French Ligue 1",
+    "recordSummary": "5-2-1",
+    "standingSummary": "1st in French Ligue 1",
     "clubhouse": "https://www.espn.com/soccer/club/_/id/160/paris-saint-germain"
    },
    "events": [
     {
-     "id": "401915399",
-     "date": "2026-10-20T19:00Z",
+     "id": "401876422",
+     "date": "2026-10-26T19:30Z",
      "timeValid": true,
      "league": {
-      "name": "UEFA Champions League",
-      "abbreviation": "UEFA Champions League"
+      "name": "French Ligue 1",
+      "abbreviation": "Ligue 1"
      },
      "competitions": [
       {
@@ -373,83 +373,7 @@
         {
          "homeAway": "home",
          "winner": true,
-         "score": "4",
-         "shootoutScore": null,
-         "team": {
-          "id": "160",
-          "displayName": "Paris Saint-Germain",
-          "shortDisplayName": "PSG",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/160.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
          "score": "2",
-         "shootoutScore": null,
-         "team": {
-          "id": "83",
-          "displayName": "Barcelona",
-          "shortDisplayName": "Barcelona",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/83.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401876422",
-     "date": "2026-10-26T19:30Z",
-     "timeValid": true,
-     "league": {
-      "name": "French Ligue 1",
-      "abbreviation": "Ligue 1"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": "0",
          "shootoutScore": null,
          "team": {
           "id": "160",
@@ -648,6 +572,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/160.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401876407",
+     "date": "2026-11-07T19:45Z",
+     "timeValid": true,
+     "league": {
+      "name": "French Ligue 1",
+      "abbreviation": "Ligue 1"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "160",
+          "displayName": "Paris Saint-Germain",
+          "shortDisplayName": "PSG",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/160.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "170",
+          "displayName": "Troyes",
+          "shortDisplayName": "Troyes",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/170.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/170.png"
            }
           ]
          }
