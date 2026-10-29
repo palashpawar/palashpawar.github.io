@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-29T02:31:03+00:00",
+ "updated": "2026-10-29T10:04:36+00:00",
  "ap": {
   "2390": 1,
   "194": 2,
@@ -983,8 +983,8 @@
    },
    "events": [
     {
-     "id": "761896",
-     "date": "2026-10-25T00:30Z",
+     "id": "761916",
+     "date": "2026-10-29T02:30Z",
      "timeValid": true,
      "league": {
       "name": "MLS",
@@ -1004,82 +1004,6 @@
          "homeAway": "home",
          "winner": false,
          "score": "0",
-         "shootoutScore": null,
-         "team": {
-          "id": "6077",
-          "displayName": "Houston Dynamo FC",
-          "shortDisplayName": "Houston",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/6077.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/6077.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": "0",
-         "shootoutScore": null,
-         "team": {
-          "id": "17362",
-          "displayName": "Minnesota United FC",
-          "shortDisplayName": "Minnesota",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/17362.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/17362.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "761916",
-     "date": "2026-10-29T02:30Z",
-     "timeValid": true,
-     "league": {
-      "name": "MLS",
-      "abbreviation": "MLS"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "pre"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": null,
          "shootoutScore": null,
          "team": {
           "id": "9726",
@@ -1105,8 +1029,8 @@
         },
         {
          "homeAway": "away",
-         "winner": false,
-         "score": null,
+         "winner": true,
+         "score": "1",
          "shootoutScore": null,
          "team": {
           "id": "6077",
