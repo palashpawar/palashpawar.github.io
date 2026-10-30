@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-30T15:58:22+00:00",
+ "updated": "2026-10-30T20:50:22+00:00",
  "ap": {
   "2390": 1,
   "194": 2,
@@ -347,14 +347,14 @@
    "team": {
     "displayName": "Paris Saint-Germain",
     "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
-    "recordSummary": "5-2-1",
+    "recordSummary": "6-2-1",
     "standingSummary": "1st in French Ligue 1",
     "clubhouse": "https://www.espn.com/soccer/club/_/id/160/paris-saint-germain"
    },
    "events": [
     {
-     "id": "401876422",
-     "date": "2026-10-26T19:30Z",
+     "id": "401876421",
+     "date": "2026-10-30T18:00Z",
      "timeValid": true,
      "league": {
       "name": "French Ligue 1",
@@ -372,84 +372,8 @@
        "competitors": [
         {
          "homeAway": "home",
-         "winner": true,
-         "score": "2",
-         "shootoutScore": null,
-         "team": {
-          "id": "160",
-          "displayName": "Paris Saint-Germain",
-          "shortDisplayName": "PSG",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/160.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
          "winner": false,
-         "score": "0",
-         "shootoutScore": null,
-         "team": {
-          "id": "167",
-          "displayName": "Lyon",
-          "shortDisplayName": "Lyon",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/167.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401876421",
-     "date": "2026-10-30T18:00Z",
-     "timeValid": true,
-     "league": {
-      "name": "French Ligue 1",
-      "abbreviation": "Ligue 1"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "pre"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": null,
+         "score": "1",
          "shootoutScore": null,
          "team": {
           "id": "3236",
@@ -475,8 +399,8 @@
         },
         {
          "homeAway": "away",
-         "winner": false,
-         "score": null,
+         "winner": true,
+         "score": "5",
          "shootoutScore": null,
          "team": {
           "id": "160",
@@ -648,6 +572,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/170.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401876398",
+     "date": "2026-11-21T16:15Z",
+     "timeValid": true,
+     "league": {
+      "name": "French Ligue 1",
+      "abbreviation": "Ligue 1"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "2502",
+          "displayName": "Nice",
+          "shortDisplayName": "Nice",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/2502.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/2502.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "160",
+          "displayName": "Paris Saint-Germain",
+          "shortDisplayName": "PSG",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/160.png"
            }
           ]
          }
@@ -983,82 +983,6 @@
    },
    "events": [
     {
-     "id": "761916",
-     "date": "2026-10-29T02:30Z",
-     "timeValid": true,
-     "league": {
-      "name": "MLS",
-      "abbreviation": "MLS"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": true,
-         "state": "post"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": "0",
-         "shootoutScore": null,
-         "team": {
-          "id": "9726",
-          "displayName": "Seattle Sounders FC",
-          "shortDisplayName": "Seattle",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/9726.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/9726.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": true,
-         "score": "1",
-         "shootoutScore": null,
-         "team": {
-          "id": "6077",
-          "displayName": "Houston Dynamo FC",
-          "shortDisplayName": "Houston",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/6077.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/6077.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
      "id": "761933",
      "date": "2026-11-02T02:45Z",
      "timeValid": true,
@@ -1202,6 +1126,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/21812.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401932547",
+     "date": "2027-02-21T01:00Z",
+     "timeValid": true,
+     "league": {
+      "name": "MLS",
+      "abbreviation": "MLS"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "6077",
+          "displayName": "Houston Dynamo FC",
+          "shortDisplayName": "Houston",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/6077.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/6077.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "186",
+          "displayName": "Sporting Kansas City",
+          "shortDisplayName": "Kansas City",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/186.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/186.png"
            }
           ]
          }
