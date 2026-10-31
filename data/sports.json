@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31T00:50:48+00:00",
+ "updated": "2026-10-31T07:02:05+00:00",
  "ap": {
   "2390": 1,
   "194": 2,
@@ -2476,14 +2476,14 @@
    "team": {
     "displayName": "Houston Rockets",
     "logo": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
-    "recordSummary": "5-0",
-    "standingSummary": "1st in Southwest Division",
+    "recordSummary": "5-1",
+    "standingSummary": "2nd in Southwest Division",
     "clubhouse": "https://www.espn.com/nba/team/_/name/hou/houston-rockets"
    },
    "events": [
     {
-     "id": "401909887",
-     "date": "2026-10-29T00:00Z",
+     "id": "401909283",
+     "date": "2026-10-31T00:00Z",
      "timeValid": true,
      "league": {
       "name": null,
@@ -2501,84 +2501,8 @@
        "competitors": [
         {
          "homeAway": "home",
-         "winner": false,
-         "score": "100",
-         "shootoutScore": null,
-         "team": {
-          "id": "15",
-          "displayName": "Milwaukee Bucks",
-          "shortDisplayName": "Bucks",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/mil.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
          "winner": true,
-         "score": "132",
-         "shootoutScore": null,
-         "team": {
-          "id": "10",
-          "displayName": "Houston Rockets",
-          "shortDisplayName": "Rockets",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/hou.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401909283",
-     "date": "2026-10-31T00:00Z",
-     "timeValid": true,
-     "league": {
-      "name": null,
-      "abbreviation": null
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": null,
-         "score": null,
+         "score": "116",
          "shootoutScore": null,
          "team": {
           "id": "6",
@@ -2604,8 +2528,8 @@
         },
         {
          "homeAway": "away",
-         "winner": null,
-         "score": null,
+         "winner": false,
+         "score": "111",
          "shootoutScore": null,
          "team": {
           "id": "10",
@@ -2777,6 +2701,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/bos.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401909930",
+     "date": "2026-11-05T01:30Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "10",
+          "displayName": "Houston Rockets",
+          "shortDisplayName": "Rockets",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/hou.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "16",
+          "displayName": "Minnesota Timberwolves",
+          "shortDisplayName": "Timberwolves",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500/min.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nba/500-dark/min.png"
            }
           ]
          }
