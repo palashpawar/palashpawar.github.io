@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-30T20:50:22+00:00",
+ "updated": "2026-10-31T00:50:48+00:00",
  "ap": {
   "2390": 1,
   "194": 2,
@@ -2571,7 +2571,7 @@
        "status": {
         "type": {
          "completed": false,
-         "state": "pre"
+         "state": "in"
         }
        },
        "competitors": [
