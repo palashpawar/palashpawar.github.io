@@ -1,31 +1,31 @@
 {
- "updated": "2026-11-01T16:50:14+00:00",
+ "updated": "2026-11-01T21:13:00+00:00",
  "ap": {
   "2390": 1,
-  "194": 2,
-  "61": 3,
-  "84": 4,
-  "87": 5,
-  "254": 6,
-  "26": 7,
-  "252": 8,
-  "96": 9,
-  "333": 10,
-  "251": 11,
+  "61": 2,
+  "254": 3,
+  "87": 4,
+  "26": 5,
+  "84": 6,
+  "252": 7,
+  "96": 8,
+  "333": 9,
+  "251": 10,
+  "194": 11,
   "145": 12,
   "2641": 13,
   "154": 14,
   "99": 15,
   "2633": 16,
-  "57": 17,
-  "248": 18,
-  "2567": 19,
+  "248": 17,
+  "30": 18,
+  "142": 19,
   "68": 20,
-  "77": 20,
-  "12": 22,
-  "142": 23,
-  "197": 24,
-  "275": 25
+  "2294": 21,
+  "167": 22,
+  "2579": 23,
+  "12": 24,
+  "57": 25
  },
  "teams": {
   "soccer/eng.1|360": {
@@ -662,87 +662,11 @@
    "team": {
     "displayName": "Real Madrid",
     "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
-    "recordSummary": "8-0-2",
+    "recordSummary": "9-0-2",
     "standingSummary": "3rd in Spanish LALIGA",
     "clubhouse": "https://www.espn.com/soccer/club/_/id/86/real-madrid"
    },
    "events": [
-    {
-     "id": "401882832",
-     "date": "2026-10-25T20:00Z",
-     "timeValid": true,
-     "league": {
-      "name": "Spanish LALIGA",
-      "abbreviation": "LALIGA"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": true,
-         "state": "post"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": "1",
-         "shootoutScore": null,
-         "team": {
-          "id": "83",
-          "displayName": "Barcelona",
-          "shortDisplayName": "Barcelona",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/83.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": true,
-         "score": "2",
-         "shootoutScore": null,
-         "team": {
-          "id": "86",
-          "displayName": "Real Madrid",
-          "shortDisplayName": "Real Madrid",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/86.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
     {
      "id": "401882819",
      "date": "2026-11-01T15:15Z",
@@ -756,8 +680,8 @@
        "neutralSite": false,
        "status": {
         "type": {
-         "completed": false,
-         "state": "in"
+         "completed": true,
+         "state": "post"
         }
        },
        "competitors": [
@@ -790,7 +714,7 @@
         },
         {
          "homeAway": "away",
-         "winner": false,
+         "winner": true,
          "score": "3",
          "shootoutScore": null,
          "team": {
@@ -963,6 +887,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/86.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401882798",
+     "date": "2026-11-21T20:00Z",
+     "timeValid": true,
+     "league": {
+      "name": "Spanish LALIGA",
+      "abbreviation": "LALIGA"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "86",
+          "displayName": "Real Madrid",
+          "shortDisplayName": "Real Madrid",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/86.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "85",
+          "displayName": "Celta Vigo",
+          "shortDisplayName": "Celta Vigo",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/85.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/85.png"
            }
           ]
          }
@@ -1614,7 +1614,7 @@
     },
     {
      "id": "401856854",
-     "date": "2026-11-07T17:00Z",
+     "date": "2026-11-07T18:00Z",
      "timeValid": true,
      "league": {
       "name": null,
@@ -1929,8 +1929,8 @@
     },
     {
      "id": "401856851",
-     "date": "2026-11-07T05:00Z",
-     "timeValid": false,
+     "date": "2026-11-07T20:30Z",
+     "timeValid": true,
      "league": {
       "name": null,
       "abbreviation": null
