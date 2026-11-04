@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T15:28:27+00:00",
+ "updated": "2026-11-04T21:55:28+00:00",
  "ap": {
   "2390": 1,
   "61": 2,
@@ -668,12 +668,12 @@
    },
    "events": [
     {
-     "id": "401882819",
-     "date": "2026-11-01T15:15Z",
+     "id": "401915383",
+     "date": "2026-11-04T17:45Z",
      "timeValid": true,
      "league": {
-      "name": "Spanish LALIGA",
-      "abbreviation": "LALIGA"
+      "name": "UEFA Champions League",
+      "abbreviation": "UEFA Champions League"
      },
      "competitions": [
       {
@@ -688,83 +688,7 @@
         {
          "homeAway": "home",
          "winner": false,
-         "score": "0",
-         "shootoutScore": null,
-         "team": {
-          "id": "87",
-          "displayName": "Racing Santander",
-          "shortDisplayName": "Racing",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/87.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/87.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": true,
-         "score": "3",
-         "shootoutScore": null,
-         "team": {
-          "id": "86",
-          "displayName": "Real Madrid",
-          "shortDisplayName": "Real Madrid",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/86.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401915383",
-     "date": "2026-11-04T17:45Z",
-     "timeValid": true,
-     "league": {
-      "name": "UEFA Champions League",
-      "abbreviation": "UEFA Champions League"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "pre"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": null,
+         "score": "2",
          "shootoutScore": null,
          "team": {
           "id": "887",
@@ -790,8 +714,8 @@
         },
         {
          "homeAway": "away",
-         "winner": false,
-         "score": null,
+         "winner": true,
+         "score": "3",
          "shootoutScore": null,
          "team": {
           "id": "86",
@@ -963,6 +887,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/85.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401915298",
+     "date": "2026-11-24T20:00Z",
+     "timeValid": true,
+     "league": {
+      "name": "UEFA Champions League",
+      "abbreviation": "UEFA Champions League"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "86",
+          "displayName": "Real Madrid",
+          "shortDisplayName": "Real Madrid",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/86.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "148",
+          "displayName": "PSV Eindhoven",
+          "shortDisplayName": "PSV",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/148.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/148.png"
            }
           ]
          }
