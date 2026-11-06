@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T00:20:54+00:00",
+ "updated": "2026-11-06T07:57:28+00:00",
  "ap": {
   "2390": 1,
   "61": 2,
@@ -3351,12 +3351,12 @@
    },
    "events": [
     {
-     "id": "401914357",
-     "date": "2026-10-06T14:00Z",
+     "id": "401932722",
+     "date": "2026-11-05T09:30Z",
      "timeValid": true,
      "league": {
-      "name": "International Friendly",
-      "abbreviation": "Men's International Friendly"
+      "name": "SAFF Championship",
+      "abbreviation": "SAFF Championship"
      },
      "competitions": [
       {
@@ -3371,7 +3371,34 @@
         {
          "homeAway": "home",
          "winner": false,
-         "score": "1",
+         "score": "2",
+         "shootoutScore": null,
+         "team": {
+          "id": "5781",
+          "displayName": "Pakistan",
+          "shortDisplayName": "Pakistan",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/pak.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/pak.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": true,
+         "score": "3",
          "shootoutScore": null,
          "team": {
           "id": "4385",
@@ -3391,33 +3418,6 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/ind.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": true,
-         "score": "6",
-         "shootoutScore": null,
-         "team": {
-          "id": "212",
-          "displayName": "Uruguay",
-          "shortDisplayName": "Uruguay",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/uru.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/uru.png"
            }
           ]
          }
