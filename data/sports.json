@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T11:41:43+00:00",
+ "updated": "2026-11-09T22:25:58+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -1375,8 +1375,8 @@
     },
     {
      "id": "401856755",
-     "date": "2026-11-21T05:00Z",
-     "timeValid": false,
+     "date": "2026-11-21T20:30Z",
+     "timeValid": true,
      "league": {
       "name": null,
       "abbreviation": null
@@ -1690,8 +1690,8 @@
     },
     {
      "id": "401856870",
-     "date": "2026-11-21T05:00Z",
-     "timeValid": false,
+     "date": "2026-11-22T03:15Z",
+     "timeValid": true,
      "league": {
       "name": null,
       "abbreviation": null
