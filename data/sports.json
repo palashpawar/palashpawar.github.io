@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T07:48:57+00:00",
+ "updated": "2026-11-11T16:14:20+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -3351,8 +3351,8 @@
    },
    "events": [
     {
-     "id": "401932722",
-     "date": "2026-11-05T09:30Z",
+     "id": "401932726",
+     "date": "2026-11-11T09:30Z",
      "timeValid": true,
      "league": {
       "name": "SAFF Championship",
@@ -3370,35 +3370,8 @@
        "competitors": [
         {
          "homeAway": "home",
-         "winner": false,
-         "score": "2",
-         "shootoutScore": null,
-         "team": {
-          "id": "5781",
-          "displayName": "Pakistan",
-          "shortDisplayName": "Pakistan",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/pak.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/pak.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
          "winner": true,
-         "score": "3",
+         "score": "1",
          "shootoutScore": null,
          "team": {
           "id": "4385",
@@ -3418,6 +3391,33 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/ind.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": "0",
+         "shootoutScore": null,
+         "team": {
+          "id": "4390",
+          "displayName": "Maldives",
+          "shortDisplayName": "Maldives",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/mdv.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/mdv.png"
            }
           ]
          }
