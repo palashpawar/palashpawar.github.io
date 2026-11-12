@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T12:49:11+00:00",
+ "updated": "2026-11-12T20:51:56+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -3201,14 +3201,14 @@
        "status": {
         "type": {
          "completed": false,
-         "state": "pre"
+         "state": "in"
         }
        },
        "competitors": [
         {
          "homeAway": "home",
          "winner": false,
-         "score": null,
+         "score": "1",
          "shootoutScore": null,
          "team": {
           "id": "162",
@@ -3235,7 +3235,7 @@
         {
          "homeAway": "away",
          "winner": false,
-         "score": null,
+         "score": "1",
          "shootoutScore": null,
          "team": {
           "id": "478",
@@ -3418,6 +3418,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/ind.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401934182",
+     "date": "2026-11-14T09:00Z",
+     "timeValid": true,
+     "league": {
+      "name": "SAFF Championship",
+      "abbreviation": "SAFF Championship"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "4385",
+          "displayName": "India",
+          "shortDisplayName": "India",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/ind.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/ind.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "5784",
+          "displayName": "Bhutan",
+          "shortDisplayName": "Bhutan",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/5784.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/5784.png"
            }
           ]
          }
