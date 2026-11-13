@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T01:52:44+00:00",
+ "updated": "2026-11-13T09:37:59+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -3112,8 +3112,8 @@
    },
    "events": [
     {
-     "id": "401861129",
-     "date": "2026-10-05T18:45Z",
+     "id": "401861151",
+     "date": "2026-11-12T19:45Z",
      "timeValid": true,
      "league": {
       "name": "UEFA Nations League",
@@ -3132,7 +3132,34 @@
         {
          "homeAway": "home",
          "winner": true,
-         "score": "4",
+         "score": "3",
+         "shootoutScore": null,
+         "team": {
+          "id": "162",
+          "displayName": "Italy",
+          "shortDisplayName": "Italy",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/ita.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/ita.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": "1",
          "shootoutScore": null,
          "team": {
           "id": "478",
@@ -3152,33 +3179,6 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/fra.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": "1",
-         "shootoutScore": null,
-         "team": {
-          "id": "459",
-          "displayName": "Belgium",
-          "shortDisplayName": "Belgium",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/bel.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/bel.png"
            }
           ]
          }
