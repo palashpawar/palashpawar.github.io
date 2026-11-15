@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T11:03:24+00:00",
+ "updated": "2026-11-15T17:46:16+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -1777,8 +1777,8 @@
     },
     {
      "id": "401856868",
-     "date": "2026-11-21T05:00Z",
-     "timeValid": false,
+     "date": "2026-11-21T18:00Z",
+     "timeValid": true,
      "league": {
       "name": null,
       "abbreviation": null
@@ -2971,8 +2971,8 @@
    },
    "events": [
     {
-     "id": "401906458",
-     "date": "2026-11-12T06:00Z",
+     "id": "401906463",
+     "date": "2026-11-15T03:00Z",
      "timeValid": true,
      "league": {
       "name": "International Friendly",
@@ -2991,7 +2991,7 @@
         {
          "homeAway": "home",
          "winner": true,
-         "score": "5",
+         "score": "3",
          "shootoutScore": null,
          "team": {
           "id": "2666",
@@ -3038,6 +3038,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/ind.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401934455",
+     "date": "2026-11-17T14:00Z",
+     "timeValid": true,
+     "league": {
+      "name": "SAFF Championship",
+      "abbreviation": "SAFF Championship"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "4385",
+          "displayName": "India",
+          "shortDisplayName": "India",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/ind.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/ind.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "5781",
+          "displayName": "Pakistan",
+          "shortDisplayName": "Pakistan",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/pak.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/pak.png"
            }
           ]
          }
