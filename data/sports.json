@@ -1,31 +1,31 @@
 {
- "updated": "2026-11-15T17:46:16+00:00",
+ "updated": "2026-11-15T22:53:42+00:00",
  "ap": {
   "61": 1,
   "254": 2,
   "87": 3,
   "26": 4,
-  "2390": 5,
-  "84": 6,
+  "84": 5,
+  "2390": 6,
   "333": 7,
   "251": 8,
   "2633": 9,
-  "2641": 10,
-  "154": 11,
+  "154": 10,
+  "2641": 11,
   "252": 12,
-  "96": 13,
-  "248": 14,
-  "30": 15,
-  "2294": 16,
-  "68": 17,
-  "2483": 18,
-  "145": 19,
-  "2579": 20,
-  "194": 21,
-  "12": 22,
-  "167": 23,
-  "99": 24,
-  "2567": 25
+  "2294": 13,
+  "2483": 14,
+  "68": 15,
+  "145": 16,
+  "194": 17,
+  "96": 18,
+  "30": 19,
+  "12": 20,
+  "248": 21,
+  "97": 22,
+  "99": 23,
+  "150": 24,
+  "57": 25
  },
  "teams": {
   "soccer/eng.1|360": {
@@ -1933,14 +1933,14 @@
    "team": {
     "displayName": "Houston Texans",
     "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png",
-    "recordSummary": "3-5",
+    "recordSummary": "3-6",
     "standingSummary": "2nd in AFC South",
     "clubhouse": "https://www.espn.com/nfl/team/_/name/hou/houston-texans"
    },
    "events": [
     {
-     "id": "401873046",
-     "date": "2026-11-08T21:05Z",
+     "id": "401873056",
+     "date": "2026-11-15T18:00Z",
      "timeValid": true,
      "league": {
       "name": null,
@@ -1958,84 +1958,8 @@
        "competitors": [
         {
          "homeAway": "home",
-         "winner": false,
-         "score": "22",
-         "shootoutScore": null,
-         "team": {
-          "id": "24",
-          "displayName": "Los Angeles Chargers",
-          "shortDisplayName": "Chargers",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nfl/500/lac.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/lac.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
          "winner": true,
-         "score": "44",
-         "shootoutScore": null,
-         "team": {
-          "id": "34",
-          "displayName": "Houston Texans",
-          "shortDisplayName": "Texans",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/hou.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401873056",
-     "date": "2026-11-15T18:00Z",
-     "timeValid": true,
-     "league": {
-      "name": null,
-      "abbreviation": null
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "pre"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": null,
-         "score": null,
+         "score": "27",
          "shootoutScore": null,
          "team": {
           "id": "5",
@@ -2061,8 +1985,8 @@
         },
         {
          "homeAway": "away",
-         "winner": null,
-         "score": null,
+         "winner": false,
+         "score": "24",
          "shootoutScore": null,
          "team": {
           "id": "34",
@@ -2234,6 +2158,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/bal.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401873107",
+     "date": "2026-12-07T01:20Z",
+     "timeValid": true,
+     "league": {
+      "name": null,
+      "abbreviation": null
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "23",
+          "displayName": "Pittsburgh Steelers",
+          "shortDisplayName": "Steelers",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nfl/500/pit.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/pit.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": null,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "34",
+          "displayName": "Houston Texans",
+          "shortDisplayName": "Texans",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/hou.png"
            }
           ]
          }
@@ -2802,8 +2802,8 @@
    "team": {
     "displayName": "France",
     "logo": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png",
-    "recordSummary": "3-1-1",
-    "standingSummary": "2nd in UEFA Nations League",
+    "recordSummary": "4-1-1",
+    "standingSummary": "1st in UEFA Nations League",
     "clubhouse": "https://www.espn.com/soccer/team/_/id/478/france"
    },
    "events": [
@@ -2875,82 +2875,6 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/fra.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401861177",
-     "date": "2026-11-15T19:45Z",
-     "timeValid": true,
-     "league": {
-      "name": "UEFA Nations League",
-      "abbreviation": "UEFA Nations League"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "pre"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": null,
-         "shootoutScore": null,
-         "team": {
-          "id": "478",
-          "displayName": "France",
-          "shortDisplayName": "France",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/fra.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": null,
-         "shootoutScore": null,
-         "team": {
-          "id": "465",
-          "displayName": "Türkiye",
-          "shortDisplayName": "Türkiye",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/tur.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/tur.png"
            }
           ]
          }
