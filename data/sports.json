@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T23:02:05+00:00",
+ "updated": "2026-11-15T02:44:14+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -1311,14 +1311,14 @@
        "status": {
         "type": {
          "completed": false,
-         "state": "pre"
+         "state": "in"
         }
        },
        "competitors": [
         {
          "homeAway": "home",
          "winner": null,
-         "score": null,
+         "score": "14",
          "shootoutScore": null,
          "team": {
           "id": "99",
@@ -1345,7 +1345,7 @@
         {
          "homeAway": "away",
          "winner": null,
-         "score": null,
+         "score": "10",
          "shootoutScore": null,
          "team": {
           "id": "251",
@@ -1626,7 +1626,7 @@
        "status": {
         "type": {
          "completed": false,
-         "state": "pre"
+         "state": "in"
         }
        },
        "competitors": [
@@ -2797,82 +2797,6 @@
      ]
     },
     {
-     "id": "401929710",
-     "date": "2026-11-14T21:30Z",
-     "timeValid": true,
-     "league": {
-      "name": "Concacaf Nations League",
-      "abbreviation": "Concacaf Nations League"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": "0",
-         "shootoutScore": null,
-         "team": {
-          "id": "2654",
-          "displayName": "Haiti",
-          "shortDisplayName": "Haiti",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/hai.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/hai.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": "4",
-         "shootoutScore": null,
-         "team": {
-          "id": "660",
-          "displayName": "United States",
-          "shortDisplayName": "USA",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/usa.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
      "id": "401929766",
      "date": "2026-11-18T00:00Z",
      "timeValid": true,
@@ -3276,7 +3200,7 @@
     },
     {
      "id": "401906463",
-     "date": "2026-11-15T03:10Z",
+     "date": "2026-11-15T03:00Z",
      "timeValid": true,
      "league": {
       "name": "International Friendly",
