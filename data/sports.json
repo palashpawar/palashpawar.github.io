@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T22:56:01+00:00",
+ "updated": "2026-11-18T04:27:54+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -2636,82 +2636,6 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/usa.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401929766",
-     "date": "2026-11-18T00:00Z",
-     "timeValid": true,
-     "league": {
-      "name": "Concacaf Nations League",
-      "abbreviation": "Concacaf Nations League"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "pre"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": null,
-         "shootoutScore": null,
-         "team": {
-          "id": "660",
-          "displayName": "United States",
-          "shortDisplayName": "USA",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/usa.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": null,
-         "shootoutScore": null,
-         "team": {
-          "id": "2654",
-          "displayName": "Haiti",
-          "shortDisplayName": "Haiti",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/hai.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/hai.png"
            }
           ]
          }
