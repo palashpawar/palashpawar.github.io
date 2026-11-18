@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T04:27:54+00:00",
+ "updated": "2026-11-18T14:07:34+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -2569,8 +2569,8 @@
    },
    "events": [
     {
-     "id": "401929710",
-     "date": "2026-11-14T21:30Z",
+     "id": "401929766",
+     "date": "2026-11-18T00:00Z",
      "timeValid": true,
      "league": {
       "name": "Concacaf Nations League",
@@ -2588,6 +2588,33 @@
        "competitors": [
         {
          "homeAway": "home",
+         "winner": true,
+         "score": "2",
+         "shootoutScore": null,
+         "team": {
+          "id": "660",
+          "displayName": "United States",
+          "shortDisplayName": "USA",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/usa.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
          "winner": false,
          "score": "0",
          "shootoutScore": null,
@@ -2609,33 +2636,6 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/hai.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": true,
-         "score": "6",
-         "shootoutScore": null,
-         "team": {
-          "id": "660",
-          "displayName": "United States",
-          "shortDisplayName": "USA",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/usa.png"
            }
           ]
          }
