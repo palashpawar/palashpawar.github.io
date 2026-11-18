@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T14:07:34+00:00",
+ "updated": "2026-11-18T22:01:31+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -2712,6 +2712,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/jam.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401935564",
+     "date": "2027-03-26T02:15Z",
+     "timeValid": true,
+     "league": {
+      "name": "Concacaf Nations League",
+      "abbreviation": "Concacaf Nations League"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "660",
+          "displayName": "United States",
+          "shortDisplayName": "USA",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/usa.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "203",
+          "displayName": "Mexico",
+          "shortDisplayName": "Mexico",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/mex.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/mex.png"
            }
           ]
          }
