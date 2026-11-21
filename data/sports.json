@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T12:59:48+00:00",
+ "updated": "2026-11-21T02:23:17+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -2875,6 +2875,158 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/tur.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401936104",
+     "date": "2027-03-25T19:45Z",
+     "timeValid": true,
+     "league": {
+      "name": "UEFA Nations League",
+      "abbreviation": "UEFA Nations League"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "164",
+          "displayName": "Spain",
+          "shortDisplayName": "Spain",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/esp.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/esp.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "478",
+          "displayName": "France",
+          "shortDisplayName": "France",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/fra.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401936101",
+     "date": "2027-03-28T18:45Z",
+     "timeValid": true,
+     "league": {
+      "name": "UEFA Nations League",
+      "abbreviation": "UEFA Nations League"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "478",
+          "displayName": "France",
+          "shortDisplayName": "France",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/fra.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "164",
+          "displayName": "Spain",
+          "shortDisplayName": "Spain",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500/esp.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/countries/500-dark/esp.png"
            }
           ]
          }
