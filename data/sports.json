@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T06:57:32+00:00",
+ "updated": "2026-11-22T15:24:25+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -1379,14 +1379,14 @@
    "team": {
     "displayName": "Oklahoma State Cowboys",
     "logo": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png",
-    "recordSummary": "6-4",
-    "standingSummary": "6th in Big 12",
+    "recordSummary": "7-4",
+    "standingSummary": "4th in Big 12",
     "clubhouse": "https://www.espn.com/college-football/team/_/id/197/oklahoma-state-cowboys"
    },
    "events": [
     {
-     "id": "401856863",
-     "date": "2026-11-15T02:30Z",
+     "id": "401856870",
+     "date": "2026-11-22T03:30Z",
      "timeValid": true,
      "league": {
       "name": null,
@@ -1406,82 +1406,6 @@
          "homeAway": "home",
          "winner": false,
          "score": "27",
-         "shootoutScore": null,
-         "team": {
-          "id": "197",
-          "displayName": "Oklahoma State Cowboys",
-          "shortDisplayName": "Oklahoma St",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/197.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/197.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": true,
-         "score": "52",
-         "shootoutScore": null,
-         "team": {
-          "id": "2641",
-          "displayName": "Texas Tech Red Raiders",
-          "shortDisplayName": "Texas Tech",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500/2641.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/ncaa/500-dark/2641.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "401856870",
-     "date": "2026-11-22T03:30Z",
-     "timeValid": true,
-     "league": {
-      "name": null,
-      "abbreviation": null
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": null,
-         "score": null,
          "shootoutScore": null,
          "team": {
           "id": "9",
@@ -1507,8 +1431,8 @@
         },
         {
          "homeAway": "away",
-         "winner": null,
-         "score": null,
+         "winner": true,
+         "score": "30",
          "shootoutScore": null,
          "team": {
           "id": "197",
