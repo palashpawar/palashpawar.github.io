@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T11:00:26+00:00",
+ "updated": "2026-11-24T21:17:51+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -757,14 +757,14 @@
        "status": {
         "type": {
          "completed": false,
-         "state": "pre"
+         "state": "in"
         }
        },
        "competitors": [
         {
          "homeAway": "home",
          "winner": false,
-         "score": null,
+         "score": "1",
          "shootoutScore": null,
          "team": {
           "id": "86",
@@ -791,7 +791,7 @@
         {
          "homeAway": "away",
          "winner": false,
-         "score": null,
+         "score": "1",
          "shootoutScore": null,
          "team": {
           "id": "148",
