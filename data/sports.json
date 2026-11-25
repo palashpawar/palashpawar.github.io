@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T04:54:43+00:00",
+ "updated": "2026-11-25T15:41:36+00:00",
  "ap": {
   "61": 1,
   "254": 2,
@@ -983,82 +983,6 @@
    },
    "events": [
     {
-     "id": "401933738",
-     "date": "2026-11-25T03:00Z",
-     "timeValid": true,
-     "league": {
-      "name": "MLS",
-      "abbreviation": "MLS"
-     },
-     "competitions": [
-      {
-       "neutralSite": false,
-       "status": {
-        "type": {
-         "completed": false,
-         "state": "in"
-        }
-       },
-       "competitors": [
-        {
-         "homeAway": "home",
-         "winner": false,
-         "score": "2",
-         "shootoutScore": null,
-         "team": {
-          "id": "191",
-          "displayName": "San Jose Earthquakes",
-          "shortDisplayName": "San Jose",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/191.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/191.png"
-           }
-          ]
-         }
-        },
-        {
-         "homeAway": "away",
-         "winner": false,
-         "score": "0",
-         "shootoutScore": null,
-         "team": {
-          "id": "6077",
-          "displayName": "Houston Dynamo FC",
-          "shortDisplayName": "Houston",
-          "logos": [
-           {
-            "rel": [
-             "full",
-             "default"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/6077.png"
-           },
-           {
-            "rel": [
-             "full",
-             "dark"
-            ],
-            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/6077.png"
-           }
-          ]
-         }
-        }
-       ]
-      }
-     ]
-    },
-    {
      "id": "401933724",
      "date": "2026-11-28T19:30Z",
      "timeValid": true,
@@ -1202,6 +1126,82 @@
              "dark"
             ],
             "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/6077.png"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "401932547",
+     "date": "2027-02-21T01:00Z",
+     "timeValid": true,
+     "league": {
+      "name": "MLS",
+      "abbreviation": "MLS"
+     },
+     "competitions": [
+      {
+       "neutralSite": false,
+       "status": {
+        "type": {
+         "completed": false,
+         "state": "pre"
+        }
+       },
+       "competitors": [
+        {
+         "homeAway": "home",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "6077",
+          "displayName": "Houston Dynamo FC",
+          "shortDisplayName": "Houston",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/6077.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/6077.png"
+           }
+          ]
+         }
+        },
+        {
+         "homeAway": "away",
+         "winner": false,
+         "score": null,
+         "shootoutScore": null,
+         "team": {
+          "id": "186",
+          "displayName": "Sporting Kansas City",
+          "shortDisplayName": "Kansas City",
+          "logos": [
+           {
+            "rel": [
+             "full",
+             "default"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500/186.png"
+           },
+           {
+            "rel": [
+             "full",
+             "dark"
+            ],
+            "href": "https://a.espncdn.com/i/teamlogos/soccer/500-dark/186.png"
            }
           ]
          }
