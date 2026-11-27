@@ -1461,3 +1461,25 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 [data-theme="dark"] .gh-repo:hover { transform: none; border-color: var(--accent); }
 [data-theme="dark"] .league-tab { border-radius: 0; font-family: inherit; text-transform: lowercase; }
 [data-theme="dark"] .gh-section { --gh-1: #1e2d57; --gh-2: #2c4796; --gh-3: #4069d6; --gh-4: #5b8cff; color: var(--fg); }
+
+/* map page: departure board + dot-matrix map */
+.board { display: flex; flex-wrap: wrap; gap: 18px 32px; margin: 0 0 28px; }
+.flap-stat { display: flex; flex-direction: column; gap: 6px; }
+.flap-label { color: var(--dim); font-size: 13px; }
+.flap-cells { display: flex; gap: 3px; }
+.flap {
+  display: inline-block; min-width: 0.95em; padding: 4px 3px; text-align: center;
+  font-size: clamp(20px, 3.4vw, 30px); font-weight: 700; color: var(--fg); line-height: 1.1;
+  background: linear-gradient(#14171f 0 49%, #000 49% 51%, #0e1117 51%);  /* the split in a split-flap tile */
+  border: 1px solid var(--rule);
+}
+.map-page .airline-legend { justify-content: flex-start; color: var(--dim); font-size: 13px; margin: 0 0 16px; }
+.dotmap-wrap { position: relative; overflow-x: auto; border: 1px solid var(--rule); }
+.dotmap-wrap canvas { display: block; touch-action: pan-x pan-y; }
+.dotmap-tip {
+  position: absolute; pointer-events: none; background: #000; border: 1px solid var(--rule);
+  padding: 8px 10px; font-size: 12px; line-height: 1.5; color: var(--fg); max-width: 320px; z-index: 2;
+}
+.dotmap-tip .tip-dim { color: var(--dim); }
+.dotmap-note { color: var(--dim); font-size: 13px; margin-top: 10px; }
+.flap.flap-sep { background: none; border: none; min-width: 0; padding: 4px 0; }

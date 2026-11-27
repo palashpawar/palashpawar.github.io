@@ -21,17 +21,17 @@
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202611261200"/>
+  <link rel="stylesheet" href="style.css?v=202611261400"/>
   <script src="theme.js?v=202611261200"></script>
 </head>
 <body>
   <main class="page map-page">
     <a class="back" href="index.html">home</a>
     <h1>places i've flown</h1>
-    <p class="map-count" id="mapCount"></p>
-    <p class="map-count map-count-sub" id="flightCount"></p>
+    <div class="board" id="board"></div>
     <div class="airline-legend" id="airlineLegend"></div>
-    <div id="map" class="travel-map"></div>
+    <div class="dotmap-wrap"><canvas id="dotmap" aria-label="Map of every route flown"></canvas><div class="dotmap-tip" id="tip" hidden></div></div>
+    <p class="dotmap-note">hover or tap a route or airport</p>
   </main>
 
 
@@ -193,144 +193,43 @@
       return 2 * R * Math.asin(Math.sqrt(h));
     };
 
-    // Google's "night" palette, used when the site is in dark mode
-    const darkStyle = [
-      { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-      { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-      { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-      { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
-      { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
-      { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#263c3f" }] },
-      { featureType: "poi.park", elementType: "labels.text.fill", stylers: [{ color: "#6b9a76" }] },
-      { featureType: "road", elementType: "geometry", stylers: [{ color: "#38414e" }] },
-      { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#212a37" }] },
-      { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#9ca5b3" }] },
-      { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#746855" }] },
-      { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1f2835" }] },
-      { featureType: "road.highway", elementType: "labels.text.fill", stylers: [{ color: "#f3d19c" }] },
-      { featureType: "transit", elementType: "geometry", stylers: [{ color: "#2f3948" }] },
-      { featureType: "transit.station", elementType: "labels.text.fill", stylers: [{ color: "#d59563" }] },
-      { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] },
-      { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#515c6d" }] },
-      { featureType: "water", elementType: "labels.text.stroke", stylers: [{ color: "#17263c" }] },
-    ];
-    const styleFor = () => (document.documentElement.dataset.theme === "dark" ? darkStyle : []);
-
-    function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
-        styles: styleFor(),
-        gestureHandling: "cooperative", // page scroll isn't hijacked; ctrl/two-finger to zoom
-        mapTypeControl: false,
-        streetViewControl: false,
-        // keep the view inside the world so no grey bands show above/below it
-        restriction: {
-          latLngBounds: { north: 85, south: -85, west: -180, east: 180 },
-          strictBounds: true,
-        },
-      });
-
-      const isDark = () => document.documentElement.dataset.theme === "dark";
-      const routeColor = () => (isDark() ? "#5ecfff" : "#4f46e5");
-      const dotColor = () => (isDark() ? "#ffffff" : "#1b1e29");
-      const info = new google.maps.InfoWindow();
-      const pos = code => ({ lat: airports[code][1], lng: airports[code][2] });
-      const fmtDate = d => new Date(d + "T12:00:00").toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" });
-
-      // every flight on an airport pair (either direction), for the popup
-      const pairOf = f => [f[2], f[3]].sort().join("-");
-      const pairs = new Map();
-      for (const f of flights) {
-        if (!pairs.has(pairOf(f))) pairs.set(pairOf(f), []);
-        pairs.get(pairOf(f)).push(f);
-      }
-
-      const showPair = (key, latLng) => {
-        const [a, b] = key.split("-");
-        const legs = [...pairs.get(key)].sort((x, y) => x[0].localeCompare(y[0]));
-        const rows = legs.map(([d, num, from, to]) => {
-          const [name, color] = airlineOf(num);
-          return `<div><span class="popup-swatch" style="background:${color}"></span>${fmtDate(d)} · ${name} <b>${num}</b> · ${from} → ${to}</div>`;
-        }).join("");
-        info.setContent(`<div class="map-popup"><b>${airports[a][0]} (${a}) ⇄ ${airports[b][0]} (${b})</b>` +
-          `<div class="popup-sub">${Math.round(miles(a, b)).toLocaleString()} mi · flown ${legs.length}×</div>${rows}</div>`);
-        info.setPosition(latLng);
-        info.open({ map });
-      };
-
-      // one arc per airport pair and airline, in the airline's color; flown more often → thicker
-      const arcs = new Map();
-      for (const f of flights) {
-        const key = `${pairOf(f)}|${f[1].slice(0, 2)}`;
-        arcs.set(key, (arcs.get(key) || 0) + 1);
-      }
-      const lines = [];
-      for (const [key, n] of arcs) {
-        const [pair, carrier] = key.split("|");
-        const [a, b] = pair.split("-");
-        const line = new google.maps.Polyline({
-          map,
-          path: [pos(a), pos(b)],
-          geodesic: true,            // follow the great-circle path, like a real flight
-          strokeColor: airlineOf(carrier)[1],
-          strokeOpacity: 0.85,
-          strokeWeight: 1.5 + n,
-        });
-        line.addListener("mouseover", () => line.setOptions({ strokeOpacity: 1, zIndex: 10 }));
-        line.addListener("mouseout", () => line.setOptions({ strokeOpacity: 0.85, zIndex: 1 }));
-        line.addListener("click", e => showPair(pair, e.latLng));
-        lines.push(line);
-      }
-
-      // small dot on every airport
-      const codes = [...new Set(flights.flatMap(f => [f[2], f[3]]))];
-      const dots = codes.map(code => {
-        const dot = new google.maps.Marker({
-          map,
-          position: pos(code),
-          title: `${airports[code][0]} (${code})`,
-          icon: { path: google.maps.SymbolPath.CIRCLE, scale: 4, fillColor: dotColor(), fillOpacity: 1, strokeColor: routeColor(), strokeWeight: 2 },
-          zIndex: 20,
-        });
-        dot.addListener("click", () => {
-          const n = flights.filter(f => f[2] === code || f[3] === code).length;
-          info.setContent(`<div class="map-popup"><b>${airports[code][0]} (${code})</b><div class="popup-sub">${n} flight${n === 1 ? "" : "s"}</div></div>`);
-          info.open({ map, anchor: dot });
-        });
-        return dot;
-      });
-
-      // Bounds come from min/max so the view spans Americas → Europe → India
-      // instead of wrapping the short way across the Pacific
-      const pts = codes.map(pos);
-      const bounds = new google.maps.LatLngBounds(
-        { lat: Math.min(...pts.map(p => p.lat)), lng: Math.min(...pts.map(p => p.lng)) },
-        { lat: Math.max(...pts.map(p => p.lat)), lng: Math.max(...pts.map(p => p.lng)) }
-      );
-
-      map.fitBounds(bounds, 60);
-      google.maps.event.addListenerOnce(map, "idle", () => {
-        if (map.getZoom() > 6) map.setZoom(6);
-      });
-
-      new MutationObserver(() => {
-        map.setOptions({ styles: styleFor() });
-        dots.forEach(d => d.setIcon({ ...d.getIcon(), fillColor: dotColor(), strokeColor: routeColor() }));
-      }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    }
-
-    // "Dallas, TX" → United States (two-letter state code); "Paris, France" → France
     const countryOf = name => {
+      // "Dallas, TX" → United States (two-letter state code); "Paris, France" → France
       const place = name.split(", ").pop();
       return /^[A-Z]{2}$/.test(place) ? "United States" : place;
     };
     const countries = [...new Set(cities.map(([name]) => countryOf(name)))];
-    const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
-    const count = document.getElementById("mapCount");
-    count.textContent = `${plural(cities.length, "city", "cities")} · ${plural(countries.length, "country", "countries")} visited`;
-    count.title = countries.join(", ");
     const totalMiles = Math.round(flights.reduce((sum, f) => sum + miles(f[2], f[3]), 0));
-    const airportCount = new Set(flights.flatMap(f => [f[2], f[3]])).size;
-    // legend: airlines flown, most-flown first
+    const codes = [...new Set(flights.flatMap(f => [f[2], f[3]]))];
+    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // ---- departure board: each character flips through random ones before settling ----
+    const board = document.getElementById("board");
+    board.title = countries.join(", ");
+    const stats = [["cities", cities.length], ["countries", countries.length], ["flights", flights.length],
+                   ["airports", codes.length], ["miles", totalMiles.toLocaleString()]];
+    stats.forEach(([label, value], s) => {
+      const box = document.createElement("div");
+      box.className = "flap-stat";
+      box.innerHTML = `<span class="flap-label">${label}</span><span class="flap-cells" aria-label="${value} ${label}"></span>`;
+      const cells = box.querySelector(".flap-cells");
+      [...String(value)].forEach((ch, i) => {
+        const cell = document.createElement("span");
+        cell.className = /\d/.test(ch) ? "flap" : "flap flap-sep";
+        cell.setAttribute("aria-hidden", "true");
+        cell.textContent = ch;
+        cells.append(cell);
+        if (still || !/\d/.test(ch)) return;
+        const stopAt = performance.now() + 500 + s * 220 + i * 90;
+        const tick = setInterval(() => {
+          if (performance.now() >= stopAt) { clearInterval(tick); cell.textContent = ch; return; }
+          cell.textContent = Math.floor(Math.random() * 10);
+        }, 55);
+      });
+      board.append(box);
+    });
+
+    // ---- legend: airlines flown, most-flown first ----
     const flownBy = {};
     flights.forEach(f => { const c = f[1].slice(0, 2); flownBy[c] = (flownBy[c] || 0) + 1; });
     const legend = document.getElementById("airlineLegend");
@@ -341,13 +240,163 @@
       const sw = document.createElement("span");
       sw.className = "airline-swatch";
       sw.style.background = color;
-      item.append(sw, `${name} ${n}`);
+      item.append(sw, `${name.toLowerCase()} ${n}`);
       legend.append(item);
     });
-    document.getElementById("flightCount").textContent =
-      `${plural(flights.length, "flight", "flights")} · ${plural(airportCount, "airport", "airports")} · ${totalMiles.toLocaleString()} miles flown`;
+
+    // ---- dot-matrix map: land as a dot grid, routes as arcs with planes moving along them ----
+    const VIEW = { w: -130, e: 92, n: 64, s: 2 };          // lon/lat window around every route
+    const ASPECT = (VIEW.n - VIEW.s) / ((VIEW.e - VIEW.w) * Math.cos(35 * Math.PI / 180));
+    const canvas = document.getElementById("dotmap"), ctx = canvas.getContext("2d");
+    const tip = document.getElementById("tip");
+    let W = 0, H = 0, landDots = [], routes = [], hover = null, landGeo = null;
+    const project = (lat, lon) => [(lon - VIEW.w) / (VIEW.e - VIEW.w) * W, (VIEW.n - lat) / (VIEW.n - VIEW.s) * H];
+    const fmtDate = d => new Date(d + "T12:00:00").toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" }).toLowerCase();
+
+    // one arc per airport pair + airline; flown more often → thicker
+    const pairOf = f => [f[2], f[3]].sort().join("-");
+    const groups = new Map();
+    for (const f of flights) {
+      const key = `${pairOf(f)}|${f[1].slice(0, 2)}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(f);
+    }
+
+    function layout() {
+      const wrap = canvas.parentElement;
+      W = Math.max(wrap.clientWidth, 640);  // shortcut: phones scroll the map sideways instead of shrinking it
+      H = Math.round(W * ASPECT);
+      const dpr = devicePixelRatio || 1;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = W + "px"; canvas.style.height = H + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      routes = [...groups].map(([key, legs], i) => {
+        const [pair, carrier] = key.split("|");
+        const [a, b] = pair.split("-");
+        const [x1, y1] = project(airports[a][1], airports[a][2]);
+        const [x2, y2] = project(airports[b][1], airports[b][2]);
+        const len = Math.hypot(x2 - x1, y2 - y1);
+        // bow every arc upward (north) by a share of its length
+        let nx = -(y2 - y1) / len, ny = (x2 - x1) / len;
+        if (ny > 0) { nx = -nx; ny = -ny; }
+        const cx = (x1 + x2) / 2 + nx * len * 0.22, cy = (y1 + y2) / 2 + ny * len * 0.22;
+        const pts = [];
+        for (let k = 0; k <= 60; k++) {
+          const t = k / 60, u = 1 - t;
+          pts.push([u * u * x1 + 2 * u * t * cx + t * t * x2, u * u * y1 + 2 * u * t * cy + t * t * y2]);
+        }
+        return { pair, carrier, legs, color: airlineOf(carrier)[1], width: 0.8 + 0.6 * legs.length, pts,
+                 speed: 70 / Math.max(len, 40), phase: (i * 0.37) % 1 };
+      });
+
+      landDots = [];
+      if (!landGeo) return;
+      const off = document.createElement("canvas");
+      off.width = W; off.height = H;
+      const o = off.getContext("2d");
+      // fill each polygon on its own; one that crosses the antimeridian (Eurasia's Chukotka tip) gets
+      // its stray points shifted 360° to the side most of it is on, so it doesn't smear across the map
+      for (const feature of landGeo.features) {
+        const polys = feature.geometry.type === "Polygon" ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+        for (const poly of polys) {
+          const lons = poly[0].map(p => p[0]);
+          const wraps = Math.max(...lons) - Math.min(...lons) > 300;
+          const east = lons.filter(l => l > 0).length > lons.length / 2;
+          const fix = lon => !wraps ? lon : east && lon < -150 ? lon + 360 : !east && lon > 150 ? lon - 360 : lon;
+          o.beginPath();
+          for (const ring of poly) ring.forEach(([lon, lat], k) => {
+            const [x, y] = project(lat, fix(lon));
+            k ? o.lineTo(x, y) : o.moveTo(x, y);
+          });
+          o.fill("evenodd");
+        }
+      }
+      const mask = o.getImageData(0, 0, W, H).data, step = Math.max(5, W / 150);
+      for (let y = step / 2; y < H; y += step) for (let x = step / 2; x < W; x += step)
+        if (mask[(Math.floor(y) * W + Math.floor(x)) * 4 + 3] > 128) landDots.push([x, y]);
+    }
+
+    function draw(now) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "#3a4152";
+      for (const [x, y] of landDots) { ctx.beginPath(); ctx.arc(x, y, 1.4, 0, 7); ctx.fill(); }
+
+      for (const r of routes) {
+        const lit = !hover || (hover.route ? hover.route.pair === r.pair : r.pair.split("-").includes(hover.code));
+        ctx.globalAlpha = lit ? 0.85 : 0.12;
+        ctx.strokeStyle = r.color; ctx.lineWidth = r.width;
+        ctx.beginPath(); r.pts.forEach(([x, y], k) => k ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke();
+        if (still || !lit) continue;
+        // plane: a bright head with a short fading trail
+        const t = (r.phase + now / 1000 * r.speed) % 1, head = Math.floor(t * 60);
+        for (let k = 0; k < 8 && head - k >= 0; k++) {
+          ctx.globalAlpha = (1 - k / 8) * 0.9;
+          ctx.fillStyle = "#fff";
+          ctx.beginPath(); ctx.arc(r.pts[head - k][0], r.pts[head - k][1], k ? 1.2 : 2, 0, 7); ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+
+      codes.forEach((code, i) => {
+        const [x, y] = project(airports[code][1], airports[code][2]);
+        if (!still) {
+          const p = ((now / 2400) + i * 0.13) % 1;
+          ctx.strokeStyle = `rgba(91,140,255,${1 - p})`; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(x, y, 3 + p * 9, 0, 7); ctx.stroke();
+        }
+        ctx.fillStyle = hover && hover.code === code ? "#5b8cff" : "#fff";
+        ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 7); ctx.fill();
+      });
+    }
+
+    function showTip(html, x, y) {
+      tip.innerHTML = html; tip.hidden = false;
+      tip.style.left = Math.min(x + 14, W - tip.offsetWidth - 4) + "px";
+      tip.style.top = Math.max(y - tip.offsetHeight - 10, 4) + "px";
+    }
+    function onPoint(e) {
+      const box = canvas.getBoundingClientRect(), mx = e.clientX - box.left, my = e.clientY - box.top;
+      let best = null, bestD = 12;
+      for (const code of codes) {
+        const [x, y] = project(airports[code][1], airports[code][2]), d = Math.hypot(mx - x, my - y);
+        if (d < bestD) { best = { code }; bestD = d; }
+      }
+      if (!best) {
+        bestD = 7;
+        for (const r of routes) for (const [x, y] of r.pts) {
+          const d = Math.hypot(mx - x, my - y);
+          if (d < bestD) { best = { route: r }; bestD = d; }
+        }
+      }
+      hover = best;
+      if (!best) { tip.hidden = true; }
+      else if (best.code) {
+        const n = flights.filter(f => f[2] === best.code || f[3] === best.code).length;
+        showTip(`<b>${best.code}</b> · ${airports[best.code][0].toLowerCase()}<br>${n} flight${n === 1 ? "" : "s"}`, mx, my);
+      } else {
+        const [a, b] = best.route.pair.split("-");
+        const legs = flights.filter(f => pairOf(f) === best.route.pair).sort((x, y) => x[0].localeCompare(y[0]));
+        showTip(`<b>${a} ⇄ ${b}</b> · ${Math.round(miles(a, b)).toLocaleString()} mi · flown ${legs.length}×` +
+          legs.map(([d, num, from, to]) => `<br><span class="tip-dim">${fmtDate(d)} · ${num} · ${from} → ${to}</span>`).join(""), mx, my);
+      }
+      if (still) draw(0);
+    }
+    canvas.addEventListener("pointermove", onPoint);
+    canvas.addEventListener("pointerdown", onPoint);
+    canvas.addEventListener("pointerleave", () => { hover = null; tip.hidden = true; if (still) draw(0); });
+
+    layout();
+    addEventListener("resize", () => { layout(); if (still) draw(0); });
+    if (still) draw(0);
+    else (function loop(now) { draw(now); requestAnimationFrame(loop); })(performance.now());
+
+    // land outlines (Natural Earth 1:110m via world-atlas); routes still draw if this fails
+    fetch("https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-110m.json")
+      .then(r => r.json())
+      .then(topo => { landGeo = topojson.feature(topo, topo.objects.land); layout(); if (still) draw(0); })
+      .catch(() => {});
   </script>
-  <!-- Replace YOUR_API_KEY with your Google Maps JavaScript API key -->
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAU7Ed_gfyZOxjNcIihbAQprkOrLixZC_c&callback=initMap&loading=async"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 </body>
 </html>
