@@ -283,8 +283,10 @@
     });
 
     // ---- dot-matrix map: land as a dot grid, routes as arcs with planes moving along them ----
-    const VIEW = { w: -130, e: 92, n: 64, s: 2 };          // lon/lat window around every route
-    const ASPECT = (VIEW.n - VIEW.s) / ((VIEW.e - VIEW.w) * Math.cos(35 * Math.PI / 180));
+    const BASE = { w: -130, e: 92, n: 64, s: 2 };          // lon/lat window around every route
+    const KM = Math.cos(35 * Math.PI / 180);                // squash longitude like a mid-latitude map
+    const ASPECT = (BASE.n - BASE.s) / ((BASE.e - BASE.w) * KM);
+    let VIEW = { ...BASE };
     const canvas = document.getElementById("dotmap"), ctx = canvas.getContext("2d");
     const tip = document.getElementById("tip");
     let W = 0, H = 0, landDots = [], routes = [], hover = null, landGeo = null;
@@ -312,7 +314,13 @@
     function layout() {
       const wrap = canvas.parentElement;
       W = Math.max(wrap.clientWidth, 640);  // shortcut: phones scroll the map sideways instead of shrinking it
-      H = Math.round(W * ASPECT);
+      // when the legend sits beside the map, grow the map to the legend's height and show more
+      // latitude (same scale, no stretching) so the two line up
+      const leg = document.getElementById("airlineLegend");
+      const beside = leg && leg.getBoundingClientRect().top < wrap.getBoundingClientRect().bottom - 1;
+      H = Math.max(Math.round(W * ASPECT), beside ? Math.round(leg.getBoundingClientRect().height) - 2 : 0);
+      const span = H / W * (BASE.e - BASE.w) * KM, mid = (BASE.n + BASE.s) / 2 + 4;   // bias north: routes sit above the equator
+      VIEW = { w: BASE.w, e: BASE.e, n: Math.min(84, mid + span / 2), s: Math.min(84, mid + span / 2) - span };
       const dpr = devicePixelRatio || 1;
       canvas.width = W * dpr; canvas.height = H * dpr;
       canvas.style.width = W + "px"; canvas.style.height = H + "px";
