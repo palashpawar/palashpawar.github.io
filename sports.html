@@ -21,7 +21,7 @@
   <link rel="icon" href="favicon-32.png?v=4" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202611271740"/>
+  <link rel="stylesheet" href="style.css?v=202611271800"/>
   <script src="theme.js?v=202611262000"></script>
 </head>
 <body>
@@ -29,7 +29,6 @@
     <a class="back" href="index.html">home</a>
     <h1>sports</h1>
     <p class="sports-note" id="sportsNote">loading live standings…</p>
-    <nav class="league-tabs" id="leagueTabs" aria-label="Filter by league"></nav>
     <div class="sport-list" id="teamCards"></div>
     <p class="sports-footnote">soccer records are wins-draws-losses; squares are the last 5 results.<span id="fifaDate"></span></p>
   </main>
@@ -68,24 +67,7 @@
       return e;
     }
 
-    // League tab each team belongs to (only tabs that have teams are shown)
-    const tabOf = ([path, , , , fifaCode]) =>
-      fifaCode ? "International" : path.startsWith("soccer") ? "Soccer"
-      : path.endsWith("college-football") ? "NCAAF" : path.endsWith("nfl") ? "NFL" : "NBA";
-    const TAB_ORDER = ["All", "Soccer", "NFL", "NCAAF", "NBA", "International"];
-
-    const tabs = document.getElementById("leagueTabs");
     const grid = document.getElementById("teamCards");
-    TAB_ORDER.filter(tab => tab === "All" || teams.some(t => tabOf(t) === tab)).forEach(tab => {
-      const b = el("button", "league-tab", tab);
-      b.type = "button";
-      b.setAttribute("aria-pressed", tab === "All" ? "true" : "false");
-      b.addEventListener("click", () => {
-        tabs.querySelectorAll(".league-tab").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
-        grid.querySelectorAll(".sport-item").forEach(c => { c.hidden = tab !== "All" && c.dataset.tab !== tab; });
-      });
-      tabs.append(b);
-    });
 
     // Opponent colours come from the hourly snapshot (ESPN's live feeds don't include them)
     let colors = {};
@@ -170,7 +152,6 @@
 
     const cards = teams.map(t => {
       const card = el("div", "sport-item item");
-      card.dataset.tab = tabOf(t);
       card.append(el("p", "card-loading", `Loading ${t[2]}…`));
       grid.append(card);
       return card;

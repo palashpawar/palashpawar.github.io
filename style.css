@@ -1563,3 +1563,4 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 .home-min a.org { text-decoration: none; width: fit-content; }
 .home-min a.org::after { content: " ↗"; font-size: 13px; color: var(--dim); }
 .home-min a.org:hover { color: var(--accent); }
+.sports-page .sports-note { margin-bottom: 28px; }
