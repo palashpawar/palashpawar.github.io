@@ -20,115 +20,57 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202610251542"/>
-  <script src="theme.js?v=202610251542"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css?v=202611261200"/>
+  <script src="theme.js?v=202611261200"></script>
 </head>
 <body>
-  <header class="floating-nav">
-    <a href="index.html">Home</a>
-    <a href="experience.html">Experience</a>
-    <a href="map.html">Map</a>
-    <a href="sports.html">Sports</a>
-    <a href="github.html">GitHub</a>
-  </header>
-
-  <main class="with-nav projects">
-    <div class="card-grid">
-
-      <div class="project-card">
-        <img class="logo" src="img/coinbase-logo.png" alt="Coinbase logo" />
-        <h2>Insights to Impact Challenge</h2>
-        <p class="description">Analytics-engineering challenge: designed an onboarding-funnel data model, reconciled three conflicting signup counts, and fixed a join fan-out in inherited SQL.</p>
-        <ul class="tags"><li>SQL</li><li>dbt</li><li>Python</li><li>pandas</li></ul>
-        <p class="award">Winner (Top 20) + $250 USDC</p>
-        <div class="card-links"><a class="card-btn" href="files/coinbase-insights-to-impact.pdf" target="_blank" rel="noopener">PDF</a><a class="card-btn card-btn-secondary" href="https://www.gem.com/lp/coinbase/insights-to-impact-bounty-2026" target="_blank" rel="noopener">Challenge</a></div>
-      </div>
-
-      <div class="project-card">
-        <img class="logo logo-light logo-tall" src="img/statsbomb-logo.png" alt="Hudl StatsBomb logo" />
-        <img class="logo logo-dark logo-tall" src="img/statsbomb-logo-dark.png" alt="Hudl StatsBomb logo" />
-        <h2>ScoutIQ</h2>
-        <p class="description">AI scouting assistant for Premier League clubs on a budget: a Meta model turns plain-English briefs into filters, and transparent percentile scoring ranks every pick.</p>
-        <ul class="tags"><li>Python</li><li>FastAPI</li><li>Next.js</li><li>Muse Spark</li></ul>
-        <div class="card-links"><a class="card-btn" href="https://github.com/palashpawar/scoutiq" target="_blank" rel="noopener">Code</a></div>
-      </div>
-
-      <div class="project-card">
-        <img class="logo" src="img/nbpa-logo.png" alt="National Basketball Players Association logo" />
-        <h2>CourtSide</h2>
-        <p class="description">Modeled 60,000+ NBA team-games (2000–26): back-to-backs cost ~1.9 pts/100, and betting markets underprice eastward jet lag.</p>
-        <ul class="tags"><li>Python</li><li>pandas</li><li>statsmodels</li><li>XGBoost</li><li>SHAP</li></ul>
-        <p class="award">1st Place @ JPMC Data For Good Hackathon + iPad (A16)</p>
-        <div class="card-links"><a class="card-btn" href="https://palashpawar.github.io/courtside/" target="_blank" rel="noopener">Live</a><a class="card-btn card-btn-secondary" href="https://github.com/palashpawar/courtside" target="_blank" rel="noopener">Code</a></div>
-      </div>
-
-      <div class="project-card">
-        <img class="logo logo-light" src="img/nyse-logo.png" alt="NYSE logo" />
-        <img class="logo logo-dark" src="img/nyse-logo-dark.png" alt="NYSE logo" />
-        <h2>SPY Volatility Surface + Market-Making Simulator</h2>
-        <p class="description">Arbitrage-free SVI surface fit to 4,500+ real SPY option quotes, plus a market-making simulator with full P&amp;L attribution. 188 tests, fully reproducible.</p>
-        <ul class="tags"><li>Python</li><li>NumPy</li><li>SciPy</li><li>Streamlit</li></ul>
-        <div class="card-links"><a class="card-btn" href="https://github.com/palashpawar/spy-vol-surface-mm" target="_blank" rel="noopener">Code</a></div>
-      </div>
-
-      <div class="project-card">
-        <img class="logo logo-light" src="img/ncbi-logo.png" alt="NCBI logo" />
-        <img class="logo logo-dark" src="img/ncbi-logo-dark.png" alt="NCBI logo" />
-        <h2>BioCatalyst: Biotech Event Engine</h2>
-        <p class="description">Builds a calendar of trial readouts and FDA dates from ClinicalTrials.gov and SEC EDGAR, then ranks each as a named setup backed by an actual backtest.</p>
-        <ul class="tags"><li>Python</li><li>DuckDB</li><li>Flask</li><li>Vercel</li></ul>
-        <div class="card-links"><a class="card-btn" href="https://biocatalyst-iota.vercel.app" target="_blank" rel="noopener">Live</a><a class="card-btn card-btn-secondary" href="https://github.com/palashpawar/biocatalyst" target="_blank" rel="noopener">Code</a></div>
-      </div>
-
-      <div class="project-card">
-        <img class="logo" src="img/kalshi-logo.svg" alt="Kalshi logo" />
-        <h2>Kalshi Earnings-Mention Edge Study</h2>
-        <p class="description">A backtest found a +4¢/contract edge in prediction markets on earnings-call keywords. Forward testing rejected it (−3.6¢), and the repo diagnoses why.</p>
-        <ul class="tags"><li>Python</li><li>Kalshi API</li><li>pandas</li></ul>
-        <div class="card-links"><a class="card-btn" href="https://github.com/palashpawar/kalshi-earnings-edge" target="_blank" rel="noopener">Code</a></div>
-      </div>
-
-      <div class="project-card">
-        <img class="logo" src="img/transfermarkt-logo.png" alt="Transfermarkt logo" />
-        <h2>Moneyball 2.0: Analyzing Value in the Global Soccer Transfer Market</h2>
-        <p class="description">Predicts player market values from a decade of FBref stats across Europe's top five leagues, compares four models (XGBoost best, R² 0.63), and flags over- and undervalued players.</p>
-        <ul class="tags"><li>R</li><li>XGBoost</li><li>Random Forest</li><li>tidyverse</li></ul>
-        <div class="card-links"><a class="card-btn" href="https://github.com/anikethk1/player_market_value_prediction" target="_blank" rel="noopener">Code</a></div>
-      </div>
-
-      <div class="project-card">
-        <img class="logo logo-light" src="img/plaid-logo.svg" alt="Plaid logo" />
-        <img class="logo logo-dark" src="img/plaid-logo-dark.svg" alt="Plaid logo" />
-        <h2>Debit Ledger</h2>
-        <p class="description">Local-first spending dashboard with real bank sync through Plaid. Data stays on your machine in SQLite, with no build step.</p>
-        <ul class="tags"><li>Node.js</li><li>Plaid API</li><li>SQLite</li></ul>
-        <div class="card-links"><a class="card-btn" href="https://github.com/palashpawar/debit-ledger" target="_blank" rel="noopener">Code</a></div>
-      </div>
-
-      <div class="project-card">
-        <img class="logo logo-light" src="img/knowledge-matters.png" alt="Knowledge Matters logo" />
-        <img class="logo logo-dark" src="img/knowledge-matters-dark.png" alt="Knowledge Matters logo" />
-        <h2>Uncovering Hidden Gems: Using Data to Build a Winning Franchise</h2>
-        <p class="description">Implemented Moneyball in a sports franchise simulation</p>
-        <p class="award">3rd Place @ DECA ICDC + $500</p>
-        <div class="card-links"><a class="card-btn" href="https://www.youtube.com/watch?v=qi1M5PiFbqk" target="_blank" rel="noopener">Video</a></div>
-      </div>
-
-      <div class="project-card">
-        <img class="logo logo-light" src="img/tensorflow.png" alt="TensorFlow logo" />
-        <img class="logo logo-dark" src="img/tensorflow-dark.png" alt="TensorFlow logo" />
-        <h2>Creating a Convolutional Neural Network for Insect Bite Classification</h2>
-        <p class="description">Created an ML model for insect bite classification and implemented it into an Android app</p>
-        <ul class="tags"><li>Python</li><li>Tensorflow</li><li>Kotlin</li></ul>
-        <div class="card-links"><a class="card-btn" href="https://drive.google.com/file/d/1it8Y_aBNfJUBj2RynIkCmBNlAtyOc7zc/view" target="_blank" rel="noopener">View</a></div>
-      </div>
-
+  <main class="page">
+    <a class="back" href="index.html">home</a>
+    <h1>projects</h1>
+    <div class="item">
+      <a href="files/coinbase-insights-to-impact.pdf" target="_blank" rel="noopener">coinbase insights to impact</a> <a class="sub" href="https://www.gem.com/lp/coinbase/insights-to-impact-bounty-2026" target="_blank" rel="noopener">challenge</a>
+      <p>onboarding-funnel data model, reconciled three conflicting signup counts, fixed a join fan-out in inherited sql.</p>
+      <p class="award-line">winner (top 20) + $250 usdc</p>
+    </div>
+    <div class="item">
+      <a href="https://github.com/palashpawar/scoutiq" target="_blank" rel="noopener">scoutiq</a>
+      <p>ai scouting assistant for budget premier league clubs: plain-english briefs become filters, percentile scoring ranks every pick.</p>
+    </div>
+    <div class="item">
+      <a href="https://palashpawar.github.io/courtside/" target="_blank" rel="noopener">courtside</a> <a class="sub" href="https://github.com/palashpawar/courtside" target="_blank" rel="noopener">code</a>
+      <p>60,000+ nba team-games modeled: back-to-backs cost ~1.9 pts/100, and markets underprice eastward jet lag.</p>
+      <p class="award-line">1st place @ jpmc data for good hackathon</p>
+    </div>
+    <div class="item">
+      <a href="https://github.com/palashpawar/spy-vol-surface-mm" target="_blank" rel="noopener">spy vol surface + market maker</a>
+      <p>arbitrage-free svi surface on 4,500+ spy option quotes, plus a market-making sim with full p&amp;l attribution.</p>
+    </div>
+    <div class="item">
+      <a href="https://biocatalyst-iota.vercel.app" target="_blank" rel="noopener">biocatalyst</a> <a class="sub" href="https://github.com/palashpawar/biocatalyst" target="_blank" rel="noopener">code</a>
+      <p>calendar of trial readouts and fda dates from clinicaltrials.gov and sec edgar, each ranked by a real backtest.</p>
+    </div>
+    <div class="item">
+      <a href="https://github.com/palashpawar/kalshi-earnings-edge" target="_blank" rel="noopener">kalshi earnings-mention study</a>
+      <p>a backtest found +4¢/contract on earnings-call keyword markets. forward testing rejected it (−3.6¢); the repo explains why.</p>
+    </div>
+    <div class="item">
+      <a href="https://github.com/anikethk1/player_market_value_prediction" target="_blank" rel="noopener">moneyball 2.0</a>
+      <p>predicts soccer market values from a decade of fbref stats; xgboost best (r² 0.63), flags over- and undervalued players.</p>
+    </div>
+    <div class="item">
+      <a href="https://github.com/palashpawar/debit-ledger" target="_blank" rel="noopener">debit ledger</a>
+      <p>local-first spending dashboard with real bank sync through plaid. data stays on your machine in sqlite.</p>
+    </div>
+    <div class="item">
+      <a href="https://www.youtube.com/watch?v=qi1M5PiFbqk" target="_blank" rel="noopener">uncovering hidden gems</a>
+      <p>moneyball in a sports franchise simulation.</p>
+      <p class="award-line">3rd place @ deca icdc + $500</p>
+    </div>
+    <div class="item">
+      <a href="https://drive.google.com/file/d/1it8Y_aBNfJUBj2RynIkCmBNlAtyOc7zc/view" target="_blank" rel="noopener">insect bite classifier</a>
+      <p>a cnn for insect bite classification, shipped inside an android app.</p>
     </div>
   </main>
-
-  <footer>
-    <p>&copy; 2026 Palash Pawar</p>
-  </footer>
 </body>
 </html>

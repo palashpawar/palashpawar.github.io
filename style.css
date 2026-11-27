@@ -1353,3 +1353,111 @@ a.exp-link .location {
   border-radius: 50%;
   display: inline-block;
 }
+
+/* ===== Minimal terminal theme (2026-11 revamp): black, mono, blue accent, hairline rules.
+   Everything below overrides the older card styles; the site is always data-theme="dark". ===== */
+:root {
+  --bg: #000; --fg: #f2f2f2; --dim: #8b8b8b; --accent: #5b8cff; --rule: #2a2f3a; --ut: #bf5700;
+  color-scheme: dark;
+}
+[data-theme="dark"] body {
+  background: var(--bg); color: var(--fg);
+  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+
+/* homepage */
+.home-wrap { display: flex; gap: 64px; align-items: center; min-height: 100vh; padding: 48px 16px; max-width: 1300px; margin: 0 auto; box-sizing: border-box; }
+.home-min { flex: 0 0 auto; width: min(600px, 100%); line-height: 1.4; }
+.home-min h1 { color: var(--accent); font-size: clamp(28px, 5vw, 44px); margin: 0 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--rule); }
+.home-min h2 { color: var(--dim); font-size: 16px; font-weight: 400; margin: 32px 0 14px; }
+.home-min .row { display: grid; grid-template-columns: 210px 64px 1fr; gap: 14px; align-items: center; margin: 10px 0; }
+.home-min .role { color: var(--dim); }
+.home-min .org { font-size: 18px; }
+.home-min .logo { width: 64px; height: 26px; object-fit: contain; }
+.home-min .links { margin-top: 32px; }
+.home-min .links a { display: block; color: var(--fg); text-decoration: none; font-size: 18px; margin: 10px 0; width: fit-content; }
+.home-min .links a::after { content: " →"; font-size: 14px; }
+.home-min .links a[target="_blank"]::after { content: " ↗"; }
+.home-min .links a:hover { color: var(--accent); }
+.home-min footer { margin-top: 28px; padding: 20px 0 0; border-top: 2px solid var(--rule); display: flex; gap: 24px; text-align: left; }
+.home-min footer a { color: var(--dim); }
+.home-min footer a:hover { color: var(--fg); }
+.home-min footer svg { width: 26px; height: 26px; }
+pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--ut); text-align: center; user-select: none; }
+@media (max-width: 900px) {
+  .home-wrap { flex-direction: column-reverse; align-items: flex-start; gap: 24px; }
+  pre#art { align-self: center; font-size: 6px; line-height: 6px; }
+}
+@media (max-width: 480px) {
+  .home-min .row { grid-template-columns: 110px 56px 1fr; gap: 10px; }
+  .home-min .org, .home-min .links a { font-size: 16px; }
+}
+
+/* nav on inner pages: a plain row of lowercase links under a rule, not a floating pill */
+[data-theme="dark"] .floating-nav {
+  position: static; transform: none; margin: 0 auto; width: auto; max-width: 1140px;
+  background: none; box-shadow: none; backdrop-filter: none; border-radius: 0;
+  padding: 32px 16px 14px; gap: 6px 24px; border-bottom: 2px solid var(--rule);
+  justify-content: flex-start; box-sizing: border-box;
+}
+[data-theme="dark"] .floating-nav a {
+  padding: 0; border-radius: 0; color: var(--dim); font-weight: 400; text-transform: lowercase; font-size: 16px;
+}
+[data-theme="dark"] .floating-nav a:first-child { color: var(--accent); font-weight: 700; }
+[data-theme="dark"] .floating-nav a:hover { background: none; color: var(--fg); }
+[data-theme="dark"] main.with-nav { padding-top: 8px; }
+
+/* cards: flat, hairline border, no shadow or lift */
+[data-theme="dark"] .project-card {
+  background: transparent; border: 1px solid var(--rule); border-radius: 0; box-shadow: none; color: var(--fg);
+}
+[data-theme="dark"] .project-card:hover { transform: none; border-color: var(--accent); }
+[data-theme="dark"] .project-card h2 { color: var(--fg); }
+[data-theme="dark"] .project-card .description,
+[data-theme="dark"] .project-card .tech-stack { color: var(--fg); }
+[data-theme="dark"] .project-card .location { color: var(--dim); }
+[data-theme="dark"] .tags li { background: none; border: 1px solid var(--rule); border-radius: 0; color: var(--dim); }
+[data-theme="dark"] .project-card a.card-btn,
+[data-theme="dark"] .project-card a.card-btn-secondary,
+[data-theme="dark"] .project-card .card-links a {
+  background: none; border: 1px solid var(--rule); border-radius: 0; color: var(--fg);
+}
+[data-theme="dark"] .project-card .card-links a:hover { border-color: var(--accent); color: var(--accent); background: none; }
+[data-theme="dark"] .now-badge { border-radius: 0; }
+
+/* sports page palette */
+[data-theme="dark"] .sports-page {
+  --rs-card: #000; --rs-tile: #0d0f14; --rs-line: var(--rule); --rs-text: var(--fg);
+  --rs-muted: var(--dim); --rs-accent: var(--accent); --rs-pill: #0d0f14;
+}
+[data-theme="dark"] .team-card { border: 1px solid var(--rule); border-radius: 0; box-shadow: none; }
+
+/* inner pages: "← home", lowercase blue title over a rule, then a plain list */
+.page { max-width: 1000px; margin: 0 auto; padding: 48px 16px 64px; box-sizing: border-box; line-height: 1.5; }
+.page .back { color: var(--dim); text-decoration: none; font-size: 18px; }
+.page .back::before { content: "← "; }
+.page .back:hover { color: var(--fg); }
+.page h1 { color: var(--accent); font-size: clamp(28px, 5vw, 40px); margin: 56px 0 40px; padding-bottom: 16px; border-bottom: 2px solid var(--rule); }
+.page .item { margin: 0 0 30px; }
+.page .item > a { color: var(--fg); text-decoration: none; font-size: 18px; }
+.page .item > a[target="_blank"]::after { content: " ↗"; font-size: 14px; }
+.page .item > a:hover { color: var(--accent); }
+.page .item > a.sub { color: var(--dim); font-size: 14px; margin-left: 12px; }
+.page .item p { color: var(--dim); margin: 6px 0 0; font-size: 16px; }
+.page .item p.award-line { color: var(--ut); font-size: 14px; margin-top: 4px; }
+.page .item p.award-line::before { content: "★ "; }
+.page .item .when { color: var(--dim); font-size: 14px; margin-left: 12px; }
+/* the page wrapper sets width; the old per-page wrappers shouldn't add a second one */
+.page.map-page, .page.sports-page, .page.github-page { max-width: 1000px; padding-left: 16px; padding-right: 16px; }
+
+/* sports + github: flat hairline panels, square corners, mono type, site accent */
+[data-theme="dark"] .sports-page { font-family: inherit; }
+[data-theme="dark"] .team-card,
+[data-theme="dark"] .stat-tile,
+[data-theme="dark"] .gh-calendar-wrap,
+[data-theme="dark"] .gh-repo,
+[data-theme="dark"] .travel-map { border-radius: 0; box-shadow: none; background: transparent; border: 1px solid var(--rule); }
+[data-theme="dark"] .stat-tile { border: none; background: var(--rs-tile); }
+[data-theme="dark"] .gh-repo:hover { transform: none; border-color: var(--accent); }
+[data-theme="dark"] .league-tab { border-radius: 0; font-family: inherit; text-transform: lowercase; }
+[data-theme="dark"] .gh-section { --gh-1: #1e2d57; --gh-2: #2c4796; --gh-3: #4069d6; --gh-4: #5b8cff; color: var(--fg); }

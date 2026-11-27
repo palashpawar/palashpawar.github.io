@@ -20,29 +20,20 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202610251542"/>
-  <script src="theme.js?v=202610251542"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css?v=202611261200"/>
+  <script src="theme.js?v=202611261200"></script>
 </head>
 <body>
-  <header class="floating-nav">
-    <a href="index.html">Home</a>
-    <a href="experience.html">Experience</a>
-    <a href="projects.html">Projects</a>
-    <a href="map.html">Map</a>
-    <a href="github.html">GitHub</a>
-  </header>
-
-  <main class="with-nav sports-page">
+  <main class="page sports-page">
+    <a class="back" href="index.html">home</a>
+    <h1>teams i follow</h1>
     <p class="sports-note" id="sportsNote">Loading live standings…</p>
     <nav class="league-tabs" id="leagueTabs" aria-label="Filter by league"></nav>
     <div class="team-cards" id="teamCards"></div>
     <p class="sports-footnote">Soccer records are wins-draws-losses.<span id="fifaDate"></span></p>
   </main>
 
-  <footer>
-    <p>&copy; 2026 Palash Pawar</p>
-  </footer>
 
   <script>
     // Teams I follow: [ESPN sport/league path, ESPN team id, league label, soccer?,

@@ -20,29 +20,20 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202610251542"/>
-  <script src="theme.js?v=202610251542"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css?v=202611261200"/>
+  <script src="theme.js?v=202611261200"></script>
 </head>
 <body>
-  <header class="floating-nav">
-    <a href="index.html">Home</a>
-    <a href="experience.html">Experience</a>
-    <a href="projects.html">Projects</a>
-    <a href="sports.html">Sports</a>
-    <a href="github.html">GitHub</a>
-  </header>
-
-  <main class="with-nav map-page">
+  <main class="page map-page">
+    <a class="back" href="index.html">home</a>
+    <h1>places i've flown</h1>
     <p class="map-count" id="mapCount"></p>
     <p class="map-count map-count-sub" id="flightCount"></p>
     <div class="airline-legend" id="airlineLegend"></div>
     <div id="map" class="travel-map"></div>
   </main>
 
-  <footer>
-    <p>&copy; 2026 Palash Pawar</p>
-  </footer>
 
   <script>
     // Cities visited: [name, latitude, longitude]
