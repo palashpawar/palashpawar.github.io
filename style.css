@@ -1557,3 +1557,6 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 [data-theme="dark"] .theme-toggle:hover { color: var(--fg); border-color: var(--fg); background: var(--bg); }
 [data-theme="dark"] .theme-toggle, [data-theme="dark"] .theme-toggle:hover { border: none; background: none; }
 .home-min h1 { color: #027c7b; }
+/* homepage: everything but the name in the main text colour (white in dark mode, near-black in light) */
+.home-min h2, .home-min .role, .home-min .org, .home-min footer a { color: var(--fg); }
+.home-min footer a:hover { color: var(--accent); }
