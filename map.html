@@ -73,6 +73,7 @@
       ["Toronto, Canada", 43.6532, -79.3832],
       ["Cancún, Mexico", 21.1619, -86.8515],
       ["Cozumel, Mexico", 20.4230, -86.9223],
+      ["Los Cabos, Mexico", 22.8905, -109.9167],
       ["Guanacaste, Costa Rica", 10.6346, -85.4407],
 
       // Europe
@@ -109,6 +110,8 @@
       PIT: ["Pittsburgh", 40.4915, -80.2329],
       YYZ: ["Toronto Pearson", 43.6777, -79.6248],
       CUN: ["Cancún", 21.0365, -86.8771],
+      GDL: ["Guadalajara", 20.5218, -103.3112],
+      SJD: ["Los Cabos", 23.1518, -109.7215],
       LIR: ["Liberia, Costa Rica", 10.5933, -85.5444],
       LHR: ["London Heathrow", 51.4700, -0.4543],
       CDG: ["Paris CDG", 49.0097, 2.5479],
@@ -121,6 +124,10 @@
 
     // Flights flown: [date, flight number, from, to]
     const flights = [
+      ["2026-11-26", "Y4", "GDL", "IAH"],   // flight number not on the booking
+      ["2026-11-26", "Y41145", "SJD", "GDL"],
+      ["2026-11-22", "Y41142", "GDL", "SJD"],
+      ["2026-11-22", "Y41731", "IAH", "GDL"],
       ["2026-10-16", "AA2292", "AUS", "JFK"],
       ["2026-10-17", "AA2772", "JFK", "AUS"],
       ["2025-11-20", "BA194", "IAH", "LHR"],
@@ -182,6 +189,7 @@
       VY: ["Vueling", "#ffc72c"],
       UK: ["Vistara", "#7b2d6e"],
       AC: ["Air Canada", "#ff5a5f"],
+      Y4: ["Volaris", "#c2268f"],
     };
     const airlineOf = num => airlines[num.slice(0, 2)] || [num.slice(0, 2), "#888888"];
 
