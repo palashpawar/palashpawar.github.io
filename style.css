@@ -1521,3 +1521,16 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 .github-page .gh-lang-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
 .github-page .gh-months, .github-page .gh-calendar { margin: 0; }
 .github-page .gh-months { color: var(--dim); opacity: 1; font-size: 11px; }
+
+/* map page: legend beside the map, one airline per row with its logo */
+.map-row { display: flex; gap: 20px; align-items: flex-start; }
+.map-row .dotmap-wrap { flex: 1; min-width: 0; }
+.map-page .map-row .airline-legend { flex: 0 0 210px; display: flex; flex-direction: column; gap: 8px; margin: 0; font-size: 13px; color: var(--fg); }
+.map-page .airline-key { display: flex; align-items: center; gap: 10px; border-left: 3px solid; padding-left: 10px; }
+.map-page .airline-key img { width: 22px; height: 22px; object-fit: contain; }
+.map-page .airline-count { margin-left: auto; color: var(--dim); }
+@media (max-width: 900px) {
+  .map-row { flex-direction: column; }
+  .map-row .dotmap-wrap { width: 100%; }
+  .map-page .map-row .airline-legend { flex: none; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }
+}

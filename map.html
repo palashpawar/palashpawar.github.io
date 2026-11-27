@@ -21,7 +21,7 @@
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202611261700"/>
+  <link rel="stylesheet" href="style.css?v=202611261800"/>
   <script src="theme.js?v=202611261200"></script>
 </head>
 <body>
@@ -29,8 +29,10 @@
     <a class="back" href="index.html">home</a>
     <h1>places</h1>
     <div class="board" id="board"></div>
-    <div class="airline-legend" id="airlineLegend"></div>
-    <div class="dotmap-wrap"><canvas id="dotmap" aria-label="Map of every route flown"></canvas><div class="dotmap-tip" id="tip" hidden></div></div>
+    <div class="map-row">
+      <div class="dotmap-wrap"><canvas id="dotmap" aria-label="Map of every route flown"></canvas><div class="dotmap-tip" id="tip" hidden></div></div>
+      <div class="airline-legend" id="airlineLegend"></div>
+    </div>
     <p class="dotmap-note">hover or tap a route or airport</p>
   </main>
 
@@ -243,12 +245,20 @@
     const legend = document.getElementById("airlineLegend");
     Object.entries(flownBy).sort((x, y) => y[1] - x[1]).forEach(([c, n]) => {
       const [name, color] = airlineOf(c);
-      const item = document.createElement("span");
+      // Google Flights' airline marks (dark-background versions); the left bar is the route color
+      const item = document.createElement("div");
       item.className = "airline-key";
-      const sw = document.createElement("span");
-      sw.className = "airline-swatch";
-      sw.style.background = color;
-      item.append(sw, `${name.toLowerCase()} ${n}`);
+      item.style.borderLeftColor = color;
+      const logo = document.createElement("img");
+      logo.src = `https://www.gstatic.com/flights/airline_logos/70px/dark/${c}.png`;
+      logo.alt = "";
+      logo.onerror = () => logo.remove();
+      const label = document.createElement("span");
+      label.textContent = name.toLowerCase();
+      const count = document.createElement("span");
+      count.className = "airline-count";
+      count.textContent = n;
+      item.append(logo, label, count);
       legend.append(item);
     });
 
