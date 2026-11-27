@@ -55,16 +55,10 @@
     wrap.scrollLeft = wrap.scrollWidth;   // narrow screens scroll; start at the most recent weeks
   }
 
-  // contributions, streaks and busiest day as split-flap tiles that settle one by one
+  // contributions, active days and busiest day as split-flap tiles that settle one by one
   function drawBoard(data) {
     const counts = data.days.map(d => d[1]);
-    let longest = 0, run = 0;
-    counts.forEach(c => { run = c > 0 ? run + 1 : 0; longest = Math.max(longest, run); });
-    let current = 0, k = counts.length - 1;
-    if (counts[k] === 0) k--;   // today isn't over yet, so a quiet today doesn't break the streak
-    while (k >= 0 && counts[k] > 0) { current++; k--; }
-    const stats = [["contributions", data.total.toLocaleString()], ["current streak", current],
-                   ["longest streak", longest], ["active days", counts.filter(c => c > 0).length],
+    const stats = [["contributions", data.total.toLocaleString()], ["active days", counts.filter(c => c > 0).length],
                    ["busiest day", Math.max(0, ...counts)]];
     const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const board = document.getElementById("ghBoard");
