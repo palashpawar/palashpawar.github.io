@@ -91,6 +91,32 @@ def snapshot_team(path, team_id, soccer):
     }
 
 
+def opponent_colors(teams, known):
+    """{team id: "rrggbb"} for every opponent in the snapshot, so the page can colour their names.
+
+    ESPN's team lists don't allow browser requests and the schedule feed's opponent entries carry
+    no colour, but each team's own schedule feed does. Colours rarely change, so ids already in
+    the previous snapshot are reused and only new opponents cost a request.
+    """
+    colors = {}
+    for key, snap in teams.items():
+        path, _ = key.split("|")
+        sport = "soccer/all" if path.startswith("soccer") else path
+        for ev in snap["events"]:
+            for c in ev["competitions"][0]["competitors"]:
+                tid = str(c["team"]["id"])
+                if tid in colors:
+                    continue
+                if tid in known:
+                    colors[tid] = known[tid]
+                    continue
+                try:
+                    colors[tid] = get(f"{API}/{sport}/teams/{tid}/schedule").get("team", {}).get("color")
+                except Exception as e:
+                    print("no colour for", tid, e)
+    return {k: v for k, v in colors.items() if v}
+
+
 def ap_ranks():
     data = get(f"{API}/football/college-football/rankings")
     polls = data.get("rankings", [])
@@ -120,8 +146,8 @@ def main():
     if failed and len(failed) > len(teams):
         sys.exit("ESPN requests failed; keeping the existing snapshot")
 
-    data = {"ap": ap, "teams": teams}
-    if old and {"ap": old.get("ap"), "teams": old.get("teams")} == data:
+    data = {"ap": ap, "teams": teams, "colors": opponent_colors(teams, old.get("colors", {}))}
+    if old and {"ap": old.get("ap"), "teams": old.get("teams"), "colors": old.get("colors")} == data:
         print("Sports data unchanged.")
         return
     data = {"updated": datetime.now(timezone.utc).isoformat(timespec="seconds"), **data}

@@ -101,6 +101,22 @@
       tabs.append(b);
     });
 
+    // Opponent colours come from the hourly snapshot (ESPN's live feeds don't include them)
+    let colors = {};
+    // Nudge a team colour toward white (dark mode) or black (light mode) until it reads on the page
+    function readable(hex) {
+      let [r, g, b] = [0, 2, 4].map(i => parseInt(hex.slice(i, i + 2), 16));
+      const light = document.documentElement.dataset.mode === "light";
+      const lum = () => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+      for (let t = 0; t < 20 && (light ? lum() > 0.55 : lum() < 0.42); t++) {
+        const to = light ? 0 : 255;
+        [r, g, b] = [r, g, b].map(v => Math.round(v + (to - v) * 0.15));
+      }
+      return `rgb(${r},${g},${b})`;
+    }
+    document.addEventListener("modechange", () =>
+      document.querySelectorAll(".opp[data-color]").forEach(s => { s.style.color = readable(s.dataset.color); }));
+
     // One list row per team, styled like the projects page:
     //   manchester united ↗   19th · premier league   ● live
     //   8 pts · 1-5-5   ■■□■■
@@ -145,16 +161,25 @@
         line1.append(strip);
       }
 
+      // last/next line; opponent names in their team colour (from the snapshot's colour list)
       const last = lastGame(sched, id), next = nextGame(sched, id);
-      const parts = [];
-      if (last) parts.push(`last: ${last.where} ${last.name} ${last.score}`);
-      if (next && next.live) {
-        top.append(el("span", "live-dot", "live"));
-        parts.push(`now: ${next.where} ${next.name}`);
-      } else if (next) {
-        parts.push(`next: ${next.where} ${next.name}, ${[next.day, next.time, next.tag].filter(Boolean).join(" · ")}`);
+      const games = el("p", "sport-games");
+      const opp = g => {
+        const span = el("span", "opp", g.name.toLowerCase());
+        if (colors[g.id]) { span.dataset.color = colors[g.id]; span.style.color = readable(colors[g.id]); }
+        return span;
+      };
+      if (last) games.append(`last: ${last.where} `, opp(last), ` ${last.score}`);
+      if (next) {
+        if (last) games.append("  ·  ");
+        if (next.live) {
+          top.append(el("span", "live-dot", "live"));
+          games.append(`now: ${next.where} `, opp(next));
+        } else {
+          games.append(`next: ${next.where} `, opp(next), `, ${[next.day, next.time, next.tag].filter(Boolean).join(" · ").toLowerCase()}`);
+        }
       }
-      row.replaceChildren(top, ...(line1.textContent || form.length ? [line1] : []), el("p", "sport-games", parts.join("  ·  ").toLowerCase()));
+      row.replaceChildren(top, ...(line1.textContent || form.length ? [line1] : []), games);
     }
 
     const cards = teams.map(t => {
@@ -175,7 +200,8 @@
     };
     // Hourly snapshot of the same ESPN feeds, saved by .github/workflows/update-sports.yml
     // (scripts/update_sports.py). Used for any team whose live request fails.
-    const snapshot = fetch("data/sports.json").then(r => r.json()).catch(() => null);
+    const snapshot = fetch("data/sports.json", { cache: "no-cache" })   // revalidate: it changes hourly
+     .then(r => r.json()).catch(() => null);
     let usedSnapshot = false;
 
     const getJSON = u => fetch(u, { signal: AbortSignal.timeout(8000) })
@@ -250,7 +276,7 @@
       const opp = comp.competitors.find(c => c !== me);
       if (!opp) return null;
       const where = comp.neutralSite || (me && me.homeAway === "home") ? "vs" : "@";
-      const game = { where, name: opp.team.displayName || opp.team.shortDisplayName, logos: opp.team.logos || [] };
+      const game = { where, id: String(opp.team.id), name: opp.team.displayName || opp.team.shortDisplayName, logos: opp.team.logos || [] };
       if (comp.status.type.state === "in") return { ...game, live: true };
 
       const d = new Date(ev.date);
@@ -295,7 +321,7 @@
       return {
         result, score: `${pts(me)}–${pts(opp)}${pens}`,
         where: comp.neutralSite || me.homeAway === "home" ? "vs" : "@",
-        name: opp.team.displayName || opp.team.shortDisplayName,
+        id: String(opp.team.id), name: opp.team.displayName || opp.team.shortDisplayName,
         logos: opp.team.logos || [], when,
       };
     }
@@ -307,6 +333,7 @@
           // before a US team's first regular-season game ESPN's record is its preseason one
           const played = sched.events.some(ev => ev.competitions[0].status.type.completed);
           if (!t[3] && !played) team.record.items[0].summary = "0-0";
+          colors = (await snapshot)?.colors || {};
           renderRow(cards[i], t, team, await fifa, sched);
         })
         .catch(() => {
