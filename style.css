@@ -1571,3 +1571,33 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 .page.map-page { max-width: 1180px; }
 .home-wrap { max-width: 1100px; gap: 48px; }
 .page.github-page { max-width: 840px; }   /* a year of week columns is 792px wide; keep it from scrolling */
+
+/* compact frame (2026-11-27): one small centred block, like the reference screenshot */
+@media (min-width: 901px) {
+  .home-wrap { max-width: none; justify-content: center; gap: 56px; padding: 40px 24px; }
+  .home-min { width: 440px; flex: 0 0 440px; }
+  .home-min h1 { font-size: 30px; margin-bottom: 14px; padding-bottom: 10px; }
+  .home-min h2 { font-size: 14px; margin: 22px 0 10px; }
+  .home-min .row { grid-template-columns: 170px 48px 1fr; gap: 12px; margin: 6px 0; font-size: 13px; }
+  .home-min .org { font-size: 15px; }
+  .home-min a.org::after { font-size: 11px; }
+  .home-min .logo { width: 48px; height: 20px; }
+  .home-min .links { margin-top: 22px; }
+  .home-min .links a { font-size: 15px; margin: 7px 0; }
+  .home-min footer { margin-top: 20px; padding-top: 16px; gap: 20px; }
+  .home-min footer svg { width: 20px; height: 20px; }
+  pre#art { flex: 0 0 auto; font-size: 7px; line-height: 7.5px; }
+}
+/* inner pages follow the same smaller scale */
+.page h1 { font-size: 30px; margin: 40px 0 28px; padding-bottom: 12px; }
+.page .back { font-size: 15px; }
+.page .item > a, .sport-top a { font-size: 15px; }
+.page .item p { font-size: 13px; }
+.page .item { margin-bottom: 22px; }
+@media (max-width: 900px) {
+  .home-min h1 { font-size: 26px; }
+  .home-min h2 { font-size: 13px; margin: 20px 0 8px; }
+  .home-min .row { grid-template-columns: 128px 44px 1fr; gap: 10px; margin: 7px 0; font-size: 12px; }
+  .home-min .org, .home-min .links a { font-size: 14px; }
+  .home-min .logo { width: 44px; height: 18px; }
+}
