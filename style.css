@@ -1609,5 +1609,4 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 .page .proj:hover::before { color: var(--accent); }
 .page .proj p.tags-line { color: var(--accent); opacity: .75; font-size: 12px; margin-top: 6px; }
 .page .proj p.tags-line::before { content: "$ "; color: var(--dim); }
-#projBoard { margin: -8px 0 28px; }
 @media (max-width: 600px) { .page .proj { padding-left: 34px; } .page .proj::before { left: 6px; } }

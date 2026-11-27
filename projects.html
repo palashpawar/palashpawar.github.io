@@ -28,7 +28,6 @@
   <main class="page">
     <a class="back" href="index.html">home</a>
     <h1>projects</h1>
-    <div class="board" id="projBoard"></div>
     <div class="item proj" data-n="01">
       <a href="files/coinbase-insights-to-impact.pdf" target="_blank" rel="noopener">coinbase insights to impact</a> <a class="sub" href="https://www.gem.com/lp/coinbase/insights-to-impact-bounty-2026" target="_blank" rel="noopener">challenge</a>
       <p>onboarding-funnel data model, reconciled three conflicting signup counts, fixed a join fan-out in inherited sql.</p>
@@ -83,32 +82,5 @@
       <p class="tags-line">python · tensorflow · kotlin</p>
     </div>
   </main>
-  <script>
-    // split-flap counts, same board as the places and github pages
-    (function () {
-      const items = document.querySelectorAll(".proj");
-      const stats = [["projects", items.length],
-                     ["awards", document.querySelectorAll(".proj .award-line").length],
-                     ["live demos", [...items].filter(i => /github\.io|vercel\.app/.test(i.querySelector("a").href)).length]];
-      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const board = document.getElementById("projBoard");
-      stats.forEach(([label, value], s) => {
-        const box = document.createElement("div"); box.className = "flap-stat";
-        const l = document.createElement("span"); l.className = "flap-label"; l.textContent = label;
-        const cells = document.createElement("span"); cells.className = "flap-cells"; cells.setAttribute("aria-label", value + " " + label);
-        [...String(value).padStart(2, "0")].forEach((ch, i) => {
-          const c = document.createElement("span"); c.className = "flap"; c.setAttribute("aria-hidden", "true"); c.textContent = ch;
-          cells.append(c);
-          if (still) return;
-          const stopAt = performance.now() + 500 + s * 220 + i * 90;
-          const t = setInterval(() => {
-            if (performance.now() >= stopAt) { clearInterval(t); c.textContent = ch; return; }
-            c.textContent = Math.floor(Math.random() * 10);
-          }, 55);
-        });
-        box.append(l, cells); board.append(box);
-      });
-    })();
-  </script>
 </body>
 </html>
