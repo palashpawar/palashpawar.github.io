@@ -1556,3 +1556,4 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 }
 [data-theme="dark"] .theme-toggle:hover { color: var(--fg); border-color: var(--fg); background: var(--bg); }
 [data-theme="dark"] .theme-toggle, [data-theme="dark"] .theme-toggle:hover { border: none; background: none; }
+.home-min h1 { color: #027c7b; }
