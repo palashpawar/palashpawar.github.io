@@ -313,7 +313,9 @@
           const t = k / 60, u = 1 - t;
           pts.push([u * u * x1 + 2 * u * t * cx + t * t * x2, u * u * y1 + 2 * u * t * cy + t * t * y2]);
         }
-        return { pair, carrier, legs, color: airlineOf(carrier)[1], width: 0.8 + 0.6 * legs.length, pts,
+        // the arc is drawn a→b (codes sorted); +1 = a plane flew a→b on this airline, -1 = b→a
+        const dirs = [...new Set(legs.map(f => (f[2] === a ? 1 : -1)))];
+        return { pair, carrier, legs, dirs, color: airlineOf(carrier)[1], width: 0.8 + 0.6 * legs.length, pts,
                  speed: 70 / Math.max(len, 40), phase: (i * 0.37) % 1 };
       });
 
@@ -355,13 +357,16 @@
         ctx.strokeStyle = r.color; ctx.lineWidth = r.width;
         ctx.beginPath(); r.pts.forEach(([x, y], k) => k ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke();
         if (still || !lit) continue;
-        // plane: a bright head with a short fading trail
-        const t = (r.phase + now / 1000 * r.speed) % 1, head = Math.floor(t * 60);
-        for (let k = 0; k < 8 && head - k >= 0; k++) {
-          ctx.globalAlpha = (1 - k / 8) * 0.9;
-          ctx.fillStyle = ink.fg;
-          ctx.beginPath(); ctx.arc(r.pts[head - k][0], r.pts[head - k][1], k ? 1.2 : 2, 0, 7); ctx.fill();
-        }
+        // one plane per direction actually flown: a bright head with a short trail behind it
+        r.dirs.forEach(d => {
+          const t = (r.phase + (d < 0 ? 0.5 : 0) + now / 1000 * r.speed) % 1, head = Math.floor(t * 60);
+          for (let k = 0; k < 8 && head - k >= 0; k++) {
+            const p = r.pts[d > 0 ? head - k : 60 - (head - k)];
+            ctx.globalAlpha = (1 - k / 8) * 0.9;
+            ctx.fillStyle = ink.fg;
+            ctx.beginPath(); ctx.arc(p[0], p[1], k ? 1.2 : 2, 0, 7); ctx.fill();
+          }
+        });
       }
       ctx.globalAlpha = 1;
 
