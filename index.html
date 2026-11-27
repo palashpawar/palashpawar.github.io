@@ -69,7 +69,7 @@
 </div>
 <script>
 // ASCII longhorn: sample img/longhorn.png into a character grid and fill the shape with
-// stats/ML formulas that slowly flow through it in reading order.
+// stats/ML formulas, with a few cells flickering each tick.
 const COLS = 90, ROWS = 28, el = document.getElementById("art");
 // only characters JetBrains Mono has, so every cell keeps the same width
 const FORMULAS = [
@@ -96,19 +96,24 @@ img.onload = () => {
     }
     filled.push(a / 16 > 0.3);
   }
+  // formulas sit still; each tick a few cells flash a random symbol for one frame, like before
   const chars = [...STREAM];   // split by code point so "²" etc. stay one cell
-  let offset = 0;
+  const glyphs = [...new Set(chars)].filter(ch => ch !== " ");
+  let k = 0;
+  const base = filled.map(f => (f ? chars[k++ % chars.length] : " "));
   const frame = () => {
-    let out = "", k = 0;
+    let out = "";
     for (let r = 0; r < ROWS; r++) {
-      for (let q = 0; q < COLS; q++) out += filled[r * COLS + q] ? chars[(k++ + offset) % chars.length] : " ";
+      for (let q = 0; q < COLS; q++) {
+        const ch = base[r * COLS + q];
+        out += ch !== " " && Math.random() < 0.05 ? glyphs[Math.floor(Math.random() * glyphs.length)] : ch;
+      }
       out += "\n";
     }
     el.textContent = out;
-    offset = (offset + chars.length - 1) % chars.length;   // text moves forward one cell per tick
   };
   frame();
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(frame, 140);
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(frame, 120);
 };
 img.src = "img/longhorn.png";
 </script>
