@@ -107,6 +107,7 @@
       SNA: ["Orange County", 33.6762, -117.8675],
       MCO: ["Orlando", 28.4312, -81.3081],
       MIA: ["Miami", 25.7959, -80.2870],
+      ATL: ["Atlanta", 33.6407, -84.4277],
       BUF: ["Buffalo", 42.9405, -78.7322],
       DTW: ["Detroit", 42.2162, -83.3554],
       PIT: ["Pittsburgh", 40.4915, -80.2329],
@@ -119,6 +120,7 @@
       CDG: ["Paris CDG", 49.0097, 2.5479],
       BCN: ["Barcelona", 41.2974, 2.0833],
       FRA: ["Frankfurt", 50.0379, 8.5622],
+      AMS: ["Amsterdam Schiphol", 52.3105, 4.7683],
       DEL: ["Delhi", 28.5562, 77.1000],
       BOM: ["Mumbai", 19.0896, 72.8656],
       MAA: ["Chennai", 12.9941, 80.1709],
@@ -175,6 +177,11 @@
       ["2022-07-07", "DL4977", "LGA", "PIT"],
       ["2022-07-18", "UA1116", "BUF", "ORD"],
       ["2022-07-18", "UA2417", "ORD", "IAH"],
+      ["2022-01-04", "DL2521", "ATL", "IAH"],
+      ["2022-01-04", "KL623", "AMS", "ATL"],
+      ["2022-01-04", "KL878", "BOM", "AMS"],
+      ["2021-12-20", "KL9494", "AMS", "BOM"],   // sold as Delta 9494, flown by KLM
+      ["2021-12-19", "KL9459", "IAH", "AMS"],   // sold as Delta 9459, flown by KLM
       ["2019-06-30", "AC594", "IAH", "YYZ"],
       ["2019-07-16", "AC593", "YYZ", "IAH"],
     ];
@@ -192,6 +199,7 @@
       UK: ["Vistara", "#7b2d6e"],
       AC: ["Air Canada", "#ff5a5f"],
       Y4: ["Volaris", "#c2268f"],
+      KL: ["KLM", "#00a1de"],
     };
     const airlineOf = num => airlines[num.slice(0, 2)] || [num.slice(0, 2), "#888888"];
 
