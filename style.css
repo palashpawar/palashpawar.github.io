@@ -1586,7 +1586,7 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
   .home-min .links a { font-size: 15px; margin: 7px 0; }
   .home-min footer { margin-top: 20px; padding-top: 16px; gap: 20px; }
   .home-min footer svg { width: 20px; height: 20px; }
-  pre#art { flex: 0 0 auto; font-size: 7px; line-height: 7.5px; }
+  pre#art { flex: 0 0 auto; }   /* longhorn keeps its full 11px size */
 }
 /* inner pages follow the same smaller scale */
 .page h1 { font-size: 30px; margin: 40px 0 28px; padding-bottom: 12px; }
