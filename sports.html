@@ -54,6 +54,23 @@
       ["soccer/all", 4385, "International", true, "IND", "img/nat-india.png"],
     ];
 
+    // Team name colors by ESPN id. ESPN's feeds don't carry them, and a few clubs' main colors
+    // (PSG/USA navy, Texans steel blue) vanish on black, so those use their brightest brand color.
+    const teamColors = {
+      360: "#DA291C",  // Manchester United red
+      160: "#4A7FD0",  // PSG blue, lightened
+      86: "#FEBE10",   // Real Madrid gold
+      6077: "#FF6B00", // Houston Dynamo orange
+      251: "#BF5700",  // Texas burnt orange
+      197: "#FF7300",  // Oklahoma State orange
+      248: "#C8102E",  // Houston Cougars red
+      34: "#C41E3A",   // Houston Texans battle red
+      10: "#CE1141",   // Houston Rockets red
+      660: "#E0283F",  // USA red
+      478: "#3B6FD8",  // France blue, lightened
+      4385: "#FF9933", // India saffron
+    };
+
     // National teams have no league table; their position is the FIFA World Ranking,
     // which scripts/update_fifa_rankings.py saves here (FIFA's API can't be called from the browser)
     const fifa = fetch("data/fifa-rankings.json").then(r => r.json()).catch(() => null);
@@ -102,6 +119,7 @@
 
       const top = el("div", "sport-top");
       const name = el("a", null, team.displayName.toLowerCase());
+      if (teamColors[id]) name.style.color = teamColors[id];
       const clubhouse = (team.links || []).find(l => l.rel.includes("clubhouse"));
       if (clubhouse) { name.href = clubhouse.href; name.target = "_blank"; name.rel = "noopener"; }
       top.append(name, el("span", "when", [place, league].filter(Boolean).join(" · ").toLowerCase()));
