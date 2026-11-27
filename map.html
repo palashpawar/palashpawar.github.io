@@ -120,6 +120,7 @@
       CDG: ["Paris CDG", 49.0097, 2.5479],
       BCN: ["Barcelona", 41.2974, 2.0833],
       FRA: ["Frankfurt", 50.0379, 8.5622],
+      ZRH: ["Zurich", 47.4582, 8.5555],
       AMS: ["Amsterdam Schiphol", 52.3105, 4.7683],
       DEL: ["Delhi", 28.5562, 77.1000],
       BOM: ["Mumbai", 19.0896, 72.8656],
@@ -128,6 +129,12 @@
 
     // Flights flown: [date, flight number, from, to]
     const flights = [
+      ["2026-12-27", "UA3000", "AMS", "IAH"],   // sold as Swiss 3000, flown by United
+      ["2026-12-27", "LX724", "ZRH", "AMS"],
+      ["2026-12-27", "LX155", "BOM", "ZRH"],
+      ["2026-12-05", "AI128", "LHR", "BOM"],
+      ["2026-12-04", "AC858", "YYZ", "LHR"],
+      ["2026-12-04", "AC594", "IAH", "YYZ"],
       ["2026-11-26", "Y41730", "GDL", "IAH"],
       ["2026-11-26", "Y41145", "SJD", "GDL"],
       ["2026-11-22", "Y41142", "GDL", "SJD"],
@@ -200,6 +207,8 @@
       AC: ["Air Canada", "#ff5a5f"],
       Y4: ["Volaris", "#c2268f"],
       KL: ["KLM", "#00a1de"],
+      AI: ["Air India", "#d7282f"],
+      LX: ["Swiss", "#e2001a"],
     };
     const airlineOf = num => airlines[num.slice(0, 2)] || [num.slice(0, 2), "#888888"];
 
