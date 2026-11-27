@@ -21,8 +21,8 @@
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202611261900"/>
-  <script src="theme.js?v=202611261200"></script>
+  <link rel="stylesheet" href="style.css?v=202611262000"/>
+  <script src="theme.js?v=202611262000"></script>
 </head>
 <body>
   <main class="page map-page">
@@ -245,12 +245,12 @@
     const legend = document.getElementById("airlineLegend");
     Object.entries(flownBy).sort((x, y) => y[1] - x[1]).forEach(([c, n]) => {
       const [name, color] = airlineOf(c);
-      // Google Flights' airline marks (dark-background versions); the left bar is the route color
+      // airline marks (from Google Flights, backgrounds removed; Vistara from its brand art); the left bar is the route color
       const item = document.createElement("div");
       item.className = "airline-key";
       item.style.borderLeftColor = color;
       const logo = document.createElement("img");
-      logo.src = `https://www.gstatic.com/flights/airline_logos/70px/dark/${c}.png`;
+      logo.src = `img/airline-${c}.png`;
       logo.alt = "";
       logo.onerror = () => logo.remove();
       const label = document.createElement("span");
@@ -268,6 +268,15 @@
     const canvas = document.getElementById("dotmap"), ctx = canvas.getContext("2d");
     const tip = document.getElementById("tip");
     let W = 0, H = 0, landDots = [], routes = [], hover = null, landGeo = null;
+    // colours come from the page theme so the map follows the light/dark toggle
+    let ink = {};
+    const readInk = () => {
+      const css = getComputedStyle(document.documentElement);
+      ink = { land: css.getPropertyValue("--land").trim(), fg: css.getPropertyValue("--fg").trim(),
+              accent: css.getPropertyValue("--accent").trim() };
+    };
+    readInk();
+    document.addEventListener("modechange", () => { readInk(); if (still) draw(0); });
     const project = (lat, lon) => [(lon - VIEW.w) / (VIEW.e - VIEW.w) * W, (VIEW.n - lat) / (VIEW.n - VIEW.s) * H];
     const fmtDate = d => new Date(d + "T12:00:00").toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" }).toLowerCase();
 
@@ -337,7 +346,7 @@
 
     function draw(now) {
       ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = "#3a4152";
+      ctx.fillStyle = ink.land;
       for (const [x, y] of landDots) { ctx.beginPath(); ctx.arc(x, y, 1.4, 0, 7); ctx.fill(); }
 
       for (const r of routes) {
@@ -350,7 +359,7 @@
         const t = (r.phase + now / 1000 * r.speed) % 1, head = Math.floor(t * 60);
         for (let k = 0; k < 8 && head - k >= 0; k++) {
           ctx.globalAlpha = (1 - k / 8) * 0.9;
-          ctx.fillStyle = "#fff";
+          ctx.fillStyle = ink.fg;
           ctx.beginPath(); ctx.arc(r.pts[head - k][0], r.pts[head - k][1], k ? 1.2 : 2, 0, 7); ctx.fill();
         }
       }
@@ -363,7 +372,7 @@
           ctx.strokeStyle = `rgba(91,140,255,${1 - p})`; ctx.lineWidth = 1;
           ctx.beginPath(); ctx.arc(x, y, 3 + p * 9, 0, 7); ctx.stroke();
         }
-        ctx.fillStyle = hover && hover.code === code ? "#5b8cff" : "#fff";
+        ctx.fillStyle = hover && hover.code === code ? ink.accent : ink.fg;
         ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 7); ctx.fill();
       });
     }

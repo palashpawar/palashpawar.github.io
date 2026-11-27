@@ -1536,3 +1536,22 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 }
 /* the map page runs wider than the other pages so the map itself has room */
 .page.map-page { max-width: 1440px; }
+
+/* ===== light mode (toggle, top right). data-theme stays "dark" for layout; data-mode swaps colours ===== */
+:root { --land: #3a4152; --flap-a: #14171f; --flap-b: #0e1117; }
+[data-mode="light"] {
+  --bg: #fff; --fg: #141414; --dim: #6b6b6b; --accent: #2f5bd6; --rule: #e3e5ea; --land: #d3d7de;
+  --flap-a: #f5f6f8; --flap-b: #eceef2;
+  color-scheme: light;
+}
+.flap { background: linear-gradient(var(--flap-a) 0 49%, var(--bg) 49% 51%, var(--flap-b) 51%); }
+.dotmap-tip { background: var(--bg); }
+[data-mode="light"] .gh-section { --gh-0: #eceef3; --gh-1: #c9d6fb; --gh-2: #8fa9f3; --gh-3: #5b7fe6; --gh-4: #2f5bd6; }
+[data-mode="light"] .sports-page { --rs-card: #fff; --rs-tile: #f2f3f6; --rs-pill: #f2f3f6; }
+[data-mode="light"] img[src$="airline-UA.png"] { filter: brightness(0.3); }   /* white globe → dark on white */
+
+[data-theme="dark"] .theme-toggle {
+  top: 20px; right: 20px; width: 36px; height: 36px; border-radius: 0;
+  background: var(--bg); color: var(--dim); border: 1px solid var(--rule); box-shadow: none;
+}
+[data-theme="dark"] .theme-toggle:hover { color: var(--fg); border-color: var(--fg); background: var(--bg); }
