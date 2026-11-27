@@ -38,6 +38,7 @@
     data.days.forEach(([date, c], i) => {
       const d = new Date(date + "T12:00:00");
       const cell = el("span", `gh-day lv${level(c)}`);
+      cell.style.animationDelay = `${Math.floor((i + lead) / 7) * 14 + d.getDay() * 6}ms`;
       cell.title = `${c} contribution${c === 1 ? "" : "s"} on ${d.toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" })}`;
       cal.append(cell);
       // month label above the first full week of each month
@@ -49,27 +50,64 @@
       }
     });
     cal.setAttribute("aria-label", `${data.total} GitHub contributions in the last year`);
-    document.getElementById("ghTotal").textContent = `${data.total.toLocaleString()} contributions in the last year`;
+    drawBoard(data);
     const wrap = document.getElementById("ghCalendarWrap");
     wrap.scrollLeft = wrap.scrollWidth;   // narrow screens scroll; start at the most recent weeks
   }
 
+  // contributions, streaks and busiest day as split-flap tiles that settle one by one
+  function drawBoard(data) {
+    const counts = data.days.map(d => d[1]);
+    let longest = 0, run = 0;
+    counts.forEach(c => { run = c > 0 ? run + 1 : 0; longest = Math.max(longest, run); });
+    let current = 0, k = counts.length - 1;
+    if (counts[k] === 0) k--;   // today isn't over yet, so a quiet today doesn't break the streak
+    while (k >= 0 && counts[k] > 0) { current++; k--; }
+    const stats = [["contributions", data.total.toLocaleString()], ["current streak", current],
+                   ["longest streak", longest], ["active days", counts.filter(c => c > 0).length],
+                   ["busiest day", Math.max(0, ...counts)]];
+    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const board = document.getElementById("ghBoard");
+    stats.forEach(([label, value], s) => {
+      const box = el("div", "flap-stat");
+      box.append(el("span", "flap-label", label));
+      const cells = el("span", "flap-cells");
+      cells.setAttribute("aria-label", `${value} ${label}`);
+      [...String(value)].forEach((ch, i) => {
+        const cell = el("span", /\d/.test(ch) ? "flap" : "flap flap-sep", ch);
+        cell.setAttribute("aria-hidden", "true");
+        cells.append(cell);
+        if (still || !/\d/.test(ch)) return;
+        const stopAt = performance.now() + 500 + s * 220 + i * 90;
+        const tick = setInterval(() => {
+          if (performance.now() >= stopAt) { clearInterval(tick); cell.textContent = ch; return; }
+          cell.textContent = Math.floor(Math.random() * 10);
+        }, 55);
+      });
+      box.append(cells);
+      board.append(box);
+    });
+  }
+
+  // repos as list rows like the projects page: name ↗, language · last push, description
   function drawRepos(repos) {
-    document.getElementById("ghRepos").replaceChildren(...repos.slice(0, 6).map(r => {
-      const a = el("a", "gh-repo");
+    document.getElementById("ghRepos").replaceChildren(...repos.slice(0, 8).map(r => {
+      const row = el("div", "item");
+      const top = el("div", "sport-top");
+      const a = el("a", null, r.name.toLowerCase());
       a.href = r.url;
       a.target = "_blank";
       a.rel = "noopener";
-      a.append(el("span", "gh-repo-name", r.name), el("span", "gh-repo-desc", r.description || "No description"));
-      const meta = el("span", "gh-repo-meta");
+      const meta = el("span", "when");
       if (r.language) {
         const dot = el("span", "gh-lang-dot");
         dot.style.background = r.color || "#888";
-        meta.append(dot, `${r.language} · `);
+        meta.append(dot, `${r.language.toLowerCase()} · `);
       }
       meta.append(timeAgo(r.pushedAt));
-      a.append(meta);
-      return a;
+      top.append(a, meta);
+      row.append(top, el("p", null, (r.description || "no description").trim().toLowerCase()));
+      return row;
     }));
   }
 

@@ -1505,3 +1505,19 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 .sport-top a[target="_blank"]::after { content: " ↗"; font-size: 14px; }
 .sport-top a:hover { color: var(--accent); }
 .sports-page .sports-note, .sports-page .sports-footnote { text-transform: lowercase; }
+
+/* github page: dot calendar that sweeps in, flip-board stats, repo list */
+.github-page .board { margin-bottom: 24px; }
+[data-theme="dark"] .github-page .gh-calendar-wrap { border: none; padding: 0 0 6px; }
+.github-page .gh-day { border-radius: 50%; }
+.github-page .gh-calendar .gh-day { animation: gh-in 0.35s ease both; }
+@keyframes gh-in { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .github-page .gh-calendar .gh-day { animation: none; } }
+.gh-legend { display: flex; align-items: center; gap: 4px; justify-content: flex-end; color: var(--dim); font-size: 12px; margin: 8px 0 0; }
+.gh-legend .gh-day { width: 10px; height: 10px; display: inline-block; }
+.gh-legend span:first-child { margin-right: 4px; } .gh-legend span:last-child { margin-left: 4px; }
+.gh-sub { color: var(--dim); font-size: 16px; font-weight: 400; margin: 40px 0 24px; }
+.gh-sub a { color: var(--dim); text-decoration: none; } .gh-sub a:hover { color: var(--fg); }
+.github-page .gh-lang-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.github-page .gh-months, .github-page .gh-calendar { margin: 0; }
+.github-page .gh-months { color: var(--dim); opacity: 1; font-size: 11px; }

@@ -21,7 +21,7 @@
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202611261600"/>
+  <link rel="stylesheet" href="style.css?v=202611261700"/>
   <script src="theme.js?v=202611261200"></script>
 </head>
 <body>
@@ -30,20 +30,18 @@
     <h1>github activity</h1>
     <!-- GitHub activity: calendar from data/github.json (daily workflow), repos live from the GitHub API -->
     <section class="gh-section" id="ghSection" hidden>
-      <div class="gh-head">
-        <h2>On GitHub</h2>
-        <a href="https://github.com/palashpawar" target="_blank" rel="noopener">@palashpawar ↗</a>
-      </div>
-      <p class="gh-total" id="ghTotal"></p>
+      <div class="board" id="ghBoard"></div>
       <div class="gh-calendar-wrap" id="ghCalendarWrap">
         <div class="gh-months" id="ghMonths"></div>
         <div class="gh-calendar" id="ghCalendar" role="img"></div>
       </div>
-      <div class="gh-repos" id="ghRepos"></div>
+      <p class="gh-legend"><span>less</span><span class="gh-day lv0"></span><span class="gh-day lv1"></span><span class="gh-day lv2"></span><span class="gh-day lv3"></span><span class="gh-day lv4"></span><span>more</span></p>
+      <h2 class="gh-sub">recently pushed · <a href="https://github.com/palashpawar" target="_blank" rel="noopener">@palashpawar ↗</a></h2>
+      <div id="ghRepos"></div>
     </section>
   </main>
 
 
-  <script src="github-activity.js?v=202610251542"></script>
+  <script src="github-activity.js?v=202611261700"></script>
 </body>
 </html>
