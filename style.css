@@ -1564,3 +1564,4 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 .home-min a.org::after { content: " ↗"; font-size: 13px; color: var(--dim); }
 .home-min a.org:hover { color: var(--accent); }
 .sports-page .sports-note { margin-bottom: 28px; }
+.home-min h2 { text-decoration: underline; text-underline-offset: 5px; }
