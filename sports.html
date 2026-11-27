@@ -21,17 +21,17 @@
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202611261400"/>
+  <link rel="stylesheet" href="style.css?v=202611261600"/>
   <script src="theme.js?v=202611261200"></script>
 </head>
 <body>
   <main class="page sports-page">
     <a class="back" href="index.html">home</a>
     <h1>sports</h1>
-    <p class="sports-note" id="sportsNote">Loading live standings…</p>
+    <p class="sports-note" id="sportsNote">loading live standings…</p>
     <nav class="league-tabs" id="leagueTabs" aria-label="Filter by league"></nav>
-    <div class="team-cards" id="teamCards"></div>
-    <p class="sports-footnote">Soccer records are wins-draws-losses.<span id="fifaDate"></span></p>
+    <div class="sport-list" id="teamCards"></div>
+    <p class="sports-footnote">soccer records are wins-draws-losses; squares are the last 5 results.<span id="fifaDate"></span></p>
   </main>
 
 
@@ -58,16 +58,6 @@
     // which scripts/update_fifa_rankings.py saves here (FIFA's API can't be called from the browser)
     const fifa = fetch("data/fifa-rankings.json").then(r => r.json()).catch(() => null);
 
-    const isDark = () => document.documentElement.dataset.theme === "dark";
-
-    // Pick ESPN's dark-background logo variant in dark mode when one exists
-    const logoFor = (logos, dark) => {
-      const pick = logos.find(l => l.rel.includes("default") && l.rel.includes(dark ? "dark" : "full") && !l.rel.includes("scoreboard"))
-        || logos.find(l => l.rel.includes(dark ? "dark" : "full"))
-        || logos[0];
-      return pick ? pick.href : "";
-    };
-
     function el(tag, cls, text) {
       const e = document.createElement(tag);
       if (cls) e.className = cls;
@@ -89,82 +79,68 @@
       b.setAttribute("aria-pressed", tab === "All" ? "true" : "false");
       b.addEventListener("click", () => {
         tabs.querySelectorAll(".league-tab").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
-        grid.querySelectorAll(".team-card").forEach(c => { c.hidden = tab !== "All" && c.dataset.tab !== tab; });
+        grid.querySelectorAll(".sport-item").forEach(c => { c.hidden = tab !== "All" && c.dataset.tab !== tab; });
       });
       tabs.append(b);
     });
 
-    const isCollege = t => t[0].endsWith("college-football");
-
-    // Real-style stat tile: small grey label over a big number
-    function tile(label, value, note) {
-      const box = el("div", "stat-tile");
-      box.append(el("span", "stat-label", label), el("span", "stat-value", value));
-      if (note) box.append(el("span", "stat-note", note));
-      return box;
-    }
-
-    function renderCard(card, t, team, rankings) {
-      const [, , league, soccer, fifaCode, crest, crestDark] = t;
+    // One list row per team, styled like the projects page:
+    //   manchester united ↗   19th · premier league   ● live
+    //   8 pts · 1-5-5   ■■□■■
+    //   last: vs sporting cp 2–2 · next: vs brentford, sat, nov 28 · 9:00 am
+    function renderRow(row, t, team, rankings, sched) {
+      const [, id, league, soccer, fifaCode] = t;
       const rec = (team.record && team.record.items && team.record.items[0]) || {};
       const s = Object.fromEntries((rec.stats || []).map(x => [x.name, x.value]));
       const n = v => (v == null ? "–" : String(Math.round(v)));
-
-      // header: logo · name + league · position badge
-      const head = el("a", "card-head");
-      const clubhouse = (team.links || []).find(l => l.rel.includes("clubhouse"));
-      if (clubhouse) { head.href = clubhouse.href; head.target = "_blank"; head.rel = "noopener"; }
-      const img = el("img", "team-logo");
-      img.alt = "";
-      if (crest) {
-        img.dataset.crest = crest;
-        img.dataset.crestDark = crestDark || crest;
-        img.src = isDark() ? img.dataset.crestDark : crest;
-      } else {
-        img.dataset.logos = JSON.stringify(team.logos || []);
-        img.src = logoFor(team.logos || [], isDark());
-      }
-      const names = el("div", "card-names");
-      const nm = el("span", "team-name");
-      nm.textContent = team.displayName;   // always the full name, on phones too
-      names.append(nm, el("span", "team-league", league));
-
-      // "12th in English Premier League" → place "12th", group "English Premier League"
-      const m = (team.standingSummary || "").match(/^(\S+)\s+in\s+(.+)$/);
-      const conf = m ? m[2].replace(/ Division$/, " Div.").replace(/^(North|South)(east|west)\b/, (w, a, b) => a[0] + b[0].toUpperCase()) : "";
       const f = fifaCode && rankings && rankings.teams[fifaCode];
-      const badgeText = fifaCode ? (f ? `#${f.rank}` : "–") : (m ? m[1] : "–");
-      const badge = el("div", "rank-badge");
-      badge.append(el("span", "rank-value", badgeText), el("span", "rank-label", fifaCode ? "FIFA rank" : soccer ? "in league" : conf));
-      head.append(img, names, badge);
 
-      // stat tiles
-      const stats = el("div", "stat-row");
-      // the badge already shows the position, so the tiles add what it doesn't
+      // "12th in English Premier League" → "12th"; US teams keep their conference/division
+      const m = (team.standingSummary || "").match(/^(\S+)\s+in\s+(.+)$/);
+      const place = fifaCode ? (f ? `#${f.rank} fifa` : "")
+        : m ? (soccer ? m[1] : `${m[1]} in ${m[2].replace(/ Division$/, "")}`) : "";
+
+      const top = el("div", "sport-top");
+      const name = el("a", null, team.displayName.toLowerCase());
+      const clubhouse = (team.links || []).find(l => l.rel.includes("clubhouse"));
+      if (clubhouse) { name.href = clubhouse.href; name.target = "_blank"; name.rel = "noopener"; }
+      top.append(name, el("span", "when", [place, league].filter(Boolean).join(" · ").toLowerCase()));
+
+      let stats;
       if (fifaCode) {
         const move = f && f.previousRank ? f.previousRank - f.rank : 0;
-        stats.append(tile("FIFA pts", f && f.points != null ? String(Math.round(f.points)) : "–"),
-                     tile("Prev rank", f && f.previousRank ? `#${f.previousRank}` : "–"),
-                     tile("Change", move > 0 ? `▲${move}` : move < 0 ? `▼${-move}` : "–"));
+        stats = [f && f.points != null ? `${Math.round(f.points).toLocaleString()} fifa pts` : "",
+                 move > 0 ? `▲${move}` : move < 0 ? `▼${-move}` : ""];
       } else if (soccer) {
-        const gp = [s.wins, s.ties, s.losses].every(v => v != null) ? String(s.wins + s.ties + s.losses) : "–";
-        stats.append(tile("Pts", n(s.points)), tile("W-D-L", `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}`), tile("Played", gp));
+        stats = s.points == null ? [] : [`${n(s.points)} pts`, `${n(s.wins)}-${n(s.ties)}-${n(s.losses)}`];  // off-season: no record yet
       } else {
         const [w, l] = (rec.summary || "").split("-").map(Number);
-        const gp = w + l;
-        const pct = gp > 0 ? (w / gp).toFixed(3).replace(/^0/, "") : "–";   // .667 style
-        const ap = team.rank && team.rank <= 25 ? `#${team.rank}` : "–";
-        stats.append(tile("Record", rec.summary || "–"), tile("Win %", pct),
-                     isCollege(t) ? tile("AP poll", ap) : tile("Played", Number.isFinite(gp) ? String(gp) : "–"));
+        const pct = w + l > 0 ? (w / (w + l)).toFixed(3).replace(/^0/, "") : "";
+        stats = [rec.summary || "", pct, team.rank && team.rank <= 25 ? `ap #${team.rank}` : ""];
+      }
+      const line1 = el("p", null, stats.filter(Boolean).join(" · "));
+      const form = formOf(sched, id);
+      if (form.length) {
+        const strip = el("span", "form-strip");
+        strip.title = "last " + form.length + ": " + form.join(" ");   // oldest → newest
+        form.forEach(r => strip.append(el("span", `form-${r}`)));
+        line1.append(strip);
       }
 
-      const games = el("div", "game-rows");
-      games.append(el("div", "game-row game-last", ""), el("div", "game-row game-next", ""));
-      card.replaceChildren(head, stats, games);
+      const last = lastGame(sched, id), next = nextGame(sched, id);
+      const parts = [];
+      if (last) parts.push(`last: ${last.where} ${last.name} ${last.score}`);
+      if (next && next.live) {
+        top.append(el("span", "live-dot", "live"));
+        parts.push(`now: ${next.where} ${next.name}`);
+      } else if (next) {
+        parts.push(`next: ${next.where} ${next.name}, ${[next.day, next.time, next.tag].filter(Boolean).join(" · ")}`);
+      }
+      row.replaceChildren(top, ...(line1.textContent || form.length ? [line1] : []), el("p", "sport-games", parts.join("  ·  ").toLowerCase()));
     }
 
     const cards = teams.map(t => {
-      const card = el("article", "team-card");
+      const card = el("div", "sport-item item");
       card.dataset.tab = tabOf(t);
       card.append(el("p", "card-loading", `Loading ${t[2]}…`));
       grid.append(card);
@@ -203,7 +179,7 @@
     });
 
     // ESPN's per-team endpoint stopped allowing cross-site requests (Oct 2026), so team details
-    // come from the schedule feed instead; reshape them into the fields renderCard reads.
+    // come from the schedule feed instead; reshape them into the fields renderRow reads.
     function teamFromSchedule(st, soccer, rank) {
       const logo = st.logo || "";
       const [w, a, b] = (st.recordSummary || "").split("-").map(Number); // soccer: wins-draws-losses
@@ -268,6 +244,21 @@
       };
     }
 
+    // Results of the last 5 finished games, oldest first: ["W", "D", "L", ...]
+    function formOf(schedule, teamId) {
+      return (schedule.events || [])
+        .filter(ev => ev.competitions[0].status.type.completed)
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .slice(-5)
+        .map(ev => {
+          const comp = ev.competitions[0];
+          const me = comp.competitors.find(c => String(c.team.id) === String(teamId));
+          const opp = comp.competitors.find(c => c !== me);
+          return !me || !opp ? null : me.winner ? "W" : opp.winner ? "L" : "D";
+        })
+        .filter(Boolean);
+    }
+
     // Most recent finished game as { result: "W"|"L"|"D", score, where, name, logos, when } (or null)
     function lastGame(schedule, teamId) {
       const done = (schedule.events || [])
@@ -291,43 +282,6 @@
       };
     }
 
-    const oppLogo = logos => {
-      const img = el("img", "opp-logo");
-      img.alt = "";
-      img.dataset.logos = JSON.stringify(logos);
-      img.src = logoFor(logos, isDark());
-      return img;
-    };
-
-    // LAST   vs (logo) Jaguars              [W] 34–31
-    function fillLastGame(row, game) {
-      const label = el("span", "game-label", "Last");
-      if (!game) { row.replaceChildren(label, el("span", "game-opp game-empty", "No games yet")); return; }
-      const opp = el("span", "game-opp");
-      opp.append(el("span", "game-where", game.where), oppLogo(game.logos), el("span", "game-name", game.name));
-      const right = el("span", "game-right");
-      right.append(el("span", `result result-${game.result}`, game.result), el("span", "game-score", game.score));
-      row.replaceChildren(label, opp, right);
-      row.title = game.when;
-    }
-
-    // NEXT   @ (logo) Como                  Wed, Oct 21 · 11:45 AM
-    function fillNextGame(row, game) {
-      const label = el("span", "game-label", "Next");
-      if (!game) { row.replaceChildren(label, el("span", "game-opp game-empty", "None scheduled")); return; }
-      const opp = el("span", "game-opp");
-      opp.append(el("span", "game-where", game.where), oppLogo(game.logos), el("span", "game-name", game.name));
-      const right = el("span", "game-right");
-      if (game.live) right.append(el("span", "live-tag", "LIVE"));
-      else {
-        // date over time, Real-style, so the opponent's name keeps its room
-        const when = el("span", "game-when");
-        when.append(el("span", "when-day", game.day), el("span", "when-time", [game.time, game.tag].filter(Boolean).join(" · ")));
-        right.append(when);
-      }
-      row.replaceChildren(label, opp, right);
-    }
-
     Promise.allSettled(teams.map((t, i) =>
       loadSchedule(t)
         .then(async sched => {
@@ -335,9 +289,7 @@
           // before a US team's first regular-season game ESPN's record is its preseason one
           const played = sched.events.some(ev => ev.competitions[0].status.type.completed);
           if (!t[3] && !played) team.record.items[0].summary = "0-0";
-          renderCard(cards[i], t, team, await fifa);
-          fillLastGame(cards[i].querySelector(".game-last"), lastGame(sched, t[1]));
-          fillNextGame(cards[i].querySelector(".game-next"), nextGame(sched, t[1]));
+          renderRow(cards[i], t, team, await fifa, sched);
         })
         .catch(() => {
           const loading = cards[i].querySelector(".card-loading");
@@ -356,15 +308,6 @@
       }
     });
 
-    // Swap logo variants when the theme toggles
-    new MutationObserver(() => {
-      document.querySelectorAll("img[data-logos]").forEach(img => {
-        img.src = logoFor(JSON.parse(img.dataset.logos || "[]"), isDark());
-      });
-      document.querySelectorAll("img[data-crest]").forEach(img => {
-        img.src = isDark() ? img.dataset.crestDark : img.dataset.crest;
-      });
-    }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   </script>
 </body>
 </html>

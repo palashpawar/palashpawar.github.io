@@ -1483,3 +1483,25 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 .dotmap-tip .tip-dim { color: var(--dim); }
 .dotmap-note { color: var(--dim); font-size: 13px; margin-top: 10px; }
 .flap.flap-sep { background: none; border: none; min-width: 0; padding: 4px 0; }
+
+/* sports page: list rows like projects, plus a W/D/L form strip */
+.sports-page .sports-note, .sports-page .sports-footnote { color: var(--dim); font-size: 13px; text-align: left; }
+.sports-page .league-tabs { justify-content: flex-start; gap: 18px; margin: 0 0 32px; padding: 0; }
+[data-theme="dark"] .sports-page .league-tab { background: none; border: none; padding: 0; color: var(--dim); font-size: 15px; cursor: pointer; }
+[data-theme="dark"] .sports-page .league-tab[aria-pressed="true"] { color: var(--fg); text-decoration: underline; text-underline-offset: 6px; }
+.sport-item[hidden] { display: none; }
+.sport-item .card-loading { color: var(--dim); margin: 0; }
+.sport-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 12px; }
+.sport-top .when { margin-left: 0 !important; }
+.form-strip { display: inline-flex; gap: 3px; margin-left: 14px; vertical-align: middle; }
+.form-strip span { width: 9px; height: 9px; display: inline-block; }
+.form-W { background: #3fb950; }
+.form-D { background: #5c6370; }
+.form-L { background: #f85149; }
+.page .item p.sport-games { font-size: 14px; margin-top: 2px; }
+.live-dot { color: #f85149; font-size: 13px; }
+.live-dot::before { content: "● "; animation: blink 1.2s infinite; }
+.sport-top a { color: var(--fg); text-decoration: none; font-size: 18px; }
+.sport-top a[target="_blank"]::after { content: " ↗"; font-size: 14px; }
+.sport-top a:hover { color: var(--accent); }
+.sports-page .sports-note, .sports-page .sports-footnote { text-transform: lowercase; }
