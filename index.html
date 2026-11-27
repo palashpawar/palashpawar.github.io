@@ -68,16 +68,25 @@
 <pre id="art" aria-hidden="true"></pre>
 </div>
 <script>
-// ASCII longhorn: sample img/longhorn.png into a character grid, flicker a few cells.
+// ASCII longhorn: sample img/longhorn.png into a character grid and fill the shape with
+// stats/ML formulas that slowly flow through it in reading order.
 const COLS = 90, ROWS = 28, el = document.getElementById("art");
-const edge = ".:-=", body = "+*#%@=:";
-const pick = (v) => v < 0.08 ? " " : v < 0.7 ? edge[Math.floor(Math.random() * edge.length)] : body[Math.floor(Math.random() * body.length)];
+// only characters JetBrains Mono has, so every cell keeps the same width
+const FORMULAS = [
+  "y=Xβ+ε", "β=(X'X)⁻¹X'y", "σ²=E[(X−μ)²]", "p(θ|x)∝p(x|θ)p(θ)", "θ←θ−η∇L(θ)",
+  "softmax(z)=e^z/Σe^z", "KL(p||q)=Σp·log(p/q)", "H(p)=−Σp·log p", "R²=1−SSE/SST",
+  "P(A|B)=P(B|A)P(A)/P(B)", "Var(X)=E[X²]−E[X]²", "σ(z)=1/(1+e^−z)", "L=−Σy·log ŷ",
+  "z=(x−μ)/σ", "N(μ,σ²)", "ReLU(x)=max(0,x)", "attn=softmax(QK'/√d)V", "E[X]=Σx·p(x)",
+  "λ||w||²", "F1=2PR/(P+R)", "∂L/∂w", "∫p(x)dx=1", "Cov(X,Y)=E[XY]−E[X]E[Y]",
+  "argmax p(y|x)", "mean±1.96·s/√n",
+];
+const STREAM = FORMULAS.join(" · ") + " · ";   // dots, not gaps, so the silhouette stays solid
 const img = new Image();
 img.onload = () => {
   const c = document.createElement("canvas"); c.width = COLS * 4; c.height = ROWS * 4;
   const ctx = c.getContext("2d");
   ctx.drawImage(img, 0, 0, c.width, c.height);
-  const px = ctx.getImageData(0, 0, c.width, c.height).data, cov = [];
+  const px = ctx.getImageData(0, 0, c.width, c.height).data, filled = [];
   for (let r = 0; r < ROWS; r++) for (let q = 0; q < COLS; q++) {
     let a = 0;
     for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) {
@@ -85,17 +94,21 @@ img.onload = () => {
       // coloured, opaque pixels count as filled; white or transparent ones don't
       a += (px[i + 3] / 255) * (1 - Math.min(px[i], px[i + 1], px[i + 2]) / 255);
     }
-    cov.push(a / 16);
+    filled.push(a / 16 > 0.3);
   }
-  const chars = cov.map(pick);
+  const chars = [...STREAM];   // split by code point so "²" etc. stay one cell
+  let offset = 0;
   const frame = () => {
-    for (let i = 0; i < chars.length; i++) if (Math.random() < 0.04) chars[i] = pick(cov[i]);
-    let out = "";
-    for (let r = 0; r < ROWS; r++) out += chars.slice(r * COLS, (r + 1) * COLS).join("") + "\n";
+    let out = "", k = 0;
+    for (let r = 0; r < ROWS; r++) {
+      for (let q = 0; q < COLS; q++) out += filled[r * COLS + q] ? chars[(k++ + offset) % chars.length] : " ";
+      out += "\n";
+    }
     el.textContent = out;
+    offset = (offset + chars.length - 1) % chars.length;   // text moves forward one cell per tick
   };
   frame();
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(frame, 120);
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(frame, 140);
 };
 img.src = "img/longhorn.png";
 </script>
