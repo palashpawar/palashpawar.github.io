@@ -21,56 +21,94 @@
   <link rel="icon" href="favicon-32.png?v=4" sizes="32x32" type="image/png"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4"/>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=202611272030"/>
+  <link rel="stylesheet" href="style.css?v=202611272100"/>
   <script src="theme.js?v=202611262000"></script>
 </head>
 <body>
   <main class="page">
     <a class="back" href="index.html">home</a>
     <h1>projects</h1>
-    <div class="item">
+    <div class="board" id="projBoard"></div>
+    <div class="item proj" data-n="01">
       <a href="files/coinbase-insights-to-impact.pdf" target="_blank" rel="noopener">coinbase insights to impact</a> <a class="sub" href="https://www.gem.com/lp/coinbase/insights-to-impact-bounty-2026" target="_blank" rel="noopener">challenge</a>
       <p>onboarding-funnel data model, reconciled three conflicting signup counts, fixed a join fan-out in inherited sql.</p>
       <p class="award-line">winner (top 20) + $250 usdc</p>
+      <p class="tags-line">sql · dbt · python · pandas</p>
     </div>
-    <div class="item">
+    <div class="item proj" data-n="02">
       <a href="https://github.com/palashpawar/scoutiq" target="_blank" rel="noopener">scoutiq</a>
       <p>ai scouting assistant for budget premier league clubs: plain-english briefs become filters, percentile scoring ranks every pick.</p>
+      <p class="tags-line">python · fastapi · next.js · muse spark</p>
     </div>
-    <div class="item">
+    <div class="item proj" data-n="03">
       <a href="https://palashpawar.github.io/courtside/" target="_blank" rel="noopener">courtside</a> <a class="sub" href="https://github.com/palashpawar/courtside" target="_blank" rel="noopener">code</a>
       <p>60,000+ nba team-games modeled: back-to-backs cost ~1.9 pts/100, and markets underprice eastward jet lag.</p>
       <p class="award-line">1st place @ jpmc data for good hackathon</p>
+      <p class="tags-line">python · pandas · statsmodels · xgboost · shap</p>
     </div>
-    <div class="item">
+    <div class="item proj" data-n="04">
       <a href="https://github.com/palashpawar/spy-vol-surface-mm" target="_blank" rel="noopener">spy vol surface + market maker</a>
       <p>arbitrage-free svi surface on 4,500+ spy option quotes, plus a market-making sim with full p&amp;l attribution.</p>
+      <p class="tags-line">python · numpy · scipy · streamlit</p>
     </div>
-    <div class="item">
+    <div class="item proj" data-n="05">
       <a href="https://biocatalyst-iota.vercel.app" target="_blank" rel="noopener">biocatalyst</a> <a class="sub" href="https://github.com/palashpawar/biocatalyst" target="_blank" rel="noopener">code</a>
       <p>calendar of trial readouts and fda dates from clinicaltrials.gov and sec edgar, each ranked by a real backtest.</p>
+      <p class="tags-line">python · duckdb · flask · vercel</p>
     </div>
-    <div class="item">
+    <div class="item proj" data-n="06">
       <a href="https://github.com/palashpawar/kalshi-earnings-edge" target="_blank" rel="noopener">kalshi earnings-mention study</a>
       <p>a backtest found +4¢/contract on earnings-call keyword markets. forward testing rejected it (−3.6¢); the repo explains why.</p>
+      <p class="tags-line">python · kalshi api · pandas</p>
     </div>
-    <div class="item">
+    <div class="item proj" data-n="07">
       <a href="https://github.com/anikethk1/player_market_value_prediction" target="_blank" rel="noopener">moneyball 2.0</a>
       <p>predicts soccer market values from a decade of fbref stats; xgboost best (r² 0.63), flags over- and undervalued players.</p>
+      <p class="tags-line">r · xgboost · random forest · tidyverse</p>
     </div>
-    <div class="item">
+    <div class="item proj" data-n="08">
       <a href="https://github.com/palashpawar/debit-ledger" target="_blank" rel="noopener">debit ledger</a>
       <p>local-first spending dashboard with real bank sync through plaid. data stays on your machine in sqlite.</p>
+      <p class="tags-line">node.js · plaid api · sqlite</p>
     </div>
-    <div class="item">
+    <div class="item proj" data-n="09">
       <a href="https://www.youtube.com/watch?v=qi1M5PiFbqk" target="_blank" rel="noopener">uncovering hidden gems</a>
       <p>moneyball in a sports franchise simulation.</p>
       <p class="award-line">3rd place @ deca icdc + $500</p>
+      <p class="tags-line">sports simulation</p>
     </div>
-    <div class="item">
+    <div class="item proj" data-n="10">
       <a href="https://drive.google.com/file/d/1it8Y_aBNfJUBj2RynIkCmBNlAtyOc7zc/view" target="_blank" rel="noopener">insect bite classifier</a>
       <p>a cnn for insect bite classification, shipped inside an android app.</p>
+      <p class="tags-line">python · tensorflow · kotlin</p>
     </div>
   </main>
+  <script>
+    // split-flap counts, same board as the places and github pages
+    (function () {
+      const items = document.querySelectorAll(".proj");
+      const stats = [["projects", items.length],
+                     ["awards", document.querySelectorAll(".proj .award-line").length],
+                     ["live demos", [...items].filter(i => /github\.io|vercel\.app/.test(i.querySelector("a").href)).length]];
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const board = document.getElementById("projBoard");
+      stats.forEach(([label, value], s) => {
+        const box = document.createElement("div"); box.className = "flap-stat";
+        const l = document.createElement("span"); l.className = "flap-label"; l.textContent = label;
+        const cells = document.createElement("span"); cells.className = "flap-cells"; cells.setAttribute("aria-label", value + " " + label);
+        [...String(value).padStart(2, "0")].forEach((ch, i) => {
+          const c = document.createElement("span"); c.className = "flap"; c.setAttribute("aria-hidden", "true"); c.textContent = ch;
+          cells.append(c);
+          if (still) return;
+          const stopAt = performance.now() + 500 + s * 220 + i * 90;
+          const t = setInterval(() => {
+            if (performance.now() >= stopAt) { clearInterval(t); c.textContent = ch; return; }
+            c.textContent = Math.floor(Math.random() * 10);
+          }, 55);
+        });
+        box.append(l, cells); board.append(box);
+      });
+    })();
+  </script>
 </body>
 </html>
