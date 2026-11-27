@@ -43,15 +43,8 @@
       ["soccer/eng.1", 360, "Premier League", true],
       ["soccer/fra.1", 160, "Ligue 1", true],
       ["soccer/esp.1", 86, "LALIGA", true],
-      ["soccer/usa.1", 6077, "MLS", true],
       ["football/college-football", 251, "College Football", false],
-      ["football/college-football", 197, "College Football", false, null, "img/osu-logo.png"],
-      ["football/college-football", 248, "College Football", false],
-      ["football/nfl", 34, "NFL", false],
       ["basketball/nba", 10, "NBA", false],
-      ["soccer/all", 660, "International", true, "USA", "img/nat-usa.png", "img/nat-usa-dark.png"],
-      ["soccer/all", 478, "International", true, "FRA", "img/nat-france.png"],
-      ["soccer/all", 4385, "International", true, "IND", "img/nat-india.png"],
     ];
 
     // Team name colors by ESPN id. ESPN's feeds don't carry them, and a few clubs' main colors
@@ -60,15 +53,8 @@
       360: "#DA291C",  // Manchester United red
       160: "#4A7FD0",  // PSG blue, lightened
       86: "#FEBE10",   // Real Madrid gold
-      6077: "#FF6B00", // Houston Dynamo orange
       251: "#BF5700",  // Texas burnt orange
-      197: "#FF7300",  // Oklahoma State orange
-      248: "#C8102E",  // Houston Cougars red
-      34: "#C41E3A",   // Houston Texans battle red
       10: "#CE1141",   // Houston Rockets red
-      660: "#E0283F",  // USA red
-      478: "#3B6FD8",  // France blue, lightened
-      4385: "#FF9933", // India saffron
     };
 
     // National teams have no league table; their position is the FIFA World Ranking,
@@ -346,11 +332,6 @@
       document.getElementById("sportsNote").textContent = usedSnapshot && saved
         ? `From ESPN · as of ${fmt(new Date(saved))}`
         : `Live from ESPN · updated ${fmt(new Date())}`;
-      const f = await fifa;
-      if (f) {
-        const date = new Date(f.published).toLocaleDateString([], { month: "long", day: "numeric", year: "numeric" });
-        document.getElementById("fifaDate").textContent = ` National teams are ranked by the FIFA World Ranking (${date}).`;
-      }
     });
 
   </script>
