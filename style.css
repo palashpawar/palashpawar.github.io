@@ -1615,3 +1615,6 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 /* wide one-line wordmark (knowledge matters) */
 .page .proj:has(.proj-logo.big) { padding-right: 150px; }
 .page .proj .proj-logo.big { width: 132px; height: 20px; top: 15px; }
+/* full ncbi lockup needs height for its four text lines */
+.page .proj:has(.proj-logo.tall) { padding-right: 110px; }
+.page .proj .proj-logo.tall { width: 96px; height: 44px; top: 10px; }
