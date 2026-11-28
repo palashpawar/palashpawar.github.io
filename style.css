@@ -1606,3 +1606,6 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 .page .proj { position: relative; padding: 10px 0; margin: 0; }
 .page .proj p.tags-line { color: var(--accent); opacity: .75; font-size: 12px; margin-top: 6px; }
 .page .proj p.tags-line::before { content: "$ "; color: var(--dim); }
+/* projects: logo pinned to the right of each row */
+.page .proj { padding-right: 84px; }
+.page .proj .proj-logo { position: absolute; right: 0; top: 12px; width: 64px; height: 26px; object-fit: contain; object-position: right center; }
