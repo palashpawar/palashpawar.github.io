@@ -1612,3 +1612,5 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 /* two logos on one row: second sits at the right edge, first just left of it */
 .page .proj:has(.proj-logo + .proj-logo) { padding-right: 124px; }
 .page .proj .proj-logo:has(+ .proj-logo) { right: 40px; }
+/* ncbi lockup is tall; a little more height keeps its text readable */
+.page .proj .proj-logo.ncbi { width: 72px; height: 33px; top: 9px; }
