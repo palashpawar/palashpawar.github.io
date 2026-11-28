@@ -1609,4 +1609,6 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 /* projects: logo pinned to the right of each row */
 .page .proj { padding-right: 84px; }
 .page .proj .proj-logo { position: absolute; right: 0; top: 12px; width: 64px; height: 26px; object-fit: contain; object-position: right center; }
-.page .proj .proj-logo + .proj-logo { top: 44px; }
+/* two logos on one row: second sits at the right edge, first just left of it */
+.page .proj:has(.proj-logo + .proj-logo) { padding-right: 124px; }
+.page .proj .proj-logo:has(+ .proj-logo) { right: 40px; }
