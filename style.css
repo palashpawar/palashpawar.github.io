@@ -1612,9 +1612,7 @@ pre#art { flex: 1; margin: 0; font-size: 11px; line-height: 11px; color: var(--u
 /* two logos on one row: second sits at the right edge, first just left of it */
 .page .proj:has(.proj-logo + .proj-logo) { padding-right: 124px; }
 .page .proj .proj-logo:has(+ .proj-logo) { right: 40px; }
-/* wide one-line wordmark (knowledge matters) */
-.page .proj:has(.proj-logo.big) { padding-right: 150px; }
-.page .proj .proj-logo.big { width: 132px; height: 20px; top: 15px; }
+.page .proj .proj-logo.big { width: 76px; height: 36px; top: 8px; }
 /* full ncbi lockup needs height for its four text lines */
 .page .proj:has(.proj-logo.tall) { padding-right: 110px; }
 .page .proj .proj-logo.tall { width: 96px; height: 44px; top: 10px; }
